@@ -148,6 +148,37 @@
               "Path": "Samples/Layers/RasterLayerRasterFunction"
             }
           ]
+        },
+        {
+          "Name": "OGC Layers",
+          "SubCategoryName": "OGCLayer",
+          "ShowGroup": false,
+          "SampleInfos": [
+            {
+              "SampleName": "IdentifyKMLFeatures",
+              "Path": "Samples/Layers/IdentifyKMLFeatures"
+            },
+            {
+              "SampleName": "KmlFeatureVisibility",
+              "Path": "Samples/Layers/KmlFeatureVisibility"
+            },
+            {
+              "SampleName": "KmlLayerFile",
+              "Path": "Samples/Layers/KmlLayerFile"
+            }, 
+            {
+              "SampleName": "KmlLayerTOC",
+              "Path": "Samples/Layers/KmlLayerTOC"
+            }, 
+            {
+              "SampleName": "KmlLayerUrl",
+              "Path": "Samples/Layers/KmlLayerUrl"
+            }, 
+            {
+              "SampleName": "KmlNetworkLinks",
+              "Path": "Samples/Layers/KmlNetworkLinks"
+            } 
+          ]
         }
       ]
     },

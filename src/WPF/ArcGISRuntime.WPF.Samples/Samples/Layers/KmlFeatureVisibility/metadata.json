@@ -1,0 +1,13 @@
+{
+  "Name": "KmlFeature visibility",
+  "SampleName": "KmlFeatureVisibility",
+  "Description": "This sample demonstrates how to toggle on/off the Kml features of GroundOverlay, ScreenOverlay and Placemark in a SceneView.",
+  "Instructions": "",
+  "Type": 0,
+  "RequiresOnlineConnection":true,
+  "RequiresOfflineData":false,
+  "RequiresLocalServer":false,
+  "Image":"KmlFeatureVisibility.jpg",
+  "Link":"",
+  "TypeLink": ["T:Esri.ArcGISRuntime.Mapping.KmlLayer","T:Esri.ArcGISRuntime.Ogc.KmlDataset","T:Esri.ArcGISRuntime.Ogc.KmlGroundOverlay","T:Esri.ArcGISRuntime.Ogc.KmlScreenOverlay","T:Esri.ArcGISRuntime.Ogc.KmlPlacemark","T:Esri.ArcGISRuntime.Ogc.KmlFeature"]
+}

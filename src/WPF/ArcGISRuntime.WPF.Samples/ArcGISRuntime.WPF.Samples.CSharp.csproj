@@ -123,6 +123,24 @@
     <Compile Include="Samples\Layers\FeatureLayerUrl\FeatureLayerUrl.xaml.cs">
       <DependentUpon>FeatureLayerUrl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Layers\IdentifyKMLFeatures\IdentifyKMLFeatures.xaml.cs">
+      <DependentUpon>IdentifyKMLFeatures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Layers\KmlFeatureVisibility\KmlFeatureVisibility.xaml.cs">
+      <DependentUpon>KmlFeatureVisibility.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Layers\KmlLayerFile\KmlLayerFile.xaml.cs">
+      <DependentUpon>KmlLayerFile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Layers\KmlLayerTOC\KmlLayerTOC.xaml.cs">
+      <DependentUpon>KmlLayerTOC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Layers\KmlLayerUrl\KmlLayerUrl.xaml.cs">
+      <DependentUpon>KmlLayerUrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Layers\KmlNetworkLinks\KmlNetworkLinks.xaml.cs">
+      <DependentUpon>KmlNetworkLinks.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Layers\RasterLayerImageServiceRaster\RasterLayerImageServiceRaster.xaml.cs">
       <DependentUpon>RasterLayerImageServiceRaster.xaml</DependentUpon>
     </Compile>
@@ -231,6 +249,25 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Samples\GraphicsOverlay\SketchOnMap\SketchOnMap.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Layers\IdentifyKMLFeatures\IdentifyKMLFeatures.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Layers\KmlFeatureVisibility\KmlFeatureVisibility.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Layers\KmlLayerFile\KmlLayerFile.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Layers\KmlLayerTOC\KmlLayerTOC.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Resources\MOCK_TOC.jpg" />
+    <Content Include="Samples\Layers\KmlLayerUrl\KmlLayerUrl.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Layers\KmlNetworkLinks\KmlNetworkLinks.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Samples\Layers\RasterLayerImageServiceRaster\RasterLayerImageServiceRaster.jpg">
@@ -479,6 +516,30 @@
     <Page Include="Samples\Layers\FeatureLayerUrl\FeatureLayerUrl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Layers\IdentifyKMLFeatures\IdentifyKMLFeatures.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\Layers\KmlFeatureVisibility\KmlFeatureVisibility.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\Layers\KmlLayerFile\KmlLayerFile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\Layers\KmlLayerTOC\KmlLayerTOC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\Layers\KmlLayerUrl\KmlLayerUrl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\Layers\KmlNetworkLinks\KmlNetworkLinks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Samples\Layers\RasterLayerImageServiceRaster\RasterLayerImageServiceRaster.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -832,7 +893,26 @@
     <Content Include="Samples\Data\StatisticalQuery\metadata.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Samples\Layers\IdentifyKMLFeatures\metadata.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Layers\KmlFeatureVisibility\metadata.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Layers\KmlLayerFile\metadata.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Layers\KmlLayerTOC\metadata.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Layers\KmlLayerUrl\metadata.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Layers\KmlNetworkLinks\metadata.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\ArcGISRuntime.Samples.Shared\ArcGISRuntime.Samples.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\packages\Esri.ArcGISRuntime.WPF.100.2.0\build\net452\Esri.ArcGISRuntime.WPF.targets" Condition="Exists('..\..\..\packages\Esri.ArcGISRuntime.WPF.100.2.0\build\net452\Esri.ArcGISRuntime.WPF.targets')" />

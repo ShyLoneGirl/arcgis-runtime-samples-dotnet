@@ -1,0 +1,13 @@
+{
+  "Name": "KML Network Links",
+  "SampleName": "KmlNetworkLinks",
+  "Description": "This sample demonstrates accessing a Kml file with NetworkLinks that automatically refresh temporal information.",
+  "Instructions": "",
+  "Type": 0,
+  "RequiresOnlineConnection":true,
+  "RequiresOfflineData":false,
+  "RequiresLocalServer":false,
+  "Image":"KmlNetworkLinks.jpg",
+  "Link":"",
+  "TypeLink": ["T:Esri.ArcGISRuntime.Mapping.KmlLayer","T:Esri.ArcGISRuntime.Ogc.KmlDataset","T:Esri.ArcGISRuntime.Ogc.KmlNetworkLink"]
+}

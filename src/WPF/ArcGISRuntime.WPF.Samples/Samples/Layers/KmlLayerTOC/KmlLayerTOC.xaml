@@ -1,0 +1,26 @@
+﻿<UserControl 
+    x:Class="ArcGISRuntime.WPF.Samples.KmlLayerTOC.KmlLayerTOC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013" 
+    mc:Ignorable="d" 
+    d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <!-- 
+        TODO: 
+        THIS IS USING A MOCK IMAGE FOR THE TOC. THIS IS NOT WHAT THE REAL CODE WOULD BE. 
+        NEED TO USE THE ARCGIS RUNTIME TOC CONTROL AND BIND IT TO THE MAP/MAPVIEW.
+        -->
+        <Image x:Name="Mock_TOC" Grid.Column="0" Stretch="Fill"/>
+        
+        <esri:MapView x:Name="MyMapView" Grid.Column="1"/>
+    </Grid>
+</UserControl>
+

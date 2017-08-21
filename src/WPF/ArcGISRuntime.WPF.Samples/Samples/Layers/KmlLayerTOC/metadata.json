@@ -1,0 +1,13 @@
+{
+  "Name": "KmlLayer TOC",
+  "SampleName": "KmlLayerTOC",
+  "Description": "This sample demonstrates displaying a KmlLayer in a MapView and an associated TOC (Table of Contents) control from the ArcGIS Runtime Toolkit.",
+  "Instructions": "",
+  "Type": 0,
+  "RequiresOnlineConnection":true,
+  "RequiresOfflineData":false,
+  "RequiresLocalServer":false,
+  "Image":"KmlLayerTOC.jpg",
+  "Link":"",
+  "TypeLink": ["T:Esri.ArcGISRuntime.Mapping.KmlLayer","T:Esri.ArcGISRuntime.Ogc.KmlDataset"]
+}

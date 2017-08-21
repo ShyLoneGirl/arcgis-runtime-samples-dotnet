@@ -1,0 +1,14 @@
+{
+  "Name": "KmlLayer file",
+  "SampleName": "KmlLayerFile",
+  "Description": "This sample demonstrates how to open Kml file from disk.",
+  "Instructions": "The Kml file will be downloaded from an ArcGIS Online portal automatically.",
+  "Type": 0,
+  "RequiresOnlineConnection": true,
+  "RequiresOfflineData": true,
+  "DataItemIds": [ "324e4742820e46cfbe5029ff2c32cb1f" ],
+  "RequiresLocalServer": false,
+  "Image": "KmlLayerFile.jpg",
+  "Link": "",
+  "TypeLink": [ "T:Esri.ArcGISRuntime.Mapping.KmlLayer","T:Esri.ArcGISRuntime.Ogc.KmlDataset" ]
+}

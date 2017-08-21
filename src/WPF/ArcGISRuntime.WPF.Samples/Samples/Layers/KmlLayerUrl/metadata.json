@@ -1,0 +1,13 @@
+{
+  "Name": "KmlLayer Url",
+  "SampleName": "KmlLayerUrl",
+  "Description": "This sample demonstrates how to load a Kml file from web server.",
+  "Instructions": "",
+  "Type": 0,
+  "RequiresOnlineConnection":true,
+  "RequiresOfflineData":false,
+  "RequiresLocalServer":false,
+  "Image":"KmlLayerUrl.jpg",
+  "Link":"",
+  "TypeLink": ["T:Esri.ArcGISRuntime.Mapping.KmlLayer","T:Esri.ArcGISRuntime.Ogc.KmlDataset"]
+}
