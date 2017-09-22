@@ -1,5 +1,6 @@
 ﻿using System;
 using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.UI.Controls;
 using UIKit;
 
 namespace ArcGISRuntimeXamarin.Samples.IOSUI
@@ -8,7 +9,7 @@ namespace ArcGISRuntimeXamarin.Samples.IOSUI
     {
         public IOSUI() : base("IOSUI", null)
         {
-            myMapView.Map = new Map(Basemap.CreateImagery());
+            
         }
 
         public override void DidReceiveMemoryWarning()
@@ -23,6 +24,7 @@ namespace ArcGISRuntimeXamarin.Samples.IOSUI
             base.ViewDidLoad();
 
             // Perform any additional setup after loading the view, typically from a nib.
+            myMapView.Map = new Map(Basemap.CreateImageryWithLabels());
         }
     }
 }
