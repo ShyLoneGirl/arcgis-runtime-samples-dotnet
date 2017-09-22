@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="220">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="219">
+            <objects>
+                <viewController id="220" sceneMemberID="viewController" customClass="Samples.IOSUI">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="217"/>
+                        <viewControllerLayoutGuide type="bottom" id="218"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="221">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="2045" customClass="MapView" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" id="2048" translatesAutoresizingMaskIntoConstraints="NO">
+                                        <rect key="frame" x="180" y="47" width="240" height="128"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2049">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        </view>
+                                        <blurEffect style="light"/>
+                                        <constraints>
+                                            <constraint id="2050" firstItem="2049" firstAttribute="centerY" secondItem="2048" secondAttribute="centerY"/>
+                                        </constraints>
+                                    </visualEffectView>
+                                </subviews>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint id="2046" firstItem="2045" firstAttribute="top" secondItem="217" secondAttribute="bottom" constant="244"/>
+                            <constraint id="2047" firstItem="218" firstAttribute="top" secondItem="2045" secondAttribute="bottom" constant="208"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="222" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-538" y="-348"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Default-568h.png" width="320" height="568"/>
+        <image name="Samples/Data/FeatureLayerQuery/FeatureLayerQuery.jpg" width="390" height="694"/>
+        <image name="Samples/Data/GenerateGeodatabase/GenerateGeodatabase.jpg" width="750" height="1334"/>
+        <image name="Samples/Data/ServiceFeatureTableCache/ServiceFeatureTableCache.jpg" width="397" height="705"/>
+        <image name="Samples/Data/ServiceFeatureTableManualCache/ServiceFeatureTableManualCache.jpg" width="397" height="705"/>
+        <image name="Samples/Data/ServiceFeatureTableNoCache/ServiceFeatureTableNoCache.jpg" width="397" height="705"/>
+        <image name="Samples/GraphicsOverlay/AddGraphicsRenderer/AddGraphicsRenderer.jpg" width="397" height="705"/>
+        <image name="Samples/GraphicsOverlay/IdentifyGraphics/IdentifyGraphics.jpg" width="397" height="705"/>
+        <image name="Samples/GraphicsOverlay/SketchOnMap/SketchOnMap.jpg" width="400" height="714"/>
+        <image name="Samples/Layers/ArcGISMapImageLayerUrl/ArcGISMapImageLayerUrl.jpg" width="397" height="705"/>
+        <image name="Samples/Layers/ArcGISTiledLayerUrl/ArcGISTiledLayerUrl.jpg" width="397" height="705"/>
+        <image name="Samples/Layers/ArcGISVectorTiledLayerUrl/ArcGISVectorTiledLayerUrl.jpg" width="750" height="1378"/>
+        <image name="Samples/Layers/ChangeFeatureLayerRenderer/ChangeFeatureLayerRenderer.jpg" width="390" height="694"/>
+        <image name="Samples/Layers/ChangeSublayerVisibility/ChangeSublayerVisibility.jpg" width="397" height="705"/>
+        <image name="Samples/Layers/CreateFeatureCollectionLayer/CreateFeatureCollectionLayer.jpg" width="400" height="708"/>
+        <image name="Samples/Layers/FeatureCollectionLayerFromPortal/FeatureCollectionLayerFromPortal.jpg" width="400" height="711"/>
+        <image name="Samples/Layers/FeatureCollectionLayerFromQuery/FeatureCollectionLayerFromQuery.jpg" width="400" height="709"/>
+        <image name="Samples/Layers/FeatureLayerDefinitionExpression/FeatureLayerDefinitionExpression.jpg" width="478" height="716"/>
+        <image name="Samples/Layers/FeatureLayerSelection/FeatureLayerSelection.jpg" width="476" height="717"/>
+        <image name="Samples/Layers/FeatureLayerUrl/FeatureLayerUrl.jpg" width="397" height="705"/>
+        <image name="Samples/Layers/RasterLayerImageServiceRaster/RasterLayerImageServiceRaster.jpg" width="500" height="786"/>
+        <image name="Samples/Layers/RasterLayerRasterFunction/RasterLayerRasterFunction.jpg" width="497" height="783"/>
+        <image name="Samples/Layers/SceneLayerUrl/SceneLayerUrl.jpg" width="748" height="1332"/>
+        <image name="Samples/Layers/WMTSLayer/WMTSLayer.jpg" width="500" height="891"/>
+        <image name="Samples/Location/DisplayDeviceLocation/DisplayDeviceLocation.jpg" width="481" height="690"/>
+        <image name="Samples/Map/AccessLoadStatus/AccessLoadStatus.jpg" width="397" height="705"/>
+        <image name="Samples/Map/AuthorMap/AuthorMap.jpg" width="400" height="710"/>
+        <image name="Samples/Map/ChangeBasemap/ChangeBasemap.jpg" width="400" height="569"/>
+        <image name="Samples/Map/DisplayMap/DisplayMap.jpg" width="397" height="705"/>
+        <image name="Samples/Map/ManageBookmarks/ManageBookmarks.jpg" width="479" height="716"/>
+        <image name="Samples/Map/SearchPortalMaps/SearchPortalMaps.jpg" width="750" height="1334"/>
+        <image name="Samples/Map/SetInitialMapArea/SetInitialMapArea.jpg" width="397" height="705"/>
+        <image name="Samples/Map/SetInitialMapLocation/SetInitialMapLocation.jpg" width="390" height="694"/>
+        <image name="Samples/Map/SetMapSpatialReference/SetMapSpatialReference.jpg" width="390" height="694"/>
+        <image name="Samples/Map/SetMinMaxScale/SetMinMaxScale.jpg" width="397" height="705"/>
+        <image name="Samples/MapView/ChangeViewpoint/ChangeViewpoint.jpg" width="397" height="705"/>
+        <image name="Samples/MapView/DisplayDrawingStatus/DisplayDrawingStatus.jpg" width="397" height="705"/>
+        <image name="Samples/MapView/DisplayLayerViewState/DisplayLayerViewState.jpg" width="480" height="669"/>
+        <image name="Samples/MapView/MapRotation/MapRotation.jpg" width="389" height="579"/>
+        <image name="Samples/MapView/ShowCallout/ShowCallout.jpg" width="750" height="1334"/>
+        <image name="Samples/MapView/ShowMagnifier/ShowMagnifier.jpg" width="397" height="705"/>
+        <image name="Samples/MapView/TakeScreenshot/TakeScreenshot.jpg" width="476" height="720"/>
+        <image name="Samples/NetworkAnalysis/FindRoute/FindRoute.jpg" width="750" height="1334"/>
+        <image name="Samples/Search/FindAddress/FindAddress.jpg" width="750" height="1334"/>
+        <image name="Samples/Symbology/RenderPictureMarkers/RenderPictureMarkers.jpg" width="397" height="705"/>
+        <image name="Samples/Symbology/RenderUniqueValues/RenderUniqueValues.jpg" width="397" height="705"/>
+        <image name="Samples/Tutorial/AuthorEditSaveMap/AuthorEditSaveMap.jpg" width="400" height="737"/>
+    </resources>
+</document>

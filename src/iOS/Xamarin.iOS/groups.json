@@ -107,12 +107,8 @@
               "Path": "Samples/Layers/ArcGISTiledLayerUrl"
             },
             {
-              "SampleName": "ArcGISVectorTiledLayerUrl",
-              "Path": "Samples/Layers/ArcGISVectorTiledLayerUrl"
-            },
-            {
-              "SampleName": "ExportTiles",
-              "Path": "Samples/Layers/ExportTiles"
+              "SampleName":"ArcGISVectorTiledLayerUrl",
+              "Path":"Samples/Layers/ArcGISVectorTiledLayerUrl"
             }
           ]
         },
@@ -132,6 +128,10 @@
             {
               "SampleName": "WMTSLayer",
               "Path": "Samples/Layers/WMTSLayer"
+            },
+            {
+              "SampleName": "WMSLayerUrl",
+              "Path": "Samples/Layers/WMSLayerUrl"
             }
           ]
         },
@@ -147,14 +147,6 @@
             {
               "SampleName": "RasterLayerRasterFunction",
               "Path": "Samples/Layers/RasterLayerRasterFunction"
-            },
-            {
-              "SampleName": "RasterLayerFile",
-              "Path": "Samples/Layers/RasterLayerFile"
-            },
-            {
-              "SampleName": "RasterRenderingRule",
-              "Path": "Samples/Layers/RasterRenderingRule"
             }
           ]
         }
@@ -196,10 +188,6 @@
             {
               "SampleName": "FeatureCollectionLayerFromQuery",
               "Path": "Samples/Layers/FeatureCollectionLayerFromQuery"
-            },
-            {
-              "SampleName": "FeatureLayerDictionaryRenderer",
-              "Path": "Samples/Layers/FeatureLayerDictionaryRenderer"
             }
           ]
         },
@@ -227,10 +215,6 @@
             {
               "SampleName": "GenerateGeodatabase",
               "Path": "Samples/Data/GenerateGeodatabase"
-            },
-            {
-              "SampleName": "EditAndSyncFeatures",
-              "Path": "Samples/Data/EditAndSyncFeatures"
             }
           ]
         }
@@ -275,10 +259,6 @@
             {
               "SampleName": "RenderUniqueValues",
               "Path": "Samples/Symbology/RenderUniqueValues"
-            },
-            {
-              "SampleName": "SimpleRenderers",
-              "Path": "Samples/Symbology/SimpleRenderers"
             }
           ]
         }
@@ -294,8 +274,35 @@
           "ShowGroup": true,
           "SampleInfos": [
             {
+              "SampleName": "AnalyzeHotspots",
+              "Path": "Samples/Geoprocessing/AnalyzeHotspots"
+            },
+            {
               "SampleName": "AnalyzeViewshed",
               "Path": "Samples/Geoprocessing/AnalyzeViewshed"
+            },
+            {
+              "SampleName": "ListGeodatabaseVersions",
+              "Path": "Samples/Geoprocessing/ListGeodatabaseVersions"
+            }
+          ]
+        },
+        {
+          "Name": "Statistics",
+          "SubCategoryName": "Statistics",
+          "ShowGroup": true,
+          "SampleInfos": [
+            {
+              "SampleName": "StatisticalQuery",
+              "Path": "Samples/Data/StatisticalQuery"
+            },
+            {
+              "SampleName": "StatisticsGroupSort",
+              "Path": "Samples/Data/StatisticsGroupSort"
+            },
+            {
+              "SampleName": "QueryCountExtent",
+              "Path": "Samples/Data/QueryCountExtent"
             }
           ]
         }
@@ -341,10 +348,6 @@
             {
               "SampleName": "SceneLayerUrl",
               "Path": "Samples/Layers/SceneLayerUrl"
-            },
-            {
-              "SampleName": "DisplayScene",
-              "Path": "Samples/Layers/DisplayScene"
             }
           ]
         }
@@ -372,17 +375,13 @@
       "CategoryName": "Search",
       "SubCategories": [
         {
-          "Name": "Working with Places",
-          "SubCategoryName": "WorkingWithPlaces",
+          "Name": "Working with Addresses",
+          "SubCategoryName": "WorkingWithAddresses",
           "ShowGroup": true,
           "SampleInfos": [
             {
               "SampleName": "FindAddress",
               "Path": "Samples/Search/FindAddress"
-            },
-            {
-              "SampleName": "FindPlace",
-              "Path": "Samples/Search/FindPlace"
             }
           ]
         }
@@ -400,6 +399,10 @@
             {
               "SampleName": "AuthorEditSaveMap",
               "Path": "Samples/Tutorial/AuthorEditSaveMap"
+            },
+            {
+              "SampleName": "IOSUI",
+              "Path": "Samples/Tutorial/IOSUI"
             }
           ]
         }
