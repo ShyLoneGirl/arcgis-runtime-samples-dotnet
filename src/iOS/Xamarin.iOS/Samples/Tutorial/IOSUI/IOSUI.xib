@@ -18,6 +18,60 @@
                 <view contentMode="scaleToFill" id="1230" customClass="MapView" translatesAutoresizingMaskIntoConstraints="NO">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <color key="backgroundColor" colorSpace="calibratedRGB" red="1" green="0" blue="0" alpha="1"/>
+                    <subviews>
+                        <visualEffectView contentMode="scaleToFill" id="1251" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1252">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="1281" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <items>
+                                            <barButtonItem title="Left" id="1289"/>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="1287"/>
+                                            <barButtonItem title="Right" id="1288"/>
+                                        </items>
+                                    </toolbar>
+                                    <searchBar contentMode="redraw" id="1290" translatesAutoresizingMaskIntoConstraints="NO">
+                                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Text" borderStyle="roundedRect" minimumFontSize="17" id="1339" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                        <rect key="frame" x="160" y="111" width="143" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1341" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES" adjustsLetterSpacingToFitWidth="NO" text="Item One">
+                                        <rect key="frame" x="22" y="116" width="116" height="21"/>
+                                        <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <accessibility key="accessibilityConfiguration" label="Item One"/>
+                                        <color key="tintColor" colorSpace="calibratedRGB" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint id="1285" firstItem="1281" firstAttribute="leading" secondItem="1252" secondAttribute="leading"/>
+                                    <constraint id="1286" firstItem="1281" firstAttribute="top" secondItem="1252" secondAttribute="top"/>
+                                    <constraint id="1291" firstItem="1290" firstAttribute="top" secondItem="1281" secondAttribute="bottom"/>
+                                    <constraint id="1292" firstItem="1290" firstAttribute="trailing" secondItem="1252" secondAttribute="trailing"/>
+                                    <constraint id="1293" firstItem="1290" firstAttribute="leading" secondItem="1252" secondAttribute="leading"/>
+                                    <constraint id="1340" firstItem="1339" firstAttribute="top" secondItem="1290" secondAttribute="bottom" constant="23"/>
+                                    <constraint id="1342" firstItem="1341" firstAttribute="leading" secondItem="1252" secondAttribute="leading" constant="22"/>
+                                    <constraint id="1343" firstItem="1252" firstAttribute="trailing" secondItem="1339" secondAttribute="trailing" constant="20"/>
+                                    <constraint id="1344" firstItem="1339" firstAttribute="leading" secondItem="1290" secondAttribute="centerX"/>
+                                    <constraint id="1346" firstItem="1339" firstAttribute="leading" secondItem="1341" secondAttribute="trailing"/>
+                                </constraints>
+                            </view>
+                            <blurEffect style="light"/>
+                        </visualEffectView>
+                    </subviews>
+                    <constraints>
+                        <constraint id="1266" firstItem="1230" firstAttribute="trailing" secondItem="1251" secondAttribute="trailing"/>
+                        <constraint id="1267" firstItem="1251" firstAttribute="leading" secondItem="1230" secondAttribute="leading"/>
+                        <constraint id="1268" firstItem="1251" firstAttribute="topMargin" secondItem="1230" secondAttribute="topMargin"/>
+                        <constraint id="1270" firstItem="1230" firstAttribute="bottom" secondItem="1251" secondAttribute="bottom" multiplier="1.5"/>
+                    </constraints>
                 </view>
             </subviews>
             <constraints>
