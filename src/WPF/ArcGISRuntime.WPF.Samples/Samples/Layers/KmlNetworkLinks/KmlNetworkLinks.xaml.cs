@@ -65,7 +65,7 @@ namespace ArcGISRuntime.WPF.Samples.KmlNetworkLinks
             await myKmlLayer.LoadAsync();
 
             // Traverse the file and display the refresh intervals for network links
-            TraverseNodesUpdateStatus(_myKmlDataset.RootFeatures);
+            TraverseNodesUpdateStatus(_myKmlDataset.RootNodes);
 
             // Subscribe to status changes
             myKmlLayer.LoadStatusChanged += KmlLayer_LoadStatusChanged;
@@ -79,14 +79,14 @@ namespace ArcGISRuntime.WPF.Samples.KmlNetworkLinks
                 MyNetworkLinkLabel.Content = "";
 
                 // Traverse the file and display the refresh intervals for network links
-                TraverseNodesUpdateStatus(_myKmlDataset.RootFeatures);
+                TraverseNodesUpdateStatus(_myKmlDataset.RootNodes);
             }
         }
 
-        private void TraverseNodesUpdateStatus(IReadOnlyList<KmlFeature> sublayers)
+        private void TraverseNodesUpdateStatus(IReadOnlyList<KmlNode> sublayers)
         {
             // Iterate through each sublayer content
-            foreach (KmlFeature content in sublayers)
+            foreach (KmlNode content in sublayers)
             {
                 // Update the UI if the content is a Network Link
                 if (typeof(KmlNetworkLink) == content.GetType())
@@ -98,15 +98,20 @@ namespace ArcGISRuntime.WPF.Samples.KmlNetworkLinks
                     string existingLabel = MyNetworkLinkLabel.Content as string;
 
                     // Update the text with information about the layer
-                    existingLabel += String.Format("\n{0} - {1}", netLink.Name, netLink.RefreshStatus);
+                    existingLabel += String.Format("\n{0} - {1}", netLink.Name, netLink.RefreshInterval);
                     //existingLabel += String.Format("\n{0} - {1}s", netLink.Name, netLink.RefreshInterval);
 
                     // Update the label with the new text
                     MyNetworkLinkLabel.Content = existingLabel;
                 }
 
-                // Recurse on the contents of this sublayer
-                TraverseNodesUpdateStatus(content.ChildFeatures);
+                // Update the UI if the content is a Network Link
+                if (typeof(KmlNetworkLink) == content.GetType())
+                {
+                    KmlNetworkLink myKmlNetworkLink = (KmlNetworkLink)content;
+                    // Recurse on the contents of this sublayer
+                    TraverseNodesUpdateStatus(myKmlNetworkLink.ChildNodes);
+                }
 
                 // Note: recursion ends when there are no more sublayer contents to visit
             }

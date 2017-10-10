@@ -87,31 +87,35 @@ namespace ArcGISRuntime.WPF.Samples.KmlFeatureVisibility
             }
         }
 
-        private IList<KmlFeature> FindAllFeatures(KmlDataset dataset)
+        private IList<KmlNode> FindAllFeatures(KmlDataset dataset)
         {
             // This function gathers a list of all KML features in the given dataset, recursively
 
             // Create an empty list of Kml features
-            var list = new List<KmlFeature>();
+            var list = new List<KmlNode>();
 
             // Loop through all the Kml features in the root features node
-            foreach (KmlFeature rootFeature in dataset.RootFeatures)
+            foreach (KmlNode rootNode in dataset.RootNodes)
 
                 // Call the recursive function get the nested Kml features from all of the child features
-                CollectFeaturesAndChildren(rootFeature, list);
+                CollectFeaturesAndChildren(rootNode, list);
 
             // Returns a flat list of all Kml features in the Kml dataset
             return list;
         }
 
-        private void CollectFeaturesAndChildren(KmlFeature feature, ICollection<KmlFeature> collection)
+        private void CollectFeaturesAndChildren(KmlNode feature, ICollection<KmlNode> collection)
         {
             // Add the Kml feature to the collection
             collection.Add(feature);
 
-            // Recursively loop through each child feature in the Kml dataset  
-            foreach (KmlFeature child in feature.ChildFeatures)
-                CollectFeaturesAndChildren(child, collection);
+            if (feature is KmlContainer)
+            {
+                KmlContainer myKmlContainer = (KmlContainer)feature;
+                // Recursively loop through each child feature in the Kml dataset  
+                foreach (KmlNode child in myKmlContainer.ChildNodes)
+                    CollectFeaturesAndChildren(child, collection);
+            };
         }
 
         private void ToggleKmlFeatureVisibility(KmlLayer myKmlLayer, string overlayType)
@@ -120,13 +124,13 @@ namespace ArcGISRuntime.WPF.Samples.KmlFeatureVisibility
             KmlDataset myKmlDataSet = myKmlLayer.Dataset;
 
             // Get the root features from the Kml dataset
-            IReadOnlyList<KmlFeature> myRootFeatures = myKmlDataSet.RootFeatures;
+            IReadOnlyList<KmlNode> myRootFeatures = myKmlDataSet.RootNodes;
 
             // Get all of the Kml features in the Kml dataset
             var myKmlFeatures = FindAllFeatures(myKmlDataSet);
 
             // Loop through each Kml feature
-            foreach (KmlFeature oneKmlFeature in myKmlFeatures)
+            foreach (KmlNode oneKmlFeature in myKmlFeatures)
             {
                 // Toggle the visibility of Kml GroundOverlay types
                 if (overlayType == "aKmlGroundOverlay")
