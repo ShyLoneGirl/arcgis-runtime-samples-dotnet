@@ -84,7 +84,7 @@ namespace ArcGISRuntimeXamarin.Samples.FeatureLayerDefinitionExpression
             if (_featureLayer.LoadStatus == Esri.ArcGISRuntime.LoadStatus.Loaded)
             {
                 //Add the feature layer to the map
-                myMap.OperationalLayersAndData.Add(_featureLayer);
+                myMap.OperationalLayers.Add(_featureLayer);
             }
         }
 

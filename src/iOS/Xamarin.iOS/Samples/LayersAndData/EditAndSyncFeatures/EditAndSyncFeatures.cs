@@ -8,7 +8,7 @@
 // language governing permissions and limitations under the License.
 
 using ArcGISRuntimeXamarin.Managers;
-using Esri.ArcGISRuntime.LayersAndData;
+using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Symbology;
@@ -152,7 +152,7 @@ namespace ArcGISRuntimeXamarin.Samples.EditAndSyncFeatures
             myMapView.GeoViewTapped += GeoViewTapped;
 
             // Update the local data path for the geodatabase file
-            String iOSFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationLayersAndData);
+            String iOSFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             _gdbPath = Path.Combine(iOSFolder, "wildfire.geodatabase");
 
             // Create a task for generating a geodatabase (GeodatabaseSyncTask)
@@ -475,7 +475,7 @@ namespace ArcGISRuntimeXamarin.Samples.EditAndSyncFeatures
             string filename = "SanFrancisco.tpk";
 
             // The data manager provides a method to get the folder
-            string folder = LayersAndDataManager.GetLayersAndDataFolder();
+            string folder = DataManager.GetDataFolder();
 
 			// Return the full path; Item ID is 3f1bbf0ec70b409a975f5c91f363fe7d
 			return Path.Combine(folder, "SampleLayersAndData", "EditAndSyncFeatures", filename);

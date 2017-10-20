@@ -65,7 +65,7 @@ namespace ArcGISRuntimeXamarin.Samples.FeatureLayerUrl
             FeatureLayer geologyLayer = new FeatureLayer(serviceUri);
 
             // Add created layer to the map
-            myMap.OperationalLayersAndData.Add(geologyLayer);
+            myMap.OperationalLayers.Add(geologyLayer);
 
             // Assign the map to the MapView
             _myMapView.Map = myMap;

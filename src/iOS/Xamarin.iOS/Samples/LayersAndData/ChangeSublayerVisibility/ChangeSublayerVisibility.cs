@@ -47,7 +47,7 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeSublayerVisibility
             myMap.Basemap = Basemap.CreateTopographic();
 
             // Add the map image layer to the map's operational layers
-            myMap.OperationalLayersAndData.Add(mapImageLayer);
+            myMap.OperationalLayers.Add(mapImageLayer);
 
             // Assign the Map to the MapView
             myMapView.Map = myMap;

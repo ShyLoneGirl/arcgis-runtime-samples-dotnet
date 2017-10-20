@@ -7,7 +7,7 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific 
 // language governing permissions and limitations under the License.
 
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.UI.Controls;
 using Foundation;
 using System;
@@ -19,8 +19,8 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
     [Register("ManageBookmarks")]
     public class ManageBookmarks : UIViewController
     {
-        // Create and hold reference to the used MapsAndVisualizationView
-        private MapsAndVisualizationView _myMapsAndVisualizationView = new MapsAndVisualizationView();
+        // Create and hold reference to the used MapView
+        private MapView _myMapView = new MapView();
 
         public ManageBookmarks()
         {
@@ -44,25 +44,25 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualizationView
-            _myMapsAndVisualizationView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
             base.ViewDidLayoutSubviews();
         }
 
         private void Initialize()
         {
-            // Create new MapsAndVisualization with basemap
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateImageryWithLabels());
+            // Create new Map with basemap
+            Map myMap = new Map(Basemap.CreateImageryWithLabels());
 
-            // Provide used MapsAndVisualization to the MapsAndVisualizationView
-            _myMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Provide used Map to the MapView
+            _myMapView.Map = myMap;
 
             // Add default bookmarks
             AddDefaultBookmarks();
 
             // Zoom to the last bookmark
-            myMapsAndVisualization.InitialViewpoint = myMapsAndVisualization.Bookmarks.Last().Viewpoint;
+            myMap.InitialViewpoint = myMap.Bookmarks.Last().Viewpoint;
         }
 
         //Add some default bookmarks
@@ -80,28 +80,28 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
             // Assign the viewpoint 
             myBookmark.Viewpoint = vp;
             // Add the bookmark to bookmark collection of the map
-            _myMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Add(myBookmark);
+            _myMapView.Map.Bookmarks.Add(myBookmark);
 
             // Bookmark-2
             vp = new Viewpoint(37.401573, -116.867808, 6000);
             myBookmark = new Bookmark();
             myBookmark.Name = "Strange Symbol";
             myBookmark.Viewpoint = vp;
-            _myMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Add(myBookmark);
+            _myMapView.Map.Bookmarks.Add(myBookmark);
 
             // Bookmark-3
             vp = new Viewpoint(-33.867886, -63.985, 40000);
             myBookmark = new Bookmark();
             myBookmark.Name = "Guitar-Shaped Forest";
             myBookmark.Viewpoint = vp;
-            _myMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Add(myBookmark);
+            _myMapView.Map.Bookmarks.Add(myBookmark);
 
             // Bookmark-4
             vp = new Viewpoint(44.525049, -110.83819, 6000);
             myBookmark = new Bookmark();
             myBookmark.Name = "Grand Prismatic Spring";
             myBookmark.Viewpoint = vp;
-            _myMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Add(myBookmark);
+            _myMapView.Map.Bookmarks.Add(myBookmark);
         }
 
         private void OnAddBookmarksButtonClicked(object sender, EventArgs e)
@@ -124,7 +124,7 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
                     return;
 
                 // Check to see if there is a bookmark with same name
-                bool doesNameExist = _myMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Any(b => b.Name == name);
+                bool doesNameExist = _myMapView.Map.Bookmarks.Any(b => b.Name == name);
                 if (doesNameExist)
                     return;
 
@@ -132,9 +132,9 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
                 Bookmark myBookmark = new Bookmark();
                 myBookmark.Name = name;
                 // Get the current viewpoint from map and assign it to bookmark 
-                myBookmark.Viewpoint = _myMapsAndVisualizationView.GetCurrentViewpoint(ViewpointType.BoundingGeometry);
+                myBookmark.Viewpoint = _myMapView.GetCurrentViewpoint(ViewpointType.BoundingGeometry);
                 // Add the bookmark to bookmark collection of the map
-                _myMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Add(myBookmark);
+                _myMapView.Map.Bookmarks.Add(myBookmark);
 
             });
 
@@ -152,11 +152,11 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
                 UIAlertControllerStyle.Alert);
 
             // Add Bookmarks as Actions
-            foreach(Bookmark myBookmark in _myMapsAndVisualizationView.MapsAndVisualization.Bookmarks)
+            foreach(Bookmark myBookmark in _myMapView.Map.Bookmarks)
             {
                 actionAlert.AddAction(UIAlertAction.Create(myBookmark.Name, UIAlertActionStyle.Default, 
                     (action) =>{
-                        _myMapsAndVisualizationView.SetViewpoint(myBookmark.Viewpoint);
+                        _myMapView.SetViewpoint(myBookmark.Viewpoint);
                     }));
             }
 
@@ -166,8 +166,8 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
 
         private void CreateLayout()
         {
-            // Setup the visual frame for the MapsAndVisualizationView
-            _myMapsAndVisualizationView = new MapsAndVisualizationView();
+            // Setup the visual frame for the MapView
+            _myMapView = new MapView();
 
             // Create a bookmark button to show existing bookmarks
             var showBookmarksButton = new UIBarButtonItem() { Title = "Bookmarks", Style = UIBarButtonItemStyle.Plain };
@@ -185,8 +185,8 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
             // Show the toolbar
             NavigationController.ToolbarHidden = false;
 
-            // Add MapsAndVisualizationView to the page
-            View.AddSubviews(_myMapsAndVisualizationView);
+            // Add MapView to the page
+            View.AddSubviews(_myMapView);
         }
     }
 }

@@ -18,8 +18,8 @@ namespace ArcGISRuntimeXamarin.Samples.TakeScreenshot
     [Register("TakeScreenshot")]
     public class TakeScreenshot : UIViewController
     {
-        // Create and hold reference to the used MapsAndVisualization
-        private MapsAndVisualization _myMapsAndVisualization = new MapsAndVisualization();
+        // Create and hold reference to the used MapView
+        private MapView _myMapView = new MapView();
 
         //overlay view for holding imageview
         private UIView _overlayView;
@@ -30,7 +30,7 @@ namespace ArcGISRuntimeXamarin.Samples.TakeScreenshot
         //Button for closing ImageView
         private UIBarButtonItem _closeImageViewButton;
 
-        // Constant holding offset where the MapsAndVisualization control should start
+        // Constant holding offset where the MapView control should start
         private const int yPageOffset = 64;
 
         public TakeScreenshot()
@@ -54,10 +54,10 @@ namespace ArcGISRuntimeXamarin.Samples.TakeScreenshot
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualization
-            _myMapsAndVisualization.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
-            _overlayView.Frame = new CoreGraphics.CGRect(10, 80, _myMapsAndVisualization.Frame.Width - 20, _myMapsAndVisualization.Frame.Height - 75);
+            _overlayView.Frame = new CoreGraphics.CGRect(10, 80, _myMapView.Frame.Width - 20, _myMapView.Frame.Height - 75);
 
             _overlayImageView.Frame = new CoreGraphics.CGRect(0, 0, _overlayView.Frame.Width, _overlayView.Frame.Height);
            
@@ -69,8 +69,8 @@ namespace ArcGISRuntimeXamarin.Samples.TakeScreenshot
             // Create new Map with basemap
             Map myMap = new Map(Basemap.CreateImagery());
 
-            // Provide used Map to the MapsAndVisualization
-            _myMapsAndVisualization.Map = myMap;
+            // Provide used Map to the MapView
+            _myMapView.Map = myMap;
         }
 
         private void OnCloseImageViewClicked(object sender, EventArgs e)
@@ -81,7 +81,7 @@ namespace ArcGISRuntimeXamarin.Samples.TakeScreenshot
         private async void OnScreenshotButtonClicked(object sender, EventArgs e)
         {
             // Export the image from mapview and assign it to the imageview
-            _overlayImageView.Image = await Esri.ArcGISRuntime.UI.RuntimeImageExtensions.ToImageSourceAsync(await _myMapsAndVisualization.ExportImageAsync());
+            _overlayImageView.Image = await Esri.ArcGISRuntime.UI.RuntimeImageExtensions.ToImageSourceAsync(await _myMapView.ExportImageAsync());
             // Enable the button to close image view
             _closeImageViewButton.Enabled = true;
             // Show the overlay view
@@ -90,8 +90,8 @@ namespace ArcGISRuntimeXamarin.Samples.TakeScreenshot
 
         private void CreateLayout()
         {
-            // Setup the visual frame for the MapsAndVisualization
-            _myMapsAndVisualization = new MapsAndVisualization();
+            // Setup the visual frame for the MapView
+            _myMapView = new MapView();
     
             // Create a button to take the screenshot
             var screenshotButton = new UIBarButtonItem() { Title = "Screenshot", Style = UIBarButtonItemStyle.Plain };
@@ -123,8 +123,8 @@ namespace ArcGISRuntimeXamarin.Samples.TakeScreenshot
             // Hide the image view
             _overlayView.Hidden = true;
 
-            // Add MapsAndVisualization and overlay view to the page
-            View.AddSubviews(_myMapsAndVisualization, _overlayView);
+            // Add MapView and overlay view to the page
+            View.AddSubviews(_myMapView, _overlayView);
         }
     }
 }

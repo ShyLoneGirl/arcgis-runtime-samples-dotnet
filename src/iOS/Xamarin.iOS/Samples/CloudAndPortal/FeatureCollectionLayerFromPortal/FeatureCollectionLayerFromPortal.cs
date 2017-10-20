@@ -87,7 +87,7 @@ namespace ArcGISRuntimeXamarin.Samples.FeatureCollectionLayerFromPortal
                     FeatureCollectionLayer featureCollectionLayer = new FeatureCollectionLayer(featureCollection);
                     featureCollectionLayer.Name = collectionItem.Title;
 
-                    _myMapView.Map.OperationalCloudAndPortal.Add(featureCollectionLayer);
+                    _myMapView.Map.OperationalLayers.Add(featureCollectionLayer);
                 }
                 else
                 {

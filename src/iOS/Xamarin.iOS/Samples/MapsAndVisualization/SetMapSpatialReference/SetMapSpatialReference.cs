@@ -8,24 +8,24 @@
 // language governing permissions and limitations under the License.
 
 using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.UI.Controls;
 using Foundation;
 using System;
 using UIKit;
 
-namespace ArcGISRuntimeXamarin.Samples.SetMapsAndVisualizationSpatialReference
+namespace ArcGISRuntimeXamarin.Samples.SetMapSpatialReference
 {
-    [Register("SetMapsAndVisualizationSpatialReference")]
-    public class SetMapsAndVisualizationSpatialReference : UIViewController
+    [Register("SetMapSpatialReference")]
+    public class SetMapSpatialReference : UIViewController
     {
-        // Constant holding offset where the MapsAndVisualizationView control should start
+        // Constant holding offset where the MapView control should start
         private const int yPageOffset = 60;
 
-        // Create and hold reference to the used MapsAndVisualizationView
-        private MapsAndVisualizationView _myMapsAndVisualizationView = new MapsAndVisualizationView();
+        // Create and hold reference to the used MapView
+        private MapView _myMapView = new MapView();
 
-        public SetMapsAndVisualizationSpatialReference()
+        public SetMapSpatialReference()
         {
             Title = "Set map spatial reference";
         }
@@ -41,34 +41,34 @@ namespace ArcGISRuntimeXamarin.Samples.SetMapsAndVisualizationSpatialReference
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualizationView
-            _myMapsAndVisualizationView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
             base.ViewDidLayoutSubviews();
         }
 
         private void Initialize()
         {
-            // Create new MapsAndVisualization using spatial reference as world bonne (54024)
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(SpatialReference.Create(54024));
+            // Create new Map using spatial reference as world bonne (54024)
+            Map myMap = new Map(SpatialReference.Create(54024));
 
             // Adding a map image layer which can reproject itself to the map's spatial reference
             // Note: Some layer such as tiled layer cannot reproject and will fail to draw if their spatial 
             // reference is not the same as the map's spatial reference
-            ArcGISMapsAndVisualizationImageLayer operationalLayer = new ArcGISMapsAndVisualizationImageLayer(new Uri(
-                "https://sampleserver6.arcgisonline.com/arcgis/rest/services/SampleWorldCities/MapsAndVisualizationServer"));
+            ArcGISMapImageLayer operationalLayer = new ArcGISMapImageLayer(new Uri(
+                "https://sampleserver6.arcgisonline.com/arcgis/rest/services/SampleWorldCities/MapServer"));
 
-            // Add operational layer to the MapsAndVisualization
-            myMapsAndVisualization.OperationalLayers.Add(operationalLayer);
+            // Add operational layer to the Map
+            myMap.OperationalLayers.Add(operationalLayer);
 
-            // Assign the map to the MapsAndVisualizationView
-            _myMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Assign the map to the MapView
+            _myMapView.Map = myMap;
         }
 
         private void CreateLayout()
         {
-           // Add MapsAndVisualizationView to the page
-            View.AddSubviews(_myMapsAndVisualizationView);
+           // Add MapView to the page
+            View.AddSubviews(_myMapView);
         }
     }
 }

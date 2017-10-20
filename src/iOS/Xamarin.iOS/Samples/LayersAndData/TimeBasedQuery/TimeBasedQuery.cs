@@ -69,7 +69,7 @@ namespace ArcGISRuntimeXamarin.Samples.TimeBasedQuery
             FeatureLayer myFeatureLayer = new FeatureLayer(_myFeatureTable);
 
             // Add created layer to the map
-            myMap.OperationalLayersAndData.Add(myFeatureLayer);
+            myMap.OperationalLayers.Add(myFeatureLayer);
 
             // Assign the Map to the MapView
             _myMapView.Map = myMap;

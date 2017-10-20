@@ -56,7 +56,7 @@ namespace ArcGISRuntimeXamarin.Samples.KmlLayerFile
             KmlLayer displayLayer = new KmlLayer(fileDataSource);
 
             // Add the layer to the map
-            _myMapView.Map.OperationalLayersAndData.Add(displayLayer);
+            _myMapView.Map.OperationalLayers.Add(displayLayer);
         }
 
         // Get the file path for the KML file

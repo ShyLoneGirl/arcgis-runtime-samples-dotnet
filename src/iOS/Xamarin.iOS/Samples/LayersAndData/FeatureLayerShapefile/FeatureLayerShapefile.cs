@@ -8,7 +8,7 @@
 // language governing permissions and limitations under the License.
 
 using ArcGISRuntimeXamarin.Managers;
-using Esri.ArcGISRuntime.LayersAndData;
+using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.UI.Controls;
 using Foundation;
@@ -79,16 +79,16 @@ namespace ArcGISRuntimeXamarin.Samples.FeatureLayerShapefile
             string filename = "Public_Art.shp";
 
             // The data manager provides a method to get the folder
-            string folder = LayersAndDataManager.GetLayersAndDataFolder();
+            string folder = DataManager.GetDataFolder();
 
             // Get the full path
-            string filepath = Path.Combine(folder, "SampleLayersAndData", "FeatureLayerShapefile", filename);
+            string filepath = Path.Combine(folder, "SampleData", "FeatureLayerShapefile", filename);
 
             // Check if the file exists
             if (!File.Exists(filepath))
             {
                 // Download the shapefile
-                await LayersAndDataManager.GetLayersAndData("d98b3e5293834c5f852f13c569930caa", "FeatureLayerShapefile");
+                await DataManager.GetData("d98b3e5293834c5f852f13c569930caa", "FeatureLayerShapefile");
             }
 
             // Return the path

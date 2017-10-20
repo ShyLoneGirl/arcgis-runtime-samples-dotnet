@@ -8,7 +8,7 @@
 // language governing permissions and limitations under the License.
 
 using CoreGraphics;
-using Esri.ArcGISRuntime.LayersAndData;
+using Esri.ArcGISRuntime.Data;
 using Foundation;
 using System;
 using System.Collections.Generic;
@@ -148,10 +148,10 @@ namespace ArcGISRuntimeXamarin.Samples.StatsQueryGroupAndSort
             UITableViewController fieldsTable = new UITableViewController(UITableViewStyle.Plain);
 
             // Create a data source to show fields the user can choose to group results with
-            GroupFieldsLayersAndDataSource groupFieldsLayersAndDataSource = new GroupFieldsLayersAndDataSource(_groupByFields);
+            GroupFieldsDataSource groupFieldsDataSource = new GroupFieldsDataSource(_groupByFields);
 
             // Set the data source on the table
-            fieldsTable.TableView.Source = groupFieldsLayersAndDataSource;
+            fieldsTable.TableView.Source = groupFieldsDataSource;
 
             // Show the table view
             this.NavigationController.PushViewController(fieldsTable, true);
@@ -189,10 +189,10 @@ namespace ArcGISRuntimeXamarin.Samples.StatsQueryGroupAndSort
             }
 
             // Create an instance of a custom data source to show the order fields
-            OrderByFieldsLayersAndDataSource sortFieldsLayersAndDataSource = new OrderByFieldsLayersAndDataSource(_orderByFields);
+            OrderByFieldsDataSource sortFieldsDataSource = new OrderByFieldsDataSource(_orderByFields);
 
             // Set the data source on the table
-            sortFieldsTable.TableView.Source = sortFieldsLayersAndDataSource;
+            sortFieldsTable.TableView.Source = sortFieldsDataSource;
 
             // Show the table view
             this.NavigationController.PushViewController(sortFieldsTable, true);
@@ -209,13 +209,13 @@ namespace ArcGISRuntimeXamarin.Samples.StatsQueryGroupAndSort
 
             // Create an instance of a custom data source to show statistic definitions in the table
             // Pass in the list of statistic definitions and the picker (for defining new ones)
-            StatisticDefinitionsLayersAndDataSource statDefsLayersAndDataSource = new StatisticDefinitionsLayersAndDataSource(_statisticDefinitions, statisticPicker);
+            StatisticDefinitionsDataSource statDefsDataSource = new StatisticDefinitionsDataSource(_statisticDefinitions, statisticPicker);
             
             // Set the data source on the table
-            statsTable.TableView.Source = statDefsLayersAndDataSource;
+            statsTable.TableView.Source = statDefsDataSource;
 
             // Put the table in edit mode (to show add and delete buttons)
-            statDefsLayersAndDataSource.WillBeginTableEditing(statsTable.TableView);
+            statDefsDataSource.WillBeginTableEditing(statsTable.TableView);
             statsTable.SetEditing(true, true);
 
             // Show the table view
@@ -266,13 +266,13 @@ namespace ArcGISRuntimeXamarin.Samples.StatsQueryGroupAndSort
             Dictionary<string,IReadOnlyDictionary<string,object>> resultsLookup = statQueryResult.ToDictionary(result => string.Join(", ", result.Group.Values), result => result.Statistics);
 
             // Create an instance of a custom data source to display the results
-            StatisticQueryResultsLayersAndDataSource statResultsLayersAndDataSource = new StatisticQueryResultsLayersAndDataSource(resultsLookup);
+            StatisticQueryResultsDataSource statResultsDataSource = new StatisticQueryResultsDataSource(resultsLookup);
 
             // Create a new table with a grouped style for displaying rows
             UITableViewController statResultsTable = new UITableViewController(UITableViewStyle.Grouped);
 
             // Set the table view data source
-            statResultsTable.TableView.Source = statResultsLayersAndDataSource;
+            statResultsTable.TableView.Source = statResultsDataSource;
             
             // Show the table view
             this.NavigationController.PushViewController(statResultsTable, true);
@@ -403,7 +403,7 @@ namespace ArcGISRuntimeXamarin.Samples.StatsQueryGroupAndSort
     }
     
     // Class that defines a custom data source for showing statistic definitions
-    public class StatisticDefinitionsLayersAndDataSource : UITableViewSource
+    public class StatisticDefinitionsDataSource : UITableViewSource
     {
         // List of statistic definitions for the current query
         private List<StatisticDefinition> _statisticDefinitions;
@@ -418,7 +418,7 @@ namespace ArcGISRuntimeXamarin.Samples.StatsQueryGroupAndSort
         private const string  AddNewStatFieldName = "(Add statistic)";
 
         // Constructor that takes a list of statistic definitions and a picker for selecting fields and statistic types
-        public StatisticDefinitionsLayersAndDataSource(List<StatisticDefinition> statDefs, UIPickerView picker)
+        public StatisticDefinitionsDataSource(List<StatisticDefinition> statDefs, UIPickerView picker)
         {
             // Store the list of statistic definitions and the statistic picker
             _statisticDefinitions = statDefs;
@@ -561,13 +561,13 @@ namespace ArcGISRuntimeXamarin.Samples.StatsQueryGroupAndSort
     }
 
     // Class that defines a custom data source for display group fields
-    public class GroupFieldsLayersAndDataSource : UITableViewSource
+    public class GroupFieldsDataSource : UITableViewSource
     {
         // Dictionary of available fields for grouping results 
         private Dictionary<string, bool> _potentialGroupFields;        
 
         // Constructor that takes a dictionary of fields
-        public GroupFieldsLayersAndDataSource(Dictionary<string, bool> fields)
+        public GroupFieldsDataSource(Dictionary<string, bool> fields)
         {
             _potentialGroupFields = fields;
         }
@@ -624,13 +624,13 @@ namespace ArcGISRuntimeXamarin.Samples.StatsQueryGroupAndSort
     }
 
     // Class that defines a custom data source for displaying fields to order results with
-    public class OrderByFieldsLayersAndDataSource : UITableViewSource
+    public class OrderByFieldsDataSource : UITableViewSource
     {
         // List of order field options
         private List<OrderFieldOption> _potentialOrderByFields;
 
         // Constructor that takes a list of order field options to display
-        public OrderByFieldsLayersAndDataSource(List<OrderFieldOption> fields)
+        public OrderByFieldsDataSource(List<OrderFieldOption> fields)
         {
             _potentialOrderByFields = fields;
         }
@@ -687,13 +687,13 @@ namespace ArcGISRuntimeXamarin.Samples.StatsQueryGroupAndSort
     }
 
     // Class that defines a custom data source for showing statistic query results
-    public class StatisticQueryResultsLayersAndDataSource : UITableViewSource
+    public class StatisticQueryResultsDataSource : UITableViewSource
     {
         // Dictionary of group names and statistic results
         private Dictionary<string, IReadOnlyDictionary<string, object>> _statisticsResults;
         
         // Constructor that takes a dictionary of group names and statistic results
-        public StatisticQueryResultsLayersAndDataSource(Dictionary<string, IReadOnlyDictionary<string, object>> results)
+        public StatisticQueryResultsDataSource(Dictionary<string, IReadOnlyDictionary<string, object>> results)
         {
             _statisticsResults = results;
         }

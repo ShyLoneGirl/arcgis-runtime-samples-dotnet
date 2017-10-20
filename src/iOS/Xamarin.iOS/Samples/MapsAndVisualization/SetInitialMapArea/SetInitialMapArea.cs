@@ -8,23 +8,23 @@
 // language governing permissions and limitations under the License.
 
 using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.UI.Controls;
 using Foundation;
 using UIKit;
 
-namespace ArcGISRuntimeXamarin.Samples.SetInitialMapsAndVisualizationArea
+namespace ArcGISRuntimeXamarin.Samples.SetInitialMapArea
 {
-    [Register("SetInitialMapsAndVisualizationArea")]
-    public class SetInitialMapsAndVisualizationArea : UIViewController
+    [Register("SetInitialMapArea")]
+    public class SetInitialMapArea : UIViewController
     {
-        // Constant holding offset where the MapsAndVisualizationView control should start
+        // Constant holding offset where the MapView control should start
         private const int yPageOffset = 60;
 
-        // Create and hold reference to the used MapsAndVisualizationView
-        private MapsAndVisualizationView _myMapsAndVisualizationView = new MapsAndVisualizationView();
+        // Create and hold reference to the used MapView
+        private MapView _myMapView = new MapView();
 
-        public SetInitialMapsAndVisualizationArea()
+        public SetInitialMapArea()
         {
             Title = "Set initial map area";
         }
@@ -40,31 +40,31 @@ namespace ArcGISRuntimeXamarin.Samples.SetInitialMapsAndVisualizationArea
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualizationView
-            _myMapsAndVisualizationView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
             base.ViewDidLayoutSubviews();
         }
 
         private void Initialize()
         {
-            // Create new MapsAndVisualization with basemap
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateImagery());
+            // Create new Map with basemap
+            Map myMap = new Map(Basemap.CreateImagery());
 
             // Create and set initial map area
             Envelope initialLocation = new Envelope(
                 -12211308.778729, 4645116.003309, -12208257.879667, 4650542.535773,
                 SpatialReferences.WebMercator);
-            myMapsAndVisualization.InitialViewpoint = new Viewpoint(initialLocation);
+            myMap.InitialViewpoint = new Viewpoint(initialLocation);
 
-            // Provide used MapsAndVisualization to the MapsAndVisualizationView
-            _myMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Provide used Map to the MapView
+            _myMapView.Map = myMap;
         }
 
         private void CreateLayout()
         {      
-            // Add MapsAndVisualizationView to the page
-            View.AddSubviews(_myMapsAndVisualizationView);
+            // Add MapView to the page
+            View.AddSubviews(_myMapView);
         }
     }
 }

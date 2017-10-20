@@ -35,7 +35,7 @@ namespace ArcGISRuntimeXamarin.Samples.SketchOnMap
         private Dictionary<string, int> _sketchModeDictionary;
 
         // Graphics overlay to host sketch graphics
-        private MapsAndVisualization _sketchOverlay;
+        private GraphicsOverlay _sketchOverlay;
 
         // Segmented control to show sketch controls
         private UISegmentedControl _segmentButton;
@@ -71,8 +71,8 @@ namespace ArcGISRuntimeXamarin.Samples.SketchOnMap
             Map myMap = new Map(Basemap.CreateLightGrayCanvas());
 
             // Create graphics overlay to display sketch geometry
-            _sketchOverlay = new MapsAndVisualization();
-            _myMapView.MapsAndVisualizations.Add(_sketchOverlay);
+            _sketchOverlay = new GraphicsOverlay();
+            _myMapView.GraphicsOverlays.Add(_sketchOverlay);
 
             // Assign the map to the MapView
             _myMapView.Map = myMap;
@@ -258,11 +258,11 @@ namespace ArcGISRuntimeXamarin.Samples.SketchOnMap
             var screenCoordinate = _myMapView.LocationToScreen(mapPoint);
 
             // Identify graphics in the graphics overlay using the point
-            var results = await _myMapView.IdentifyMapsAndVisualizationsAsync(screenCoordinate, 2, false);
+            var results = await _myMapView.IdentifyGraphicsOverlaysAsync(screenCoordinate, 2, false);
 
             // If results were found, get the first graphic
             Graphic graphic = null;
-            IdentifyMapsAndVisualizationResult idResult = results.FirstOrDefault();
+            IdentifyGraphicsOverlayResult idResult = results.FirstOrDefault();
             if (idResult != null && idResult.Graphics.Count > 0)
             {
                 graphic = idResult.Graphics.FirstOrDefault();

@@ -21,13 +21,13 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeViewpoint
     [Register("ChangeViewpoint")]
     public class ChangeViewpoint : UIViewController
     {
-        // Constant holding offset where the MapsAndVisualization control should start
+        // Constant holding offset where the MapView control should start
         private const int yPageOffset = 60;
 
         private UIButton _viewpointsButton;
 
-        // Create and hold reference to the used MapsAndVisualization
-        private MapsAndVisualization _myMapsAndVisualization = new MapsAndVisualization();
+        // Create and hold reference to the used MapView
+        private MapView _myMapView = new MapView();
 
         // Coordinates for London
         private MapPoint LondonCoords = new MapPoint(
@@ -79,8 +79,8 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeViewpoint
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualization
-            _myMapsAndVisualization.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
             // Setup the visual frame for the Button
             _viewpointsButton.Frame = new CoreGraphics.CGRect(0, View.Bounds.Height - 40, View.Bounds.Width, 40);
@@ -93,8 +93,8 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeViewpoint
             // Create new Map with basemap and initial location
             Map myMap = new Map(Basemap.CreateTopographic());
 
-            // Assign the map to the MapsAndVisualization
-            _myMapsAndVisualization.Map = myMap;
+            // Assign the map to the MapView
+            _myMapView.Map = myMap;
         }
 
         private void OnViewpointsButtonTouch(object sender, EventArgs e)
@@ -108,29 +108,29 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeViewpoint
                 async (action) =>
                 {
                     // Set Viewpoint using Redlands envelope defined above and a padding of 20
-                    await _myMapsAndVisualization.SetViewpointGeometryAsync(RedlandsEnvelope, 20);
+                    await _myMapView.SetViewpointGeometryAsync(RedlandsEnvelope, 20);
                 }));
             viewpointAlert.AddAction(UIAlertAction.Create(titles[1], UIAlertActionStyle.Default, 
                 async (action) =>
                 {
                     // Set Viewpoint so that it is centered on the London coordinates defined above
-                    await _myMapsAndVisualization.SetViewpointCenterAsync(LondonCoords);
+                    await _myMapView.SetViewpointCenterAsync(LondonCoords);
             
                     // Set the Viewpoint scale to match the specified scale 
-                    await _myMapsAndVisualization.SetViewpointScaleAsync(LondonScale);
+                    await _myMapView.SetViewpointScaleAsync(LondonScale);
                 }));
             viewpointAlert.AddAction(UIAlertAction.Create(titles[2], UIAlertActionStyle.Default, 
                 async (action) =>
                 {
                     // Navigate to full extent of the first baselayer before animating to specified geometry
-                    await _myMapsAndVisualization.SetViewpointAsync(
-                        new Viewpoint(_myMapsAndVisualization.Map.Basemap.BaseLayers.First().FullExtent));
+                    await _myMapView.SetViewpointAsync(
+                        new Viewpoint(_myMapView.Map.Basemap.BaseLayers.First().FullExtent));
                     
                     // Create a new Viewpoint using the specified geometry
                     var viewpoint = new Viewpoint(EdinburghEnvelope);
                     
-                    // Set Viewpoint of MapsAndVisualization to the Viewpoint created above and animate to it using a timespan of 5 seconds
-                    await _myMapsAndVisualization.SetViewpointAsync(viewpoint, TimeSpan.FromSeconds(5));
+                    // Set Viewpoint of MapView to the Viewpoint created above and animate to it using a timespan of 5 seconds
+                    await _myMapView.SetViewpointAsync(viewpoint, TimeSpan.FromSeconds(5));
                 }));
             PresentViewController(viewpointAlert, true, null);
         }
@@ -148,8 +148,8 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeViewpoint
             _viewpointsButton.SetTitleColor(UIColor.Blue, UIControlState.Normal);
             _viewpointsButton.TouchUpInside += OnViewpointsButtonTouch;
 
-            // Add MapsAndVisualization to the page
-            View.AddSubviews(_myMapsAndVisualization, _viewpointsButton);
+            // Add MapView to the page
+            View.AddSubviews(_myMapView, _viewpointsButton);
         }
     }
 }

@@ -125,10 +125,10 @@
   <ItemGroup>
     <!-- References -->
     <Reference Include="Esri.ArcGISRuntime, Version=100.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0\lib\Xamarin.iOS10\Esri.ArcGISRuntime.dll</HintPath>
+      <HintPath>..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0-daily1860\lib\Xamarin.iOS10\Esri.ArcGISRuntime.dll</HintPath>
     </Reference>
     <Reference Include="Esri.ArcGISRuntime.Hydrography, Version=100.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0\lib\Xamarin.iOS10\Esri.ArcGISRuntime.Hydrography.dll</HintPath>
+      <HintPath>..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0-daily1860\lib\Xamarin.iOS10\Esri.ArcGISRuntime.Hydrography.dll</HintPath>
     </Reference>
     <Reference Include="MonoTouch.Dialog-1" />
     <Reference Include="OpenTK-1.0" />
@@ -238,21 +238,8 @@
   <ItemGroup>
     <!-- JSON Metadata -->
     <EmbeddedResource Include="groups.json" />
-    <EmbeddedResource Include="Samples\LayersAndData\EditAndSyncFeatures\metadata.json" />
-    <EmbeddedResource Include="Samples\LayersAndData\FeatureLayerGeoPackage\metadata.json" />
-    <EmbeddedResource Include="Samples\LayersAndData\FeatureLayerQuery\metadata.json" />
-    <EmbeddedResource Include="Samples\LayersAndData\FeatureLayerShapefile\metadata.json" />
-    <EmbeddedResource Include="Samples\LayersAndData\GenerateGeodatabase\metadata.json" />
-    <EmbeddedResource Include="Samples\LayersAndData\ServiceFeatureTableCache\metadata.json" />
-    <EmbeddedResource Include="Samples\LayersAndData\ServiceFeatureTableManualCache\metadata.json" />
-    <EmbeddedResource Include="Samples\LayersAndData\ServiceFeatureTableNoCache\metadata.json" />
-    <EmbeddedResource Include="Samples\LayersAndData\StatisticalQuery\metadata.json" />
-    <EmbeddedResource Include="Samples\LayersAndData\StatsQueryGroupAndSort\metadata.json" />
     <EmbeddedResource Include="Samples\Analysis\AnalyzeViewshed\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\AddGraphicsRenderer\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\IdentifyGraphics\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\SketchOnMap\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\SurfacePlacements\metadata.json" />
+    <EmbeddedResource Include="Samples\CloudAndPortal\FeatureCollectionLayerFromPortal\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\ArcGISMapImageLayerUrl\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\ArcGISTiledLayerUrl\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\ArcGISVectorTiledLayerUrl\metadata.json" />
@@ -260,13 +247,17 @@
     <EmbeddedResource Include="Samples\LayersAndData\ChangeSublayerVisibility\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\CreateFeatureCollectionLayer\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\DisplayScene\metadata.json" />
+    <EmbeddedResource Include="Samples\LayersAndData\EditAndSyncFeatures\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\ExportTiles\metadata.json" />
-    <EmbeddedResource Include="Samples\CloudAndPortal\FeatureCollectionLayerFromPortal\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\FeatureCollectionLayerFromQuery\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\FeatureLayerDefinitionExpression\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\FeatureLayerDictionaryRenderer\metadata.json" />
+    <EmbeddedResource Include="Samples\LayersAndData\FeatureLayerGeoPackage\metadata.json" />
+    <EmbeddedResource Include="Samples\LayersAndData\FeatureLayerQuery\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\FeatureLayerSelection\metadata.json" />
+    <EmbeddedResource Include="Samples\LayersAndData\FeatureLayerShapefile\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\FeatureLayerUrl\metadata.json" />
+    <EmbeddedResource Include="Samples\LayersAndData\GenerateGeodatabase\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\KmlLayerFile\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\KmlLayerUrl\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\RasterLayerFile\metadata.json" />
@@ -274,57 +265,53 @@
     <EmbeddedResource Include="Samples\LayersAndData\RasterLayerRasterFunction\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\RasterRenderingRule\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\SceneLayerUrl\metadata.json" />
+    <EmbeddedResource Include="Samples\LayersAndData\ServiceFeatureTableCache\metadata.json" />
+    <EmbeddedResource Include="Samples\LayersAndData\ServiceFeatureTableManualCache\metadata.json" />
+    <EmbeddedResource Include="Samples\LayersAndData\ServiceFeatureTableNoCache\metadata.json" />
+    <EmbeddedResource Include="Samples\LayersAndData\StatisticalQuery\metadata.json" />
+    <EmbeddedResource Include="Samples\LayersAndData\StatsQueryGroupAndSort\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\TimeBasedQuery\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\WmsLayerUrl\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\WmsServiceCatalog\metadata.json" />
     <EmbeddedResource Include="Samples\LayersAndData\WMTSLayer\metadata.json" />
-    <EmbeddedResource Include="Samples\RoutingAndLocation\DisplayDeviceRoutingAndLocation\metadata.json" />
     <EmbeddedResource Include="Samples\MapsAndVisualization\AccessLoadStatus\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\AuthorMapsAndVisualization\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\AddGraphicsRenderer\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\AuthorEditSaveMap\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\AuthorMap\metadata.json" />
     <EmbeddedResource Include="Samples\MapsAndVisualization\ChangeBasemap\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\DisplayMapsAndVisualization\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\ManageBookmarks\metadata.json" />
-    <EmbeddedResource Include="Samples\Map\OpenMapURL\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\OpenMobileMapsAndVisualization\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\SearchPortalMapsAndVisualizations\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\SetInitialMapsAndVisualizationArea\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\SetInitialMapsAndVisualizationLocation\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\SetMapsAndVisualizationSpatialReference\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\SetMinMaxScale\metadata.json" />
     <EmbeddedResource Include="Samples\MapsAndVisualization\ChangeViewpoint\metadata.json" />
     <EmbeddedResource Include="Samples\MapsAndVisualization\DisplayDrawingStatus\metadata.json" />
     <EmbeddedResource Include="Samples\MapsAndVisualization\DisplayLayerViewState\metadata.json" />
-    <EmbeddedResource Include="Samples\MapView\MapRotation\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\ShowCallout\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\ShowMagnifier\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\TakeScreenshot\metadata.json" />
-    <EmbeddedResource Include="Samples\RoutingAndLocation\RoutingAndLocation\metadata.json" />
-    <EmbeddedResource Include="Samples\RoutingAndLocation\FindAddress\metadata.json" />
-    <EmbeddedResource Include="Samples\RoutingAndLocation\FindPlace\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\DisplayMap\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\IdentifyGraphics\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\ManageBookmarks\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\MapRotation\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\OpenMapUrl\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\OpenMobileMap\metadata.json" />
     <EmbeddedResource Include="Samples\MapsAndVisualization\RenderPictureMarkers\metadata.json" />
     <EmbeddedResource Include="Samples\MapsAndVisualization\RenderSimpleMarkers\metadata.json" />
     <EmbeddedResource Include="Samples\MapsAndVisualization\RenderUniqueValues\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\SearchPortalMaps\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\SetInitialMapArea\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\SetInitialMapLocation\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\SetMapSpatialReference\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\SetMinMaxScale\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\ShowCallout\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\ShowMagnifier\metadata.json" />
     <EmbeddedResource Include="Samples\MapsAndVisualization\SimpleRenderers\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\SketchOnMap\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\SurfacePlacements\metadata.json" />
+    <EmbeddedResource Include="Samples\MapsAndVisualization\TakeScreenshot\metadata.json" />
     <EmbeddedResource Include="Samples\MapsAndVisualization\UseDistanceCompositeSym\metadata.json" />
-    <EmbeddedResource Include="Samples\MapsAndVisualization\AuthorEditSaveMap\metadata.json" />
+    <EmbeddedResource Include="Samples\RoutingAndLocation\DisplayDeviceLocation\metadata.json" />
+    <EmbeddedResource Include="Samples\RoutingAndLocation\FindAddress\metadata.json" />
+    <EmbeddedResource Include="Samples\RoutingAndLocation\FindPlace\metadata.json" />
+    <EmbeddedResource Include="Samples\RoutingAndLocation\FindRoute\metadata.json" />
   </ItemGroup>
   <ItemGroup>
     <!-- Screenshots -->
-    <None Include="Samples\LayersAndData\EditAndSyncFeatures\EditAndSyncFeatures.jpg" />
-    <None Include="Samples\LayersAndData\FeatureLayerGeoPackage\FeatureLayerGeoPackage.jpg" />
-    <None Include="Samples\LayersAndData\FeatureLayerQuery\FeatureLayerQuery.jpg" />
-    <None Include="Samples\LayersAndData\FeatureLayerShapefile\FeatureLayerShapefile.jpg" />
-    <None Include="Samples\LayersAndData\GenerateGeodatabase\GenerateGeodatabase.jpg" />
-    <None Include="Samples\LayersAndData\ServiceFeatureTableCache\ServiceFeatureTableCache.jpg" />
-    <None Include="Samples\LayersAndData\ServiceFeatureTableManualCache\ServiceFeatureTableManualCache.jpg" />
-    <None Include="Samples\LayersAndData\ServiceFeatureTableNoCache\ServiceFeatureTableNoCache.jpg" />
-    <None Include="Samples\LayersAndData\StatisticalQuery\StatisticalQuery.jpg" />
-    <None Include="Samples\LayersAndData\StatsQueryGroupAndSort\StatsQueryGroupAndSort.jpg" />
     <None Include="Samples\Analysis\AnalyzeViewshed\AnalyzeViewshed.jpg" />
-    <None Include="Samples\MapsAndVisualization\AddGraphicsRenderer\AddGraphicsRenderer.jpg" />
-    <None Include="Samples\MapsAndVisualization\IdentifyGraphics\IdentifyGraphics.jpg" />
-    <None Include="Samples\MapsAndVisualization\SketchOnMap\SketchOnMap.jpg" />
-    <None Include="Samples\MapsAndVisualization\SurfacePlacements\SurfacePlacements.jpg" />
+    <None Include="Samples\CloudAndPortal\FeatureCollectionLayerFromPortal\FeatureCollectionLayerFromPortal.jpg" />
     <None Include="Samples\LayersAndData\ArcGISMapImageLayerUrl\ArcGISMapImageLayerUrl.jpg" />
     <None Include="Samples\LayersAndData\ArcGISTiledLayerUrl\ArcGISTiledLayerUrl.jpg" />
     <None Include="Samples\LayersAndData\ArcGISVectorTiledLayerUrl\ArcGISVectorTiledLayerUrl.jpg" />
@@ -332,13 +319,17 @@
     <None Include="Samples\LayersAndData\ChangeSublayerVisibility\ChangeSublayerVisibility.jpg" />
     <None Include="Samples\LayersAndData\CreateFeatureCollectionLayer\CreateFeatureCollectionLayer.jpg" />
     <None Include="Samples\LayersAndData\DisplayScene\DisplayScene.jpg" />
+    <None Include="Samples\LayersAndData\EditAndSyncFeatures\EditAndSyncFeatures.jpg" />
     <None Include="Samples\LayersAndData\ExportTiles\ExportTiles.jpg" />
-    <None Include="Samples\CloudAndPortal\FeatureCollectionLayerFromPortal\FeatureCollectionLayerFromPortal.jpg" />
     <None Include="Samples\LayersAndData\FeatureCollectionLayerFromQuery\FeatureCollectionLayerFromQuery.jpg" />
     <None Include="Samples\LayersAndData\FeatureLayerDefinitionExpression\FeatureLayerDefinitionExpression.jpg" />
     <None Include="Samples\LayersAndData\FeatureLayerDictionaryRenderer\FeatureLayerDictionaryRenderer.jpg" />
+    <None Include="Samples\LayersAndData\FeatureLayerGeoPackage\FeatureLayerGeoPackage.jpg" />
+    <None Include="Samples\LayersAndData\FeatureLayerQuery\FeatureLayerQuery.jpg" />
     <None Include="Samples\LayersAndData\FeatureLayerSelection\FeatureLayerSelection.jpg" />
+    <None Include="Samples\LayersAndData\FeatureLayerShapefile\FeatureLayerShapefile.jpg" />
     <None Include="Samples\LayersAndData\FeatureLayerUrl\FeatureLayerUrl.jpg" />
+    <None Include="Samples\LayersAndData\GenerateGeodatabase\GenerateGeodatabase.jpg" />
     <None Include="Samples\LayersAndData\KmlLayerFile\KmlLayerFile.jpg" />
     <None Include="Samples\LayersAndData\KmlLayerUrl\KmlLayerUrl.jpg" />
     <None Include="Samples\LayersAndData\RasterLayerFile\RasterLayerFile.jpg" />
@@ -346,73 +337,71 @@
     <None Include="Samples\LayersAndData\RasterLayerRasterFunction\RasterLayerRasterFunction.jpg" />
     <None Include="Samples\LayersAndData\RasterRenderingRule\RasterRenderingRule.jpg" />
     <None Include="Samples\LayersAndData\SceneLayerUrl\SceneLayerUrl.jpg" />
+    <None Include="Samples\LayersAndData\ServiceFeatureTableCache\ServiceFeatureTableCache.jpg" />
+    <None Include="Samples\LayersAndData\ServiceFeatureTableManualCache\ServiceFeatureTableManualCache.jpg" />
+    <None Include="Samples\LayersAndData\ServiceFeatureTableNoCache\ServiceFeatureTableNoCache.jpg" />
+    <None Include="Samples\LayersAndData\StatisticalQuery\StatisticalQuery.jpg" />
+    <None Include="Samples\LayersAndData\StatsQueryGroupAndSort\StatsQueryGroupAndSort.jpg" />
     <None Include="Samples\LayersAndData\TimeBasedQuery\TimeBasedQuery.jpg" />
     <None Include="Samples\LayersAndData\WmsLayerUrl\WmsLayerUrl.jpg" />
     <None Include="Samples\LayersAndData\WmsServiceCatalog\WmsServiceCatalog.jpg" />
     <None Include="Samples\LayersAndData\WMTSLayer\WMTSLayer.jpg" />
-    <None Include="Samples\RoutingAndLocation\DisplayDeviceRoutingAndLocation\DisplayDeviceRoutingAndLocation.jpg" />
     <None Include="Samples\MapsAndVisualization\AccessLoadStatus\AccessLoadStatus.jpg" />
-    <None Include="Samples\MapsAndVisualization\AuthorMapsAndVisualization\AuthorMapsAndVisualization.jpg" />
+    <None Include="Samples\MapsAndVisualization\AddGraphicsRenderer\AddGraphicsRenderer.jpg" />
+    <None Include="Samples\MapsAndVisualization\AuthorEditSaveMap\AuthorEditSaveMap.jpg" />
+    <None Include="Samples\MapsAndVisualization\AuthorMap\AuthorMap.jpg" />
     <None Include="Samples\MapsAndVisualization\ChangeBasemap\ChangeBasemap.jpg" />
-    <None Include="Samples\MapsAndVisualization\DisplayMapsAndVisualization\DisplayMapsAndVisualization.jpg" />
-    <None Include="Samples\MapsAndVisualization\ManageBookmarks\ManageBookmarks.jpg" />
-    <None Include="Samples\Map\OpenMapURL\OpenMapURL.jpg" />
-    <None Include="Samples\MapsAndVisualization\OpenMobileMapsAndVisualization\OpenMobileMapsAndVisualization.jpg" />
-    <None Include="Samples\MapsAndVisualization\SearchPortalMapsAndVisualizations\SearchPortalMapsAndVisualizations.jpg" />
-    <None Include="Samples\MapsAndVisualization\SetInitialMapsAndVisualizationArea\SetInitialMapsAndVisualizationArea.jpg" />
-    <None Include="Samples\MapsAndVisualization\SetInitialMapsAndVisualizationLocation\SetInitialMapsAndVisualizationLocation.jpg" />
-    <None Include="Samples\MapsAndVisualization\SetMapsAndVisualizationSpatialReference\SetMapsAndVisualizationSpatialReference.jpg" />
-    <None Include="Samples\MapsAndVisualization\SetMinMaxScale\SetMinMaxScale.jpg" />
     <None Include="Samples\MapsAndVisualization\ChangeViewpoint\ChangeViewpoint.jpg" />
     <None Include="Samples\MapsAndVisualization\DisplayDrawingStatus\DisplayDrawingStatus.jpg" />
     <None Include="Samples\MapsAndVisualization\DisplayLayerViewState\DisplayLayerViewState.jpg" />
-    <None Include="Samples\MapView\MapRotation\MapRotation.jpg" />
-    <None Include="Samples\MapsAndVisualization\ShowCallout\ShowCallout.jpg" />
-    <None Include="Samples\MapsAndVisualization\ShowMagnifier\ShowMagnifier.jpg" />
-    <None Include="Samples\MapsAndVisualization\TakeScreenshot\TakeScreenshot.jpg" />
-    <None Include="Samples\RoutingAndLocation\RoutingAndLocation\RoutingAndLocation.jpg" />
-    <None Include="Samples\RoutingAndLocation\FindAddress\FindAddress.jpg" />
-    <None Include="Samples\RoutingAndLocation\FindPlace\FindPlace.jpg" />
+    <None Include="Samples\MapsAndVisualization\DisplayMap\DisplayMap.jpg" />
+    <None Include="Samples\MapsAndVisualization\IdentifyGraphics\IdentifyGraphics.jpg" />
+    <None Include="Samples\MapsAndVisualization\ManageBookmarks\ManageBookmarks.jpg" />
+    <None Include="Samples\MapsAndVisualization\MapRotation\MapRotation.jpg" />
+    <None Include="Samples\MapsAndVisualization\OpenMapUrl\OpenMapURL.jpg" />
+    <None Include="Samples\MapsAndVisualization\OpenMobileMap\OpenMobileMap.jpg" />
     <None Include="Samples\MapsAndVisualization\RenderPictureMarkers\RenderPictureMarkers.jpg" />
     <None Include="Samples\MapsAndVisualization\RenderSimpleMarkers\RenderSimpleMarkers.jpg" />
     <None Include="Samples\MapsAndVisualization\RenderUniqueValues\RenderUniqueValues.jpg" />
+    <None Include="Samples\MapsAndVisualization\SearchPortalMaps\SearchPortalMaps.jpg" />
+    <None Include="Samples\MapsAndVisualization\SetInitialMapArea\SetInitialMapArea.jpg" />
+    <None Include="Samples\MapsAndVisualization\SetInitialMapLocation\SetInitialMapLocation.jpg" />
+    <None Include="Samples\MapsAndVisualization\SetMapSpatialReference\SetMapSpatialReference.jpg" />
+    <None Include="Samples\MapsAndVisualization\SetMinMaxScale\SetMinMaxScale.jpg" />
+    <None Include="Samples\MapsAndVisualization\ShowCallout\ShowCallout.jpg" />
+    <None Include="Samples\MapsAndVisualization\ShowMagnifier\ShowMagnifier.jpg" />
     <None Include="Samples\MapsAndVisualization\SimpleRenderers\SimpleRenderers.jpg" />
+    <None Include="Samples\MapsAndVisualization\SketchOnMap\SketchOnMap.jpg" />
+    <None Include="Samples\MapsAndVisualization\SurfacePlacements\SurfacePlacements.jpg" />
+    <None Include="Samples\MapsAndVisualization\TakeScreenshot\TakeScreenshot.jpg" />
     <None Include="Samples\MapsAndVisualization\UseDistanceCompositeSym\UseDistanceCompositeSym.jpg" />
-    <None Include="Samples\MapsAndVisualization\AuthorEditSaveMap\AuthorEditSaveMap.jpg" />
+    <None Include="Samples\RoutingAndLocation\DisplayDeviceLocation\DisplayDeviceLocation.jpg" />
+    <None Include="Samples\RoutingAndLocation\FindAddress\FindAddress.jpg" />
+    <None Include="Samples\RoutingAndLocation\FindPlace\FindPlace.jpg" />
+    <None Include="Samples\RoutingAndLocation\FindRoute\FindRoute.jpg" />
   </ItemGroup>
   <ItemGroup>
     <!-- Sample Code -->
-    <Compile Include="Samples\LayersAndData\EditAndSyncFeatures\EditAndSyncFeatures.cs" />
-    <Compile Include="Samples\LayersAndData\FeatureLayerGeoPackage\FeatureLayerGeoPackage.cs" />
-    <Compile Include="Samples\LayersAndData\FeatureLayerQuery\FeatureLayerQuery.cs" />
-    <Compile Include="Samples\LayersAndData\FeatureLayerShapefile\FeatureLayerShapefile.cs" />
-    <Compile Include="Samples\LayersAndData\GenerateGeodatabase\GenerateGeodatabase.cs" />
-    <Compile Include="Samples\LayersAndData\ServiceFeatureTableCache\ServiceFeatureTableCache.cs" />
-    <Compile Include="Samples\LayersAndData\ServiceFeatureTableManualCache\ServiceFeatureTableManualCache.cs" />
-    <Compile Include="Samples\LayersAndData\ServiceFeatureTableNoCache\ServiceFeatureTableNoCache.cs" />
-    <Compile Include="Samples\LayersAndData\StatisticalQuery\StatisticalQuery.cs" />
-    <Compile Include="Samples\LayersAndData\StatsQueryGroupAndSort\StatsQueryGroupAndSort.cs" />
     <Compile Include="Samples\Analysis\AnalyzeViewshed\AnalyzeViewshed.cs" />
-    <Compile Include="Samples\MapsAndVisualization\AddGraphicsRenderer\AddGraphicsRenderer.cs" />
-    <Compile Include="Samples\MapsAndVisualization\IdentifyGraphics\IdentifyGraphics.cs" />
-    <Compile Include="Samples\MapsAndVisualization\SketchOnMap\SketchOnMap.cs" />
-    <Compile Include="Samples\MapsAndVisualization\SurfacePlacements\SurfacePlacements.cs" />
+    <Compile Include="Samples\CloudAndPortal\FeatureCollectionLayerFromPortal\FeatureCollectionLayerFromPortal.cs" />
+    <Compile Include="Samples\LayersAndData\ArcGISMapImageLayerUrl\ArcGISMapImageLayerUrl.cs" />
     <Compile Include="Samples\LayersAndData\ArcGISTiledLayerUrl\ArcGISTiledLayerUrl.cs" />
     <Compile Include="Samples\LayersAndData\ArcGISVectorTiledLayerUrl\ArcGISVectorTiledLayerUrl.cs" />
     <Compile Include="Samples\LayersAndData\ChangeFeatureLayerRenderer\ChangeFeatureLayerRenderer.cs" />
     <Compile Include="Samples\LayersAndData\ChangeSublayerVisibility\ChangeSublayerVisibility.cs" />
-    <Compile Include="Samples\LayersAndData\ChangeSublayerVisibility\ChangeSublayerVisibility.designer.cs">
-      <DependentUpon>ChangeSublayerVisibility.cs</DependentUpon>
-    </Compile>
     <Compile Include="Samples\LayersAndData\CreateFeatureCollectionLayer\CreateFeatureCollectionLayer.cs" />
     <Compile Include="Samples\LayersAndData\DisplayScene\DisplayScene.cs" />
+    <Compile Include="Samples\LayersAndData\EditAndSyncFeatures\EditAndSyncFeatures.cs" />
     <Compile Include="Samples\LayersAndData\ExportTiles\ExportTiles.cs" />
-    <Compile Include="Samples\CloudAndPortal\FeatureCollectionLayerFromPortal\FeatureCollectionLayerFromPortal.cs" />
     <Compile Include="Samples\LayersAndData\FeatureCollectionLayerFromQuery\FeatureCollectionLayerFromQuery.cs" />
     <Compile Include="Samples\LayersAndData\FeatureLayerDefinitionExpression\FeatureLayerDefinitionExpression.cs" />
     <Compile Include="Samples\LayersAndData\FeatureLayerDictionaryRenderer\FeatureLayerDictionaryRenderer.cs" />
+    <Compile Include="Samples\LayersAndData\FeatureLayerGeoPackage\FeatureLayerGeoPackage.cs" />
+    <Compile Include="Samples\LayersAndData\FeatureLayerQuery\FeatureLayerQuery.cs" />
     <Compile Include="Samples\LayersAndData\FeatureLayerSelection\FeatureLayerSelection.cs" />
+    <Compile Include="Samples\LayersAndData\FeatureLayerShapefile\FeatureLayerShapefile.cs" />
     <Compile Include="Samples\LayersAndData\FeatureLayerUrl\FeatureLayerUrl.cs" />
+    <Compile Include="Samples\LayersAndData\GenerateGeodatabase\GenerateGeodatabase.cs" />
     <Compile Include="Samples\LayersAndData\KmlLayerFile\KmlLayerFile.cs" />
     <Compile Include="Samples\LayersAndData\KmlLayerUrl\KmlLayerUrl.cs" />
     <Compile Include="Samples\LayersAndData\RasterLayerFile\RasterLayerFile.cs" />
@@ -420,39 +409,51 @@
     <Compile Include="Samples\LayersAndData\RasterLayerRasterFunction\RasterLayerRasterFunction.cs" />
     <Compile Include="Samples\LayersAndData\RasterRenderingRule\RasterRenderingRule.cs" />
     <Compile Include="Samples\LayersAndData\SceneLayerUrl\SceneLayerUrl.cs" />
+    <Compile Include="Samples\LayersAndData\ServiceFeatureTableCache\ServiceFeatureTableCache.cs" />
+    <Compile Include="Samples\LayersAndData\ServiceFeatureTableManualCache\ServiceFeatureTableManualCache.cs" />
+    <Compile Include="Samples\LayersAndData\ServiceFeatureTableNoCache\ServiceFeatureTableNoCache.cs" />
+    <Compile Include="Samples\LayersAndData\StatisticalQuery\StatisticalQuery.cs" />
+    <Compile Include="Samples\LayersAndData\StatsQueryGroupAndSort\StatsQueryGroupAndSort.cs" />
     <Compile Include="Samples\LayersAndData\TimeBasedQuery\TimeBasedQuery.cs" />
     <Compile Include="Samples\LayersAndData\WmsLayerUrl\WmsLayerUrl.cs" />
     <Compile Include="Samples\LayersAndData\WmsServiceCatalog\WmsServiceCatalog.cs" />
     <Compile Include="Samples\LayersAndData\WMTSLayer\WMTSLayer.cs" />
-    <Compile Include="Samples\RoutingAndLocation\DisplayDeviceRoutingAndLocation\DisplayDeviceRoutingAndLocation.cs" />
     <Compile Include="Samples\MapsAndVisualization\AccessLoadStatus\AccessLoadStatus.cs" />
-    <Compile Include="Samples\MapsAndVisualization\AuthorMapsAndVisualization\AuthorMapsAndVisualization.cs" />
+    <Compile Include="Samples\MapsAndVisualization\AddGraphicsRenderer\AddGraphicsRenderer.cs" />
+    <Compile Include="Samples\MapsAndVisualization\AuthorEditSaveMap\AuthorEditSaveMap.cs" />
+    <Compile Include="Samples\MapsAndVisualization\AuthorMap\AuthorMap.cs" />
     <Compile Include="Samples\MapsAndVisualization\ChangeBasemap\ChangeBasemap.cs" />
-    <Compile Include="Samples\MapsAndVisualization\DisplayMapsAndVisualization\DisplayMapsAndVisualization.cs" />
-    <Compile Include="Samples\MapsAndVisualization\ManageBookmarks\ManageBookmarks.cs" />
-    <Compile Include="Samples\Map\OpenMapURL\OpenMapURL.cs" />
-    <Compile Include="Samples\MapsAndVisualization\OpenMobileMapsAndVisualization\OpenMobileMapsAndVisualization.cs" />
-    <Compile Include="Samples\MapsAndVisualization\SearchPortalMapsAndVisualizations\SearchPortalMapsAndVisualizations.cs" />
-    <Compile Include="Samples\MapsAndVisualization\SetInitialMapsAndVisualizationArea\SetInitialMapsAndVisualizationArea.cs" />
-    <Compile Include="Samples\MapsAndVisualization\SetInitialMapsAndVisualizationLocation\SetInitialMapsAndVisualizationLocation.cs" />
-    <Compile Include="Samples\MapsAndVisualization\SetMapsAndVisualizationSpatialReference\SetMapsAndVisualizationSpatialReference.cs" />
-    <Compile Include="Samples\MapsAndVisualization\SetMinMaxScale\SetMinMaxScale.cs" />
     <Compile Include="Samples\MapsAndVisualization\ChangeViewpoint\ChangeViewpoint.cs" />
     <Compile Include="Samples\MapsAndVisualization\DisplayDrawingStatus\DisplayDrawingStatus.cs" />
     <Compile Include="Samples\MapsAndVisualization\DisplayLayerViewState\DisplayLayerViewState.cs" />
-    <Compile Include="Samples\MapView\MapRotation\MapRotation.cs" />
-    <Compile Include="Samples\MapsAndVisualization\ShowCallout\ShowCallout.cs" />
-    <Compile Include="Samples\MapsAndVisualization\ShowMagnifier\ShowMagnifier.cs" />
-    <Compile Include="Samples\MapsAndVisualization\TakeScreenshot\TakeScreenshot.cs" />
-    <Compile Include="Samples\RoutingAndLocation\RoutingAndLocation\RoutingAndLocation.cs" />
-    <Compile Include="Samples\RoutingAndLocation\FindAddress\FindAddress.cs" />
-    <Compile Include="Samples\RoutingAndLocation\FindPlace\FindPlace.cs" />
+    <Compile Include="Samples\MapsAndVisualization\DisplayMap\DisplayMap.cs" />
+    <Compile Include="Samples\MapsAndVisualization\IdentifyGraphics\IdentifyGraphics.cs" />
+    <Compile Include="Samples\MapsAndVisualization\ManageBookmarks\ManageBookmarks.cs" />
+    <Compile Include="Samples\MapsAndVisualization\MapRotation\MapRotation.cs" />
+    <Compile Include="Samples\MapsAndVisualization\OpenMapUrl\OpenMapURL.cs" />
+    <Compile Include="Samples\MapsAndVisualization\OpenMobileMap\OpenMobileMap.cs" />
     <Compile Include="Samples\MapsAndVisualization\RenderPictureMarkers\RenderPictureMarkers.cs" />
     <Compile Include="Samples\MapsAndVisualization\RenderSimpleMarkers\RenderSimpleMarkers.cs" />
     <Compile Include="Samples\MapsAndVisualization\RenderUniqueValues\RenderUniqueValues.cs" />
+    <Compile Include="Samples\MapsAndVisualization\SearchPortalMaps\SearchPortalMaps.cs" />
+    <Compile Include="Samples\MapsAndVisualization\SetInitialMapArea\SetInitialMapArea.cs" />
+    <Compile Include="Samples\MapsAndVisualization\SetInitialMapLocation\SetInitialMapLocation.cs" />
+    <Compile Include="Samples\MapsAndVisualization\SetMapSpatialReference\SetMapSpatialReference.cs" />
+    <Compile Include="Samples\MapsAndVisualization\SetMinMaxScale\SetMinMaxScale.cs" />
+    <Compile Include="Samples\MapsAndVisualization\ShowCallout\ShowCallout.cs" />
+    <Compile Include="Samples\MapsAndVisualization\ShowMagnifier\ShowMagnifier.cs" />
     <Compile Include="Samples\MapsAndVisualization\SimpleRenderers\SimpleRenderers.cs" />
+    <Compile Include="Samples\MapsAndVisualization\SketchOnMap\SketchOnMap.cs" />
+    <Compile Include="Samples\MapsAndVisualization\SurfacePlacements\SurfacePlacements.cs" />
+    <Compile Include="Samples\MapsAndVisualization\TakeScreenshot\TakeScreenshot.cs" />
     <Compile Include="Samples\MapsAndVisualization\UseDistanceCompositeSym\UseDistanceCompositeSym.cs" />
-    <Compile Include="Samples\MapsAndVisualization\AuthorEditSaveMap\AuthorEditSaveMap.cs" />
+    <Compile Include="Samples\RoutingAndLocation\DisplayDeviceLocation\DisplayDeviceLocation.cs" />
+    <Compile Include="Samples\RoutingAndLocation\FindAddress\FindAddress.cs" />
+    <Compile Include="Samples\RoutingAndLocation\FindPlace\FindPlace.cs" />
+    <Compile Include="Samples\RoutingAndLocation\FindRoute\FindRoute.cs" />
+    <Compile Include="Samples\LayersAndData\ChangeSublayerVisibility\ChangeSublayerVisibility.designer.cs">
+      <DependentUpon>ChangeSublayerVisibility.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -460,8 +461,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0-daily1860\build\Xamarin.iOS10\Esri.ArcGISRuntime.Xamarin.iOS.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0-daily1860\build\Xamarin.iOS10\Esri.ArcGISRuntime.Xamarin.iOS.targets'))" />
   </Target>
   <Import Project="..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <Import Project="..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0\build\Xamarin.iOS10\Esri.ArcGISRuntime.Xamarin.iOS.targets" Condition="Exists('..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0\build\Xamarin.iOS10\Esri.ArcGISRuntime.Xamarin.iOS.targets')" />
-  <Import Project="..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0\build\Xamarin.iOS10\Esri.ArcGISRuntime.Xamarin.iOS.targets" Condition="Exists('..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0\build\Xamarin.iOS10\Esri.ArcGISRuntime.Xamarin.iOS.targets')" />
+  <Import Project="..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0-daily1860\build\Xamarin.iOS10\Esri.ArcGISRuntime.Xamarin.iOS.targets" Condition="Exists('..\..\..\packages\Esri.ArcGISRuntime.Xamarin.iOS.100.2.0-daily1860\build\Xamarin.iOS10\Esri.ArcGISRuntime.Xamarin.iOS.targets')" />
 </Project>

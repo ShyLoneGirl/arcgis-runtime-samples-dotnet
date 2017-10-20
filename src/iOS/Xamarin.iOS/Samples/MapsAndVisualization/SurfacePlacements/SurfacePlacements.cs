@@ -70,17 +70,17 @@ namespace ArcGISRuntimeXamarin.Samples.SurfacePlacements
             _mySceneView.SetViewpointCameraAsync(camera);
 
             // Create overlays with elevation modes
-            MapsAndVisualization drapedOverlay = new MapsAndVisualization();
+            GraphicsOverlay drapedOverlay = new GraphicsOverlay();
             drapedOverlay.SceneProperties.SurfacePlacement = SurfacePlacement.Draped;
-            _mySceneView.MapsAndVisualizations.Add(drapedOverlay);
+            _mySceneView.GraphicsOverlays.Add(drapedOverlay);
 
-            MapsAndVisualization relativeOverlay = new MapsAndVisualization();
+            GraphicsOverlay relativeOverlay = new GraphicsOverlay();
             relativeOverlay.SceneProperties.SurfacePlacement = SurfacePlacement.Relative;
-            _mySceneView.MapsAndVisualizations.Add(relativeOverlay);
+            _mySceneView.GraphicsOverlays.Add(relativeOverlay);
 
-            MapsAndVisualization absoluteOverlay = new MapsAndVisualization();
+            GraphicsOverlay absoluteOverlay = new GraphicsOverlay();
             absoluteOverlay.SceneProperties.SurfacePlacement = SurfacePlacement.Absolute;
-            _mySceneView.MapsAndVisualizations.Add(absoluteOverlay);
+            _mySceneView.GraphicsOverlays.Add(absoluteOverlay);
 
             // Create point for graphic location
             MapPoint point = new MapPoint(-4.04, 53.06, 1000, camera.Location.SpatialReference);

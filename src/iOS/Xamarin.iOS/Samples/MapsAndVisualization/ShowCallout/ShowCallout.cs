@@ -19,7 +19,7 @@ namespace ArcGISRuntimeXamarin.Samples.ShowCallout
     [Register("ShowCallout")]
     public class ShowCallout : UIViewController
     {
-        private MapsAndVisualization _myMapsAndVisualization = new MapsAndVisualization();
+        private MapView _myMapView = new MapView();
 
         public ShowCallout()
         {
@@ -36,25 +36,25 @@ namespace ArcGISRuntimeXamarin.Samples.ShowCallout
             // Create a new map based on the streets basemap
             Map myMap = new Map(myBasemap);
 
-            // Assign the map to the MapsAndVisualization
-            _myMapsAndVisualization.Map = myMap;
+            // Assign the map to the MapView
+            _myMapView.Map = myMap;
 
-            // Wire up the MapsAndVisualization GeoVewTapped event
-            _myMapsAndVisualization.GeoViewTapped += _myMapsAndVisualization_GeoViewTapped;
+            // Wire up the MapView GeoVewTapped event
+            _myMapView.GeoViewTapped += _myMapView_GeoViewTapped;
 
-            // Add the MapsAndVisualization to the page
-            View.AddSubview(_myMapsAndVisualization);
+            // Add the MapView to the page
+            View.AddSubview(_myMapView);
         }
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualization
-            _myMapsAndVisualization.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
             base.ViewDidLayoutSubviews();
         }
 
-        private void _myMapsAndVisualization_GeoViewTapped(object sender, GeoViewInputEventArgs e)
+        private void _myMapView_GeoViewTapped(object sender, GeoViewInputEventArgs e)
         {
             // Get the user-tapped location
             MapPoint mapLocation = e.Location;
@@ -72,7 +72,7 @@ namespace ArcGISRuntimeXamarin.Samples.ShowCallout
             CalloutDefinition myCalloutDefinition = new CalloutDefinition("Location:", mapLocationDescription);
 
             // Display the callout
-            _myMapsAndVisualization.ShowCalloutAt(mapLocation, myCalloutDefinition);
+            _myMapView.ShowCalloutAt(mapLocation, myCalloutDefinition);
         }
     }
 }

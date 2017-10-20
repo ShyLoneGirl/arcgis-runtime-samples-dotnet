@@ -8,7 +8,7 @@
 // language governing permissions and limitations under the License.
 
 using Esri.ArcGISRuntime;
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.UI.Controls;
 using Foundation;
 using UIKit;
@@ -18,13 +18,13 @@ namespace ArcGISRuntimeXamarin.Samples.AccessLoadStatus
     [Register("AccessLoadStatus")]
     public class AccessLoadStatus : UIViewController
     {
-        // Constant holding offset where the MapsAndVisualizationView control should start
+        // Constant holding offset where the MapView control should start
         private const int yPageOffset = 60;
 
-        // Create and hold reference to the used MapsAndVisualizationView
-        private MapsAndVisualizationView _myMapsAndVisualizationView = new MapsAndVisualizationView();
+        // Create and hold reference to the used MapView
+        private MapView _myMapView = new MapView();
 
-        // Control to show the MapsAndVisualizations' load status
+        // Control to show the Maps' load status
         private UITextView _loadStatusTextView;
 
         public AccessLoadStatus()
@@ -43,32 +43,32 @@ namespace ArcGISRuntimeXamarin.Samples.AccessLoadStatus
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualizationView
-            _myMapsAndVisualizationView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
             base.ViewDidLayoutSubviews();
         }
 
         private void Initialize()
         {
-            // Create new MapsAndVisualization with basemap
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateImagery());
+            // Create new Map with basemap
+            Map myMap = new Map(Basemap.CreateImagery());
 
             // Register to handle loading status changes
-            myMapsAndVisualization.LoadStatusChanged += OnMapsAndVisualizationsLoadStatusChanged;
+            myMap.LoadStatusChanged += OnMapsLoadStatusChanged;
 
-            // Provide used MapsAndVisualization to the MapsAndVisualizationView
-            _myMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Provide used Map to the MapView
+            _myMapView.Map = myMap;
         }
 
-        private void OnMapsAndVisualizationsLoadStatusChanged(object sender, LoadStatusEventArgs e)
+        private void OnMapsLoadStatusChanged(object sender, LoadStatusEventArgs e)
         {
             // Make sure that the UI changes are done in the UI thread
             InvokeOnMainThread(() =>
             {
                 // Update the load status information
                 _loadStatusTextView.Text = string.Format(
-                    "MapsAndVisualizations' load status : {0}", 
+                    "Maps' load status : {0}", 
                     e.Status.ToString());
             });
         }
@@ -82,8 +82,8 @@ namespace ArcGISRuntimeXamarin.Samples.AccessLoadStatus
                     0, yPageOffset, View.Bounds.Width, 40)
             };
   
-            // Add MapsAndVisualizationView to the page
-            View.AddSubviews(_myMapsAndVisualizationView, _loadStatusTextView);
+            // Add MapView to the page
+            View.AddSubviews(_myMapView, _loadStatusTextView);
         }
     }
 }

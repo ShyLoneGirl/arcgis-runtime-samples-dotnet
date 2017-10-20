@@ -225,7 +225,7 @@
     <EmbeddedResource Include="Samples\RoutingAndLocation\DisplayDeviceLocation\metadata.json" />
     <EmbeddedResource Include="Samples\RoutingAndLocation\FindAddress\metadata.json" />
     <EmbeddedResource Include="Samples\RoutingAndLocation\FindPlace\metadata.json" />
-    <EmbeddedResource Include="Samples\RoutingAndLocation\NetworkAnalysis\metadata.json" />
+    <EmbeddedResource Include="Samples\RoutingAndLocation\FindRoute\metadata.json" />
   </ItemGroup>
   <ItemGroup>
     <!-- Screenshots -->
@@ -299,7 +299,7 @@
     <None Include="Samples\RoutingAndLocation\DisplayDeviceLocation\DisplayDeviceLocation.jpg" />
     <None Include="Samples\RoutingAndLocation\FindAddress\FindAddress.jpg" />
     <None Include="Samples\RoutingAndLocation\FindPlace\FindPlace.jpg" />
-    <None Include="Samples\RoutingAndLocation\NetworkAnalysis\NetworkAnalysis.jpg" />
+    <None Include="Samples\RoutingAndLocation\FindRoute\FindRoute.jpg" />
   </ItemGroup>
   <ItemGroup>
     <!-- Sample Code -->
@@ -373,7 +373,7 @@
     <Compile Include="Samples\RoutingAndLocation\DisplayDeviceLocation\DisplayDeviceLocation.cs" />
     <Compile Include="Samples\RoutingAndLocation\FindAddress\FindAddress.cs" />
     <Compile Include="Samples\RoutingAndLocation\FindPlace\FindPlace.cs" />
-    <Compile Include="Samples\RoutingAndLocation\NetworkAnalysis\NetworkAnalysis.cs" />
+    <Compile Include="Samples\RoutingAndLocation\FindRoute\FindRoute.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

@@ -62,7 +62,7 @@ namespace ArcGISRuntimeXamarin.Samples.WmsLayerUrl
             await myWmsLayer.LoadAsync();
 
             // Add the layer to the map
-            _myMapView.Map.OperationalLayersAndData.Add(myWmsLayer);
+            _myMapView.Map.OperationalLayers.Add(myWmsLayer);
         }
 
         public override void ViewDidLayoutSubviews()

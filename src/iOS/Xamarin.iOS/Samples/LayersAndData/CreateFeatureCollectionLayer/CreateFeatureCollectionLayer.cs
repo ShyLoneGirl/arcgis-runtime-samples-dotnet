@@ -137,7 +137,7 @@ namespace ArcGISRuntimeXamarin.Samples.CreateFeatureCollectionLayer
             collectionLayer.Loaded += (s, e) => _myMapView.SetViewpointAsync(new Viewpoint(collectionLayer.FullExtent));
 
             // Add the layer to the Map's Operational LayersAndData collection
-            _myMapView.Map.OperationalLayersAndData.Add(collectionLayer);
+            _myMapView.Map.OperationalLayers.Add(collectionLayer);
         }
 
         private Renderer CreateRenderer(GeometryType rendererType)

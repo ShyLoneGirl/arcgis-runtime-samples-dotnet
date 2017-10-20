@@ -21,8 +21,8 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayLayerViewState
     [Register("DisplayLayerViewState")]
     public class DisplayLayerViewState : UIViewController
     {
-        // Create and hold reference to the used MapsAndVisualization
-        private MapsAndVisualization _myMapsAndVisualization = new MapsAndVisualization();
+        // Create and hold reference to the used MapView
+        private MapView _myMapView = new MapView();
 
         // Create and hold reference to tableview
         private UITableView _tableView;
@@ -44,10 +44,10 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayLayerViewState
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualization
-            _myMapsAndVisualization.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height -120);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height -120);
 
-            _tableView.Frame = new CoreGraphics.CGRect(0, _myMapsAndVisualization.Frame.Height, View.Bounds.Width, 120);
+            _tableView.Frame = new CoreGraphics.CGRect(0, _myMapView.Frame.Height, View.Bounds.Width, 120);
 
             base.ViewDidLayoutSubviews();
         }
@@ -107,10 +107,10 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayLayerViewState
             _tableView.Source = new LayerViewStatusTableSource(_layerStatusModels);
 
             // Event for layer view state changed
-            _myMapsAndVisualization.LayerViewStateChanged += OnLayerViewStateChanged;
+            _myMapView.LayerViewStateChanged += OnLayerViewStateChanged;
 
-            // Provide used Map to the MapsAndVisualization
-            _myMapsAndVisualization.Map = myMap;
+            // Provide used Map to the MapView
+            _myMapView.Map = myMap;
         }
 
         private void OnLayerViewStateChanged(object sender, LayerViewStateChangedEventArgs e)
@@ -136,16 +136,16 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayLayerViewState
             stackView.Distribution = UIStackViewDistribution.FillProportionally;
             stackView.BackgroundColor = UIColor.Gray;
 
-            _myMapsAndVisualization = new MapsAndVisualization();
+            _myMapView = new MapView();
            
-            stackView.AddArrangedSubview(_myMapsAndVisualization);
+            stackView.AddArrangedSubview(_myMapView);
 
             // Create a tableview for displaying layer view status for each layer
             _tableView = new UITableView();
 
             stackView.AddArrangedSubview(_tableView);
 
-            // Add MapsAndVisualization to the page
+            // Add MapView to the page
             View.AddSubviews(stackView);
         }
     }

@@ -59,7 +59,7 @@ namespace ArcGISRuntimeXamarin.Samples.ArcGISMapImageLayerUrl
             ArcGISMapImageLayer imageLayer = new ArcGISMapImageLayer(serviceUri);
 
             // Add created layer to the basemaps collection
-            myMap.Basemap.BaseLayersAndData.Add(imageLayer);
+            myMap.Basemap.BaseLayers.Add(imageLayer);
 
             // Assign the map to the MapView
             _myMapView.Map = myMap;

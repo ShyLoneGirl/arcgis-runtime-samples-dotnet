@@ -342,12 +342,8 @@
               "Path": "Samples/RoutingAndLocation/FindPlace"
             },
             {
-              "SampleName": "NetworkAnalysis",
-              "Path": "Samples/RoutingAndLocation/NetworkAnalysis"
-            },
-            {
-              "SampleName": "Routing",
-              "Path": "Samples/RoutingAndLocation/DisplayDeviceLocation"
+              "SampleName": "FindRoute",
+              "Path": "Samples/RoutingAndLocation/FindRoute"
             }
           ]
         }

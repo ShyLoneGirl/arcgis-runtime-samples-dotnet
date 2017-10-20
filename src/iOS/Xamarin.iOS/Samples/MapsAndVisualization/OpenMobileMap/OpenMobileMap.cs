@@ -8,22 +8,22 @@
 // language governing permissions and limitations under the License.
 
 using System.Linq;
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.UI.Controls;
 using Foundation;
 using UIKit;
 using System.IO;
 using ArcGISRuntimeXamarin.Managers;
 
-namespace ArcGISRuntimeXamarin.Samples.OpenMobileMapsAndVisualization
+namespace ArcGISRuntimeXamarin.Samples.OpenMobileMap
 {
-    [Register("OpenMobileMapsAndVisualization")]
-    public class OpenMobileMapsAndVisualization : UIViewController
+    [Register("OpenMobileMap")]
+    public class OpenMobileMap : UIViewController
     {
-        // Create and hold reference to the used MapsAndVisualizationView
-        private MapsAndVisualizationView _myMapsAndVisualizationView = new MapsAndVisualizationView();
+        // Create and hold reference to the used MapView
+        private MapView _myMapView = new MapView();
 
-        public OpenMobileMapsAndVisualization()
+        public OpenMobileMap()
         {
             Title = "Open mobile map (map package)";
         }
@@ -40,7 +40,7 @@ namespace ArcGISRuntimeXamarin.Samples.OpenMobileMapsAndVisualization
             base.ViewDidLayoutSubviews();
 
             // Update the UI to account for new layout
-            _myMapsAndVisualizationView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
         }
 
         private async void Initialize()
@@ -49,13 +49,13 @@ namespace ArcGISRuntimeXamarin.Samples.OpenMobileMapsAndVisualization
             string filepath = GetMmpkPath();
 
             // Open the map package
-            MobileMapsAndVisualizationPackage myMapsAndVisualizationPackage = await MobileMapsAndVisualizationPackage.OpenAsync(filepath);
+            MobileMapPackage myMapPackage = await MobileMapPackage.OpenAsync(filepath);
 
             // Check that there is at least one map
-            if (myMapsAndVisualizationPackage.MapsAndVisualizations.Count > 0)
+            if (myMapPackage.Maps.Count > 0)
             {
                 // Display the first map in the package
-                _myMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualizationPackage.MapsAndVisualizations.First();
+                _myMapView.Map = myMapPackage.Maps.First();
             }
         }
 
@@ -75,14 +75,14 @@ namespace ArcGISRuntimeXamarin.Samples.OpenMobileMapsAndVisualization
             string folder = DataManager.GetDataFolder();
 
 			// Return the full path; Item ID is e1f3a7254cb845b09450f54937c16061
-			return Path.Combine(folder, "SampleData", "OpenMobileMapsAndVisualization", filename);
+			return Path.Combine(folder, "SampleData", "OpenMobileMap", filename);
             #endregion offlinedata
         }
 
         private void CreateLayout()
         {
-            // Add MapsAndVisualizationView to the page
-            View.AddSubview(_myMapsAndVisualizationView);
+            // Add MapView to the page
+            View.AddSubview(_myMapView);
         }
     }
 }

@@ -7,7 +7,7 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific 
 // language governing permissions and limitations under the License.
 
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Portal;
 using Esri.ArcGISRuntime.Security;
 using Esri.ArcGISRuntime.UI;
@@ -21,13 +21,13 @@ using System.Threading.Tasks;
 using UIKit;
 using Xamarin.Auth;
 
-namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
+namespace ArcGISRuntimeXamarin.Samples.AuthorMap
 {
-    [Register("AuthorMapsAndVisualization")]
-    public class AuthorMapsAndVisualization : UIViewController, IOAuthAuthorizeHandler
+    [Register("AuthorMap")]
+    public class AuthorMap : UIViewController, IOAuthAuthorizeHandler
     {
-        // Reference to the MapsAndVisualizationView used in the app
-        private MapsAndVisualizationView _myMapsAndVisualizationView;
+        // Reference to the MapView used in the app
+        private MapView _myMapView;
 
         private UISegmentedControl _segmentButton;
         private UIToolbar _toolbar;
@@ -35,9 +35,9 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
         // Dictionary of operational layer names and URLs
         private Dictionary<string, string> _operationalLayerUrls = new Dictionary<string, string>
         {
-            {"World Elevations", "https://sampleserver5.arcgisonline.com/arcgis/rest/services/Elevation/WorldElevations/MapsAndVisualizationServer"},
-            {"World Cities", "https://sampleserver6.arcgisonline.com/arcgis/rest/services/SampleWorldCities/MapsAndVisualizationServer/" },
-            {"US Census Data", "https://sampleserver5.arcgisonline.com/arcgis/rest/services/Census/MapsAndVisualizationServer"}
+            {"World Elevations", "https://sampleserver5.arcgisonline.com/arcgis/rest/services/Elevation/WorldElevations/MapServer"},
+            {"World Cities", "https://sampleserver6.arcgisonline.com/arcgis/rest/services/SampleWorldCities/MapServer/" },
+            {"US Census Data", "https://sampleserver5.arcgisonline.com/arcgis/rest/services/Census/MapServer"}
         };
 
         // Use a TaskCompletionSource to track the completion of the authorization
@@ -47,7 +47,7 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
         private OAuthPropsDialogOverlay _oauthInfoUI;
 
         // Overlay with entry controls for map item details (title, description, and tags)
-        private SaveMapsAndVisualizationDialogOverlay _mapInfoUI;
+        private SaveMapDialogOverlay _mapInfoUI;
 
         // Progress bar to show that the app is working
         private UIActivityIndicatorView _activityIndicator;
@@ -66,7 +66,7 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
         // URL used by the server for authorization
         private string AuthorizeUrl = "https://www.arcgis.com/sharing/oauth2/authorize";
 
-        public AuthorMapsAndVisualization()
+        public AuthorMap()
         {
             Title = "Author and save a map";
         }
@@ -74,7 +74,7 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
         public override void ViewDidLayoutSubviews() {
             // correctly handle re-layout events (e.g. rotated phone)
             base.ViewDidLayoutSubviews();
-            _myMapsAndVisualizationView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
             _segmentButton.Frame = new CoreGraphics.CGRect(10, 10, View.Bounds.Width - 20, 24);
             _toolbar.Frame = new CoreGraphics.CGRect(0, View.Bounds.Height - 40, View.Bounds.Width, 40);
@@ -93,11 +93,11 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
 
         private void Initialize()
         {
-            // Create new MapsAndVisualization with a light gray canvas basemap
-            var myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateLightGrayCanvas());
+            // Create new Map with a light gray canvas basemap
+            var myMap = new Map(Basemap.CreateLightGrayCanvas());
 
-            // Add the MapsAndVisualization to the MapsAndVisualizationView
-            _myMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Add the Map to the MapView
+            _myMapView.Map = myMap;
 
             // Prompt the user for OAuth settings
             ShowOAuthPropsUI();
@@ -105,16 +105,16 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
 
         private void CreateLayout()
         {
-            // Create a new MapsAndVisualizationView control
-            _myMapsAndVisualizationView = new MapsAndVisualizationView();
+            // Create a new MapView control
+            _myMapView = new MapView();
 
             // Create an activity indicator
             var centerRect = new CoreGraphics.CGRect(View.Bounds.Width / 2, View.Bounds.Height / 2, 40, 40);
             _activityIndicator = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.WhiteLarge);
             _activityIndicator.Frame = centerRect;
 
-            // Define the visual frame for the MapsAndVisualizationView
-            _myMapsAndVisualizationView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Define the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
             // Add a segmented button control
             _segmentButton = new UISegmentedControl();
@@ -142,8 +142,8 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
 			// Add the UIBarButtonItems array to the toolbar
 			_toolbar.SetItems(barButtonItems, true);
 
-            // Add the MapsAndVisualizationView, progress bar, and UIButton to the page
-            View.AddSubviews(_myMapsAndVisualizationView, _activityIndicator, _toolbar);
+            // Add the MapView, progress bar, and UIButton to the page
+            View.AddSubviews(_myMapView, _activityIndicator, _toolbar);
         }
 
         private void SegmentButtonClicked(object sender, EventArgs e)
@@ -168,12 +168,12 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
             else if (selectedSegmentId == 2)
             {
                 // Clear the map from the map view (allow the user to start over and save as a new portal item)
-                _myMapsAndVisualizationView.MapsAndVisualization = new MapsAndVisualization(Basemap.CreateLightGrayCanvas());
+                _myMapView.Map = new Map(Basemap.CreateLightGrayCanvas());
             }
             else if (selectedSegmentId == 3)
             {
                 // Show the save map UI
-                ShowSaveMapsAndVisualizationUI();
+                ShowSaveMapUI();
             }
 
             // Unselect all segments (user might want to click the same control twice)
@@ -186,10 +186,10 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
             UIAlertController basemapsActionSheet = UIAlertController.Create("Basemaps", "Choose a basemap", UIAlertControllerStyle.ActionSheet);
 
             // Add actions to apply each basemap type
-            basemapsActionSheet.AddAction(UIAlertAction.Create("Topographic", UIAlertActionStyle.Default, (action) => _myMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateTopographic()));
-            basemapsActionSheet.AddAction(UIAlertAction.Create("Streets", UIAlertActionStyle.Default, (action) => _myMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateStreets()));
-            basemapsActionSheet.AddAction(UIAlertAction.Create("Imagery", UIAlertActionStyle.Default, (action) => _myMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateImagery()));
-            basemapsActionSheet.AddAction(UIAlertAction.Create("Oceans", UIAlertActionStyle.Default, (action) => _myMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateOceans()));
+            basemapsActionSheet.AddAction(UIAlertAction.Create("Topographic", UIAlertActionStyle.Default, (action) => _myMapView.Map.Basemap = Basemap.CreateTopographic()));
+            basemapsActionSheet.AddAction(UIAlertAction.Create("Streets", UIAlertActionStyle.Default, (action) => _myMapView.Map.Basemap = Basemap.CreateStreets()));
+            basemapsActionSheet.AddAction(UIAlertAction.Create("Imagery", UIAlertActionStyle.Default, (action) => _myMapView.Map.Basemap = Basemap.CreateImagery()));
+            basemapsActionSheet.AddAction(UIAlertAction.Create("Oceans", UIAlertActionStyle.Default, (action) => _myMapView.Map.Basemap = Basemap.CreateOceans()));
             basemapsActionSheet.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, (action) => Console.WriteLine("Canceled")));
 
             // Required for iPad - You must specify a source for the Action Sheet since it is displayed as a popover
@@ -233,12 +233,12 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
         private async void AddOrRemoveLayer(string layerName)
         {
             // See if the layer already exists
-            ArcGISMapsAndVisualizationImageLayer layer = _myMapsAndVisualizationView.MapsAndVisualization.OperationalLayers.FirstOrDefault(l => l.Name == layerName) as ArcGISMapsAndVisualizationImageLayer;
+            ArcGISMapImageLayer layer = _myMapView.Map.OperationalLayers.FirstOrDefault(l => l.Name == layerName) as ArcGISMapImageLayer;
 
             // If the layer is in the map, remove it
             if (layer != null)
             {
-                _myMapsAndVisualizationView.MapsAndVisualization.OperationalLayers.Remove(layer);
+                _myMapView.Map.OperationalLayers.Remove(layer);
             }
             else
             {
@@ -247,13 +247,13 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
                 var layerUri = new Uri(layerUrl);
 
                 // Create a new map image layer
-                layer = new ArcGISMapsAndVisualizationImageLayer(layerUri);
+                layer = new ArcGISMapImageLayer(layerUri);
                 layer.Name = layerName;
                 await layer.LoadAsync();
 
                 // Set it 50% opaque, and add it to the map
                 layer.Opacity = 0.5;
-                _myMapsAndVisualizationView.MapsAndVisualization.OperationalLayers.Add(layer);
+                _myMapView.Map.OperationalLayers.Add(layer);
             }
         }
 
@@ -290,16 +290,16 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
             View.Add(_oauthInfoUI);
         }
 
-        private void ShowSaveMapsAndVisualizationUI()
+        private void ShowSaveMapUI()
         {
             if (_mapInfoUI != null) { return; }
 
             // Create a view to show map item info entry controls over the map view
             var ovBounds = new CoreGraphics.CGRect(0, 60, View.Bounds.Width, View.Bounds.Height - 60); 
-            _mapInfoUI = new SaveMapsAndVisualizationDialogOverlay(ovBounds, 0.75f, UIColor.White, (PortalItem)_myMapsAndVisualizationView.MapsAndVisualization.Item);
+            _mapInfoUI = new SaveMapDialogOverlay(ovBounds, 0.75f, UIColor.White, (PortalItem)_myMapView.Map.Item);
 
-            // Handle the OnMapsAndVisualizationInfoEntered event to get the info entered by the user
-            _mapInfoUI.OnMapsAndVisualizationInfoEntered += MapsAndVisualizationItemInfoEntered;
+            // Handle the OnMapInfoEntered event to get the info entered by the user
+            _mapInfoUI.OnMapInfoEntered += MapItemInfoEntered;
 
             // Handle the cancel event when the user closes the dialog without choosing to save
             _mapInfoUI.OnCanceled += SaveCanceled;
@@ -308,12 +308,12 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
             View.Add(_mapInfoUI);
         }
 
-        // Handle the OnMapsAndVisualizationInfoEntered event from the item input UI
-        // MapsAndVisualizationSavedEventArgs contains the title, description, and tags that were entered
-        private async void MapsAndVisualizationItemInfoEntered(object sender, MapsAndVisualizationSavedEventArgs e)
+        // Handle the OnMapInfoEntered event from the item input UI
+        // MapSavedEventArgs contains the title, description, and tags that were entered
+        private async void MapItemInfoEntered(object sender, MapSavedEventArgs e)
         {
             // Get the current map
-            var myMapsAndVisualization = _myMapsAndVisualizationView.MapsAndVisualization;
+            var myMap = _myMapView.Map;
 
             try
             {
@@ -326,16 +326,16 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
                 var tags = e.Tags;
 
                 // Apply the current extent as the map's initial extent
-                myMapsAndVisualization.InitialViewpoint = _myMapsAndVisualizationView.GetCurrentViewpoint(ViewpointType.BoundingGeometry);
+                myMap.InitialViewpoint = _myMapView.GetCurrentViewpoint(ViewpointType.BoundingGeometry);
 
                 // Export the current map view for the item's thumbnail
-                RuntimeImage thumbnailImg = await _myMapsAndVisualizationView.ExportImageAsync();
+                RuntimeImage thumbnailImg = await _myMapView.ExportImageAsync();
 
                 // See if the map has already been saved (has an associated portal item)
-                if (myMapsAndVisualization.Item == null)
+                if (myMap.Item == null)
                 {
                     // Call a function to save the map as a new portal item
-                    await SaveNewMapsAndVisualizationAsync(myMapsAndVisualization, title, description, tags, thumbnailImg);
+                    await SaveNewMapAsync(myMap, title, description, tags, thumbnailImg);
 
                     // Report a successful save
                     UIAlertController alert = UIAlertController.Create("Saved map", "Saved " + title + " to ArcGIS Online", UIAlertControllerStyle.Alert);
@@ -345,14 +345,14 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
                 else
                 {
                     // This is not the initial save, call SaveAsync to save changes to the existing portal item
-                    await myMapsAndVisualization.SaveAsync();
+                    await myMap.SaveAsync();
 
                     // Get the file stream from the new thumbnail image
                     Stream imageStream = await thumbnailImg.GetEncodedBufferAsync();
 
                     // Update the item thumbnail
-                    (myMapsAndVisualization.Item as PortalItem).SetThumbnailWithImage(imageStream);                    
-                    await myMapsAndVisualization.SaveAsync();
+                    (myMap.Item as PortalItem).SetThumbnailWithImage(imageStream);                    
+                    await myMap.SaveAsync();
 
                     // Report update was successful
                     UIAlertController alert = UIAlertController.Create("Updated map", "Saved changes to " + title, UIAlertControllerStyle.Alert);
@@ -385,7 +385,7 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
             _mapInfoUI = null;
         }
 
-        private async Task SaveNewMapsAndVisualizationAsync(MapsAndVisualization myMapsAndVisualization, string title, string description, string[] tags, RuntimeImage img)
+        private async Task SaveNewMapAsync(Map myMap, string title, string description, string[] tags, RuntimeImage img)
         {
             // Challenge the user for portal credentials (OAuth credential request for arcgis.com)
             CredentialRequestInfo loginInfo = new CredentialRequestInfo();
@@ -417,7 +417,7 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
             ArcGISPortal agsOnline = await ArcGISPortal.CreateAsync(new Uri(ServerUrl));
 
             // Save the current state of the map as a portal item in the user's default folder
-            await myMapsAndVisualization.SaveAsAsync(agsOnline, null, title, description, tags, img);
+            await myMap.SaveAsAsync(agsOnline, null, title, description, tags, img);
         }
 
         #region OAuth helpers
@@ -744,10 +744,10 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
     }
 
     // View containing "save map" controls (title, description, and tags inputs with save/cancel buttons)
-    public class SaveMapsAndVisualizationDialogOverlay : UIView
+    public class SaveMapDialogOverlay : UIView
     {
         // Event to provide information the user entered when the user dismisses the view
-        public event EventHandler<MapsAndVisualizationSavedEventArgs> OnMapsAndVisualizationInfoEntered;
+        public event EventHandler<MapSavedEventArgs> OnMapInfoEntered;
 
         // Event to report that the save was canceled
         public event EventHandler OnCanceled;
@@ -760,7 +760,7 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
         // Store any existing portal item (for "update" versus "save", e.g.)
         private PortalItem _portalItem = null;
 
-        public SaveMapsAndVisualizationDialogOverlay(CoreGraphics.CGRect frame, nfloat transparency, UIColor color, PortalItem mapItem) : base(frame)
+        public SaveMapDialogOverlay(CoreGraphics.CGRect frame, nfloat transparency, UIColor color, PortalItem mapItem) : base(frame)
         {
             // Store the current portal item for the map (if any)
             _portalItem = mapItem;
@@ -816,7 +816,7 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
 
             // Tags text input
             _tagsTextField = new UITextField(new CoreGraphics.CGRect(controlX, controlY, textViewWidth, controlHeight));
-            _tagsTextField.Text = "ArcGIS Runtime, Web MapsAndVisualization";
+            _tagsTextField.Text = "ArcGIS Runtime, Web Map";
             _tagsTextField.AutocapitalizationType = UITextAutocapitalizationType.None;
             _tagsTextField.BackgroundColor = UIColor.LightGray;
 
@@ -888,20 +888,20 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
                 return;
             }
 
-            // Fire the OnMapsAndVisualizationInfoEntered event and provide the map item values
-            if (OnMapsAndVisualizationInfoEntered != null)
+            // Fire the OnMapInfoEntered event and provide the map item values
+            if (OnMapInfoEntered != null)
             {
-                // Create a new MapsAndVisualizationSavedEventArgs to contain the user's values
-                var mapSaveEventArgs = new MapsAndVisualizationSavedEventArgs(title, description, tags);
+                // Create a new MapSavedEventArgs to contain the user's values
+                var mapSaveEventArgs = new MapSavedEventArgs(title, description, tags);
 
                 // Raise the event
-                OnMapsAndVisualizationInfoEntered(sender, mapSaveEventArgs);
+                OnMapInfoEntered(sender, mapSaveEventArgs);
             }
         }
     }
 
     // Custom EventArgs implementation to hold map item information (title, description, and tags)
-    public class MapsAndVisualizationSavedEventArgs : EventArgs
+    public class MapSavedEventArgs : EventArgs
     {
         // Title property
         public string Title { get; set; }
@@ -913,7 +913,7 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
         public string[] Tags { get; set; }
 
         // Store map item values passed into the constructor
-        public MapsAndVisualizationSavedEventArgs(string title, string description, string[] tags)
+        public MapSavedEventArgs(string title, string description, string[] tags)
         {
             Title = title;
             Description = description;

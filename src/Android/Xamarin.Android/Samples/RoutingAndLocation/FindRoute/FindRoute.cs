@@ -1,4 +1,4 @@
-﻿// Copyright 2017 Esri.
+// Copyright 2017 Esri.
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
@@ -7,32 +7,29 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific 
 // language governing permissions and limitations under the License.
 
+using Android.App;
+using Android.OS;
+using Android.Widget;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Symbology;
-using Esri.ArcGISRuntime.Tasks.RoutingAndLocation;
+using Esri.ArcGISRuntime.Tasks.FindRoute;
 using Esri.ArcGISRuntime.UI;
 using Esri.ArcGISRuntime.UI.Controls;
-using Foundation;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using UIKit;
 
-namespace ArcGISRuntimeXamarin.Samples.NetworkAnalysis
+namespace ArcGISRuntimeXamarin.Samples.FindRoute
 {
-    [Register("NetworkAnalysis")]
-    public class NetworkAnalysis : UIViewController
+    [Activity(Label = "FindRoute")]
+    public class FindRoute : Activity
     {
-        private MapView _myMapView;
-        private int _yOffset = 60;
-        private UIToolbar _toolbar;
+        private MapView _myMapView = new MapView();
 
         // List of stops on the route ('from' and 'to')
         private List<Stop> _routeStops;
-
-        // List of direction maneuvers for completing the route (once solved)
-        IReadOnlyList<DirectionManeuver> _directionsList;
 
         // Graphics overlay to display stops and the route result
         private GraphicsOverlay _routeGraphicsOverlay;
@@ -44,61 +41,57 @@ namespace ArcGISRuntimeXamarin.Samples.NetworkAnalysis
         private Uri _checkedFlagIconUri = new Uri("https://static.arcgis.com/images/Symbols/Transportation/CheckeredFlag.png");
         private Uri _carIconUri = new Uri("https://static.arcgis.com/images/Symbols/Transportation/CarRedFront.png");
 
-        public NetworkAnalysis()
+        // UI control to show/hide directions dialog (private scope so it can be enabled/disabled as needed)
+        private Button _showHideDirectionsButton;
+
+        // Dialog for showing driving directions
+        private AlertDialog _directionsDialog;
+
+        protected override void OnCreate(Bundle bundle)
         {
-            Title = "Find route";
+            base.OnCreate(bundle);
+
+            Title = "Find a route";
+
+            // Create the UI
+            CreateLayout();
+
+            // Initialize the app
+            Initialize();
         }
 
-        public override void ViewDidLoad()
+        private void CreateLayout()
         {
-            base.ViewDidLoad();
+            // Create a new layout for the entire page
+            var layout = new LinearLayout(this) { Orientation = Orientation.Vertical };
 
-            // Create a new MapView control and provide its location coordinates on the frame
-            _myMapView = new MapView();            
-            
-            // Create a toolbar on the bottom of the display 
-            _toolbar = new UIToolbar();
-            _toolbar.AutosizesSubviews = true;
+            // Create a new layout for the toolbar (buttons)
+            var toolbar = new LinearLayout(this) { Orientation = Orientation.Horizontal };
 
-            // Create a button for solving the route
-            UIButton solveRouteButton = new UIButton(UIButtonType.RoundedRect);
-            solveRouteButton.Frame = new CoreGraphics.CGRect(10, 8, 100, 24);
-            solveRouteButton.SetTitle("Solve Route", UIControlState.Normal);
-            solveRouteButton.TouchUpInside += SolveRouteButtonClick;
+            // Create a button to solve the route and add it to the toolbar
+            var solveRouteButton = new Button(this) { Text = "Solve Route" };
+            solveRouteButton.Click += SolveRouteClick;
+            toolbar.AddView(solveRouteButton);
 
-            // Create a button to reset
-            UIButton resetButton = new UIButton(UIButtonType.RoundedRect);
-            resetButton.Frame = new CoreGraphics.CGRect(120, 8, 50, 24);
-            resetButton.SetTitle("Reset", UIControlState.Normal);
-            resetButton.TouchUpInside += ResetButtonClick;
+            // Create a button to reset the route display, add it to the toolbar
+            var resetButton = new Button(this) { Text = "Reset" };
+            resetButton.Click += ResetClick;
+            toolbar.AddView(resetButton);
 
-            // Create a button for viewing the driving directions
-            UIButton showDirectionsButton = new UIButton(UIButtonType.RoundedRect);
-            showDirectionsButton.Frame = new CoreGraphics.CGRect(180, 8, 100, 24);
-            showDirectionsButton.SetTitle("Directions", UIControlState.Normal);
-            showDirectionsButton.TouchUpInside += ShowDirections;
+            // Create a button to show or hide the route directions, add it to the toolbar
+            _showHideDirectionsButton = new Button(this) { Text = "Directions" };
+            _showHideDirectionsButton.Click += ShowDirectionsClick;
+            _showHideDirectionsButton.Enabled = false;
+            toolbar.AddView(_showHideDirectionsButton);
 
-            // Create a UIBarButtonItem and set its view with the solve route button
-            UIBarButtonItem barButtonSolveRoute = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
-            barButtonSolveRoute.CustomView = solveRouteButton;
+            // Add the toolbar to the layout
+            layout.AddView(toolbar);
 
-            // Create a UIBarButtonItem and set its view with the reset button
-            UIBarButtonItem barButtonReset = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
-            barButtonReset.CustomView = resetButton;
+            // Add the map view to the layout
+            layout.AddView(_myMapView);
 
-            // Create a UIBarButtonItem and set its view with the show directions button
-            UIBarButtonItem barButtonShowDirections = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
-            barButtonShowDirections.CustomView = showDirectionsButton;
-
-            // Add the bar button items to an array of UIBarButtonItems
-            UIBarButtonItem[] barButtonItems = new UIBarButtonItem[] { barButtonSolveRoute, barButtonReset, barButtonShowDirections };
-
-            // Add the UIBarButtonItems array to the toolbar
-            _toolbar.SetItems(barButtonItems, true);
-
-            View.AddSubviews(_myMapView, _toolbar);
-
-            Initialize();
+            // Show the layout in the app
+            SetContentView(layout);
         }
 
         private void Initialize()
@@ -118,7 +111,7 @@ namespace ArcGISRuntimeXamarin.Samples.NetworkAnalysis
 
             // Add a slight offset (pixels) to the picture symbols
             carSymbol.OffsetX = -20;
-            flagSymbol.OffsetY = -10;
+            flagSymbol.OffsetY = -5;
 
             // Create graphics for the stops
             Graphic fromGraphic = new Graphic(fromPoint, carSymbol);
@@ -139,11 +132,11 @@ namespace ArcGISRuntimeXamarin.Samples.NetworkAnalysis
             _myMapView.SpatialReferenceChanged += (s, e) => _myMapView.SetViewpoint(sanDiegoViewpoint);
 
             // Add a new Map and the graphics overlay to the map view
-            _myMapView.Map = new Map(Basemap.CreateStreetsVector());
+            _myMapView.Map = new Map(Basemap.CreateStreets());
             _myMapView.GraphicsOverlays.Add(_routeGraphicsOverlay);
         }
 
-        private async void SolveRouteButtonClick(object sender, EventArgs e)
+        private async void SolveRouteClick(object sender, EventArgs e)
         {
             // Create a new route task using the San Diego route service URI
             RouteTask solveRouteTask = await RouteTask.CreateAsync(_sanDiegoRouteServiceUri);
@@ -168,21 +161,20 @@ namespace ArcGISRuntimeXamarin.Samples.NetworkAnalysis
             Polyline routePolyline = firstRoute.RouteGeometry;
 
             // Create a thick purple line symbol for the route
-            SimpleLineSymbol routeSymbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, System.Drawing.Color.Purple, 8.0);
+            SimpleLineSymbol routeSymbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.Purple, 8.0);
 
             // Create a new graphic for the route geometry and add it to the graphics overlay
             Graphic routeGraphic = new Graphic(routePolyline, routeSymbol);
             _routeGraphicsOverlay.Graphics.Add(routeGraphic);
 
             // Get a list of directions for the route and display it in the list box
-            _directionsList = firstRoute.DirectionManeuvers;          
+            var directions = from d in firstRoute.DirectionManeuvers select d.DirectionText;
+            CreateDirectionsDialog(directions);
+            _showHideDirectionsButton.Enabled = true;
         }
 
-        private void ResetButtonClick(object sender, EventArgs e)
+        private void ResetClick(object sender, EventArgs e)
         {
-            // Clear the list of directions
-            _directionsList = null;
-
             // Remove the route graphic from the graphics overlay (only line graphic in the collection)
             int graphicsCount = _routeGraphicsOverlay.Graphics.Count;
             for (var i = graphicsCount; i > 0; i--)
@@ -195,55 +187,42 @@ namespace ArcGISRuntimeXamarin.Samples.NetworkAnalysis
                     _routeGraphicsOverlay.Graphics.Remove(g);
                 }
             }
+
+            // Disable the button to show the directions dialog
+            _showHideDirectionsButton.Enabled = false;
         }
 
-        private void ShowDirections(object sender, EventArgs e)
+        private void ShowDirectionsClick(object sender, EventArgs e)
         {
-            UITableViewController directionsTableController = new UITableViewController();
-            DirectionsTableSource directionsSource = new DirectionsTableSource(_directionsList);
-            directionsTableController.TableView.Source = directionsSource;
-            NavigationController.PushViewController(directionsTableController, true);
-        }
-
-        public override void ViewDidLayoutSubviews()
-        {
-            // Setup the visual frame for the MapView
-            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
-            // Setup the visual frame for the Toolbar
-            _toolbar.Frame = new CoreGraphics.CGRect(0, View.Bounds.Height - 40, View.Bounds.Width, View.Bounds.Height);
-
-
-            base.ViewDidLayoutSubviews();
-        }
-    }
-
-    public class DirectionsTableSource : UITableViewSource
-    {
-        private IReadOnlyList<DirectionManeuver> _directionsList;
-        private string _cellID = "TableCell";
-
-        public DirectionsTableSource(IReadOnlyList<DirectionManeuver> directions)
-        {
-            _directionsList = directions;
-        }
-
-        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-        {
-            UITableViewCell cell = tableView.DequeueReusableCell(_cellID);
-            string directionText = _directionsList[indexPath.Row].DirectionText;
-
-            if(cell == null)
-            {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, _cellID);
+            // Show the directions dialog
+            if (_directionsDialog != null)
+            {                
+                _directionsDialog.Show();
             }
-
-            cell.TextLabel.Text = directionText;
-            return cell;
         }
 
-        public override nint RowsInSection(UITableView tableview, nint section)
+        private void CreateDirectionsDialog(IEnumerable<string> directions)
         {
-            return _directionsList != null ? _directionsList.Count : 0;
+            // Create a dialog to show route directions
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+
+            // Create the layout
+            LinearLayout dialogLayout = new LinearLayout(this);
+            dialogLayout.Orientation = Orientation.Vertical;            
+
+            // Create a list box for showing the route directions
+            var directionsList = new ListView(this);
+            var directionsAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, directions.ToArray());
+            directionsList.Adapter = directionsAdapter;
+            dialogLayout.AddView(directionsList);
+
+            // Add the controls to the dialog
+            dialogBuilder.SetView(dialogLayout);
+            dialogBuilder.SetTitle("Route Directions");
+
+            // Create the dialog (don't show it)
+            _directionsDialog = dialogBuilder.Create();
         }
+
     }
 }

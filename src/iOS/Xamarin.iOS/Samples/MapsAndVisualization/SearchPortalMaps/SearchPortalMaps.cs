@@ -7,7 +7,7 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific 
 // language governing permissions and limitations under the License.
 
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Portal;
 using Esri.ArcGISRuntime.Security;
 using Esri.ArcGISRuntime.UI.Controls;
@@ -19,16 +19,16 @@ using System.Threading.Tasks;
 using UIKit;
 using Xamarin.Auth;
 
-namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
+namespace ArcGISRuntimeXamarin.Samples.SearchPortalMaps
 {
-    [Register("SearchPortalMapsAndVisualizations")]
-    public class SearchPortalMapsAndVisualizations : UIViewController, IOAuthAuthorizeHandler
+    [Register("SearchPortalMaps")]
+    public class SearchPortalMaps : UIViewController, IOAuthAuthorizeHandler
     {
-        // Constant holding offset where the MapsAndVisualizationView control should start
+        // Constant holding offset where the MapView control should start
         private const int yPageOffset = 60;
 
-        // Create and hold reference to the used MapsAndVisualizationView
-        private MapsAndVisualizationView _myMapsAndVisualizationView = new MapsAndVisualizationView();
+        // Create and hold reference to the used MapView
+        private MapView _myMapView = new MapView();
 
         UISegmentedControl _segmentButton;
         UIToolbar _toolbar;
@@ -40,7 +40,7 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
         private OAuthPropsDialogOverlay _oauthInfoUI;
 
         // Overlay with entry control for web map search text
-        private SearchMapsAndVisualizationsDialogOverlay _searchMapsAndVisualizationsUI;
+        private SearchMapsDialogOverlay _searchMapsUI;
 
         // Variables for OAuth config and default values ...
         // URL of the server to authenticate with
@@ -54,7 +54,7 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
         private string _oAuthRedirectUrl = "https://developers.arcgis.com";
 
 
-        public SearchPortalMapsAndVisualizations()
+        public SearchPortalMaps()
         {
             Title = "Search a portal for maps";
         }
@@ -70,14 +70,14 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualizationView
-            _myMapsAndVisualizationView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
-            if (_searchMapsAndVisualizationsUI != null)
+            if (_searchMapsUI != null)
             {
-                _searchMapsAndVisualizationsUI.Bounds = new CoreGraphics.CGRect(0, yPageOffset, View.Bounds.Width, View.Bounds.Height);
-                _searchMapsAndVisualizationsUI.Frame = new CoreGraphics.CGRect(0, yPageOffset, View.Bounds.Width, View.Bounds.Height);
-                _searchMapsAndVisualizationsUI.Center = View.Center;
+                _searchMapsUI.Bounds = new CoreGraphics.CGRect(0, yPageOffset, View.Bounds.Width, View.Bounds.Height);
+                _searchMapsUI.Frame = new CoreGraphics.CGRect(0, yPageOffset, View.Bounds.Width, View.Bounds.Height);
+                _searchMapsUI.Center = View.Center;
             }
                 
 
@@ -98,11 +98,11 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
 
         private void Initialize()
         {
-            // Create a new MapsAndVisualization instance to display by default
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateLightGrayCanvas());
+            // Create a new Map instance to display by default
+            Map myMap = new Map(Basemap.CreateLightGrayCanvas());
 
-            // Provide used MapsAndVisualization to the MapsAndVisualizationView
-            _myMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Provide used Map to the MapView
+            _myMapView.Map = myMap;
 
             // Prompt the user for OAuth settings
             ShowOAuthPropsUI();
@@ -145,8 +145,8 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             // Add a segmented button control
             _segmentButton = new UISegmentedControl();
             _segmentButton.BackgroundColor = UIColor.White;
-            _segmentButton.InsertSegment("Search MapsAndVisualizations", 0, false);
-            _segmentButton.InsertSegment("My MapsAndVisualizations", 1, false);
+            _segmentButton.InsertSegment("Search Maps", 0, false);
+            _segmentButton.InsertSegment("My Maps", 1, false);
 
             // Handle the "click" for each segment (new segment is selected)
             _segmentButton.ValueChanged += SegmentButtonClicked;
@@ -166,8 +166,8 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
 			// Add the UIBarButtonItems array to the toolbar
 			_toolbar.SetItems(barButtonItems, true);
 
-            // Add the MapsAndVisualizationView and segmented button to the page
-            View.AddSubviews(_myMapsAndVisualizationView, _toolbar);
+            // Add the MapView and segmented button to the page
+            View.AddSubviews(_myMapView, _toolbar);
         }
 
         private void SegmentButtonClicked(object sender, EventArgs e)
@@ -182,37 +182,37 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             if (selectedSegmentId == 0)
             {
                 // Show search UI
-                ShowSearchMapsAndVisualizationUI();
+                ShowSearchMapUI();
             }
             else if (selectedSegmentId == 1)
             {
                 // Authenticate user on ArcGIS Online, then show their maps
-                GetMyMapsAndVisualizations();
+                GetMyMaps();
             }
 
             // Unselect all segments (user might want to click the same control twice)
             buttonControl.SelectedSegment = -1;
         }
 
-        private void ShowSearchMapsAndVisualizationUI()
+        private void ShowSearchMapUI()
         {
-            if (_searchMapsAndVisualizationsUI != null) { return; }
+            if (_searchMapsUI != null) { return; }
 
             // Create a view to show map item info entry controls over the map view
             var ovBounds = new CoreGraphics.CGRect(0, yPageOffset, View.Bounds.Width, View.Bounds.Height);
-            _searchMapsAndVisualizationsUI = new SearchMapsAndVisualizationsDialogOverlay(ovBounds, 0.75f, UIColor.White);
+            _searchMapsUI = new SearchMapsDialogOverlay(ovBounds, 0.75f, UIColor.White);
 
-            // Handle the OnSearchMapsAndVisualizationsTextEntered event to get the info entered by the user
-            _searchMapsAndVisualizationsUI.OnSearchMapsAndVisualizationsTextEntered += SearchTextEntered;
+            // Handle the OnSearchMapsTextEntered event to get the info entered by the user
+            _searchMapsUI.OnSearchMapsTextEntered += SearchTextEntered;
 
             // Handle the cancel event when the user closes the dialog without choosing to search
-            _searchMapsAndVisualizationsUI.OnCanceled += SearchCanceled;
+            _searchMapsUI.OnCanceled += SearchCanceled;
 
             // Add the search UI view (will display semi-transparent over the map view)
-            View.Add(_searchMapsAndVisualizationsUI);
+            View.Add(_searchMapsUI);
         }
 
-        private async void GetMyMapsAndVisualizations()
+        private async void GetMyMaps()
         {
             // Get web map portal items in the current user's folder
             IEnumerable<PortalItem> mapItems = null;
@@ -229,22 +229,22 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             PortalUserContent myContent = await portal.User.GetContentAsync();
 
             // Get the web map items in the root folder
-            mapItems = from item in myContent.Items where item.Type == PortalItemType.WebMapsAndVisualization select item;
+            mapItems = from item in myContent.Items where item.Type == PortalItemType.WebMap select item;
 
             // Loop through all sub-folders and get web map items, add them to the mapItems collection
             foreach (PortalFolder folder in myContent.Folders)
             {
                 IEnumerable<PortalItem> folderItems = await portal.User.GetContentAsync(folder.FolderId);
-                mapItems.Concat(from item in folderItems where item.Type == PortalItemType.WebMapsAndVisualization select item);
+                mapItems.Concat(from item in folderItems where item.Type == PortalItemType.WebMap select item);
             }
 
             // Show the map results
-            ShowMapsAndVisualizationList(mapItems);
+            ShowMapList(mapItems);
         }
 
         // Handle the SearchTextEntered event from the search input UI
-        // SearchMapsAndVisualizationsEventArgs contains the search text that was entered
-        private async void SearchTextEntered(object sender, SearchMapsAndVisualizationsEventArgs e)
+        // SearchMapsEventArgs contains the search text that was entered
+        private async void SearchTextEntered(object sender, SearchMapsEventArgs e)
         {
             try
             {
@@ -268,7 +268,7 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
                 mapItems = findResult.Results;
 
                 // Show the map results
-                ShowMapsAndVisualizationList(mapItems);
+                ShowMapList(mapItems);
             }
             catch (Exception ex)
             {
@@ -280,12 +280,12 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             finally
             {
                 // Get rid of the search input controls
-                _searchMapsAndVisualizationsUI.Hide();
-                _searchMapsAndVisualizationsUI = null;
+                _searchMapsUI.Hide();
+                _searchMapsUI = null;
             }
         }
 
-        private void ShowMapsAndVisualizationList(IEnumerable<PortalItem> webmapItems)
+        private void ShowMapList(IEnumerable<PortalItem> webmapItems)
         {
             // Create a new Alert Controller
             UIAlertController mapListActionSheet = UIAlertController.Create("Web maps", "Choose a map", UIAlertControllerStyle.ActionSheet);
@@ -293,7 +293,7 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             // Add actions to load the available web maps
             foreach (var item in webmapItems)
             {
-                mapListActionSheet.AddAction(UIAlertAction.Create(item.Title, UIAlertActionStyle.Default, (action) => DisplayMapsAndVisualization(item.Url)));
+                mapListActionSheet.AddAction(UIAlertAction.Create(item.Title, UIAlertActionStyle.Default, (action) => DisplayMap(item.Url)));
             }
 
             // Add a choice to cancel
@@ -311,24 +311,24 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             this.PresentViewController(mapListActionSheet, true, null);
         }
 
-        private async void DisplayMapsAndVisualization(Uri webMapsAndVisualizationUri)
+        private async void DisplayMap(Uri webMapUri)
         {
-            var webMapsAndVisualization = new MapsAndVisualization(webMapsAndVisualizationUri);
+            var webMap = new Map(webMapUri);
             try
             {
-                await webMapsAndVisualization.LoadAsync();
+                await webMap.LoadAsync();
             } catch (Esri.ArcGISRuntime.ArcGISRuntimeException e){
-				var alert = new UIAlertView("MapsAndVisualization Load Error", e.Message, null, "OK", null);
+				var alert = new UIAlertView("Map Load Error", e.Message, null, "OK", null);
 				alert.Show();
             }
 
             // Handle change in the load status (to report load errors)
-            webMapsAndVisualization.LoadStatusChanged += WebMapsAndVisualizationLoadStatusChanged;
+            webMap.LoadStatusChanged += WebMapLoadStatusChanged;
 
-            _myMapsAndVisualizationView.MapsAndVisualization = webMapsAndVisualization;
+            _myMapView.Map = webMap;
         }
 
-        private void WebMapsAndVisualizationLoadStatusChanged(object sender, Esri.ArcGISRuntime.LoadStatusEventArgs e)
+        private void WebMapLoadStatusChanged(object sender, Esri.ArcGISRuntime.LoadStatusEventArgs e)
         {
             // Get the current status
             var status = e.Status;
@@ -336,11 +336,11 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             // Report errors if map failed to load
             if (status == Esri.ArcGISRuntime.LoadStatus.FailedToLoad)
             {
-                var map = sender as MapsAndVisualization;
+                var map = sender as Map;
                 var err = map.LoadError;
                 if (err != null)
                 {
-                    var alert = new UIAlertView("MapsAndVisualization Load Error", err.Message, null, "OK", null);
+                    var alert = new UIAlertView("Map Load Error", err.Message, null, "OK", null);
                     alert.Show();
                 }
             }
@@ -349,8 +349,8 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
         private void SearchCanceled(object sender, EventArgs e)
         {
             // Remove the search input UI
-            _searchMapsAndVisualizationsUI.Hide();
-            _searchMapsAndVisualizationsUI = null;
+            _searchMapsUI.Hide();
+            _searchMapsUI = null;
         }
 
         #region OAuth helpers
@@ -722,10 +722,10 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
 
     #region UI for entering web map search text
     // View containing "search map" controls (search text input and search/cancel buttons)
-    public class SearchMapsAndVisualizationsDialogOverlay : UIView
+    public class SearchMapsDialogOverlay : UIView
     {
         // Event to provide information the user entered when the user dismisses the view
-        public event EventHandler<SearchMapsAndVisualizationsEventArgs> OnSearchMapsAndVisualizationsTextEntered;
+        public event EventHandler<SearchMapsEventArgs> OnSearchMapsTextEntered;
 
         // Event to report that the search was canceled
         public event EventHandler OnCanceled;
@@ -733,7 +733,7 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
         // Store the input control so the value can be read
         private UITextField _searchTextField;
 
-        public SearchMapsAndVisualizationsDialogOverlay(CoreGraphics.CGRect frame, nfloat transparency, UIColor color) : base(frame)
+        public SearchMapsDialogOverlay(CoreGraphics.CGRect frame, nfloat transparency, UIColor color) : base(frame)
         {
             // Create a semi-transparent overlay with the specified background color
             BackgroundColor = color;
@@ -822,26 +822,26 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             // Get the search text entered
             var searchText = _searchTextField.Text.Trim();
 
-            // Fire the OnMapsAndVisualizationInfoEntered event and provide the map item values
-            if (OnSearchMapsAndVisualizationsTextEntered != null)
+            // Fire the OnMapInfoEntered event and provide the map item values
+            if (OnSearchMapsTextEntered != null)
             {
-                // Create a new MapsAndVisualizationSavedEventArgs to contain the user's values
-                var mapSaveEventArgs = new SearchMapsAndVisualizationsEventArgs(searchText);
+                // Create a new MapSavedEventArgs to contain the user's values
+                var mapSaveEventArgs = new SearchMapsEventArgs(searchText);
 
                 // Raise the event
-                OnSearchMapsAndVisualizationsTextEntered(sender, mapSaveEventArgs);
+                OnSearchMapsTextEntered(sender, mapSaveEventArgs);
             }
         }
     }
 
     // Custom EventArgs implementation to hold web map search text
-    public class SearchMapsAndVisualizationsEventArgs : EventArgs
+    public class SearchMapsEventArgs : EventArgs
     {
         // Search text property
         public string SearchText { get; set; }
 
         // Store map item values passed into the constructor
-        public SearchMapsAndVisualizationsEventArgs(string searchText)
+        public SearchMapsEventArgs(string searchText)
         {
             SearchText = searchText;
         }

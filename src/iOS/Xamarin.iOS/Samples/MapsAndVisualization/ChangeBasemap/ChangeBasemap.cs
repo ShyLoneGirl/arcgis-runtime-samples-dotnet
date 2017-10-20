@@ -8,7 +8,7 @@
 // language governing permissions and limitations under the License.
 
 using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.UI.Controls;
 using Foundation;
 using UIKit;
@@ -19,7 +19,7 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeBasemap
     public class ChangeBasemap : UIViewController
     {
 
-        MapsAndVisualizationView _myMapsAndVisualizationView;
+        MapView _myMapView;
         UIToolbar _toolbar;
         UISegmentedControl _segmentControl;
 
@@ -38,16 +38,16 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeBasemap
         {
             base.ViewDidLoad();
 
-            // Create a new MapsAndVisualizationView control and provide its location coordinates on the frame
-            _myMapsAndVisualizationView = new MapsAndVisualizationView();
-            _myMapsAndVisualizationView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Create a new MapView control and provide its location coordinates on the frame
+            _myMapView = new MapView();
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
-            // Create a new MapsAndVisualization instance with the basemap               
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(SpatialReferences.WebMercator);
-            myMapsAndVisualization.Basemap = Basemap.CreateTopographic();
+            // Create a new Map instance with the basemap               
+            Map myMap = new Map(SpatialReferences.WebMercator);
+            myMap.Basemap = Basemap.CreateTopographic();
 
-            // Assign the MapsAndVisualization to the MapsAndVisualizationView
-            _myMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Assign the Map to the MapView
+            _myMapView.Map = myMap;
 
             // Create a segmented control to display buttons
             _segmentControl = new UISegmentedControl();
@@ -68,25 +68,25 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeBasemap
                     case 0:
 
                         // Set the basemap to Topographic
-                        _myMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateTopographic();
+                        _myMapView.Map.Basemap = Basemap.CreateTopographic();
                         break;
 
                     case 1:
                     
                         // Set the basemap to Streets
-                        _myMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateStreets();
+                        _myMapView.Map.Basemap = Basemap.CreateStreets();
                         break;
 
                     case 2:
                     
                         // Set the basemap to Imagery
-                        _myMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateImagery();
+                        _myMapView.Map.Basemap = Basemap.CreateImagery();
                         break;
 
                     case 3:
                     
                         // Set the basemap to Oceans
-                        _myMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateOceans();
+                        _myMapView.Map.Basemap = Basemap.CreateOceans();
                         break;
                 }
             };
@@ -106,13 +106,13 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeBasemap
             // Add the UIBarButtonItems array to the toolbar
             _toolbar.SetItems(barButtonItems, true);
 
-            View.AddSubviews(_myMapsAndVisualizationView, _toolbar);
+            View.AddSubviews(_myMapView, _toolbar);
         }
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualizationView
-            _myMapsAndVisualizationView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
             _toolbar.Frame = new CoreGraphics.CGRect(0, View.Bounds.Height - 40, View.Bounds.Width, 40);
             _segmentControl.Frame = new CoreGraphics.CGRect(8, 8, View.Bounds.Width - 16, 24);
             base.ViewDidLayoutSubviews();

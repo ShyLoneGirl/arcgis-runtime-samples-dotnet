@@ -327,7 +327,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
             // Update the geocode parameters if the map point is not null
             if (searchLocation != null)
             {
-                parameters.PreferredRoutingAndLocationLocation = searchLocation;
+                parameters.PreferredSearchLocation = searchLocation;
             }
 
             // Update the search area if desired
@@ -337,7 +337,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
                 Geometry extent = _myMapView.VisibleArea;
 
                 // Update the search parameters
-                parameters.RoutingAndLocationArea = extent;
+                parameters.SearchArea = extent;
             }
 
             // Show the progress bar
@@ -479,7 +479,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
                 // Update the geocode parameters if the map point is not null
                 if (searchLocation != null)
                 {
-                    parameters.PreferredRoutingAndLocationLocation = searchLocation;
+                    parameters.PreferredSearchLocation = searchLocation;
                 }
             }
 

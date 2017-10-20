@@ -11,7 +11,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Drawing;
-using Esri.ArcGISRuntime.LayersAndData;
+using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Symbology;
@@ -277,17 +277,17 @@ namespace ArcGISRuntimeXamarin.Samples.GenerateGeodatabase
             string filename = "SanFrancisco.tpk";
 
             // The data manager provides a method to get the folder
-            string folder = LayersAndDataManager.GetLayersAndDataFolder();
+            string folder = DataManager.GetDataFolder();
 
 			// Return the full path; Item ID is 3f1bbf0ec70b409a975f5c91f363fe7d
-			return Path.Combine(folder, "SampleLayersAndData", "GenerateGeodatabase", filename);
+			return Path.Combine(folder, "SampleData", "GenerateGeodatabase", filename);
             #endregion offlinedata
         }
 
         private string GetGdbPath()
         {
             // Get the platform-specific path for storing the geodatabase
-            String folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationLayersAndData);
+            String folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             // Return the final path
             return Path.Combine(folder, "wildfire.geodatabase");
         }

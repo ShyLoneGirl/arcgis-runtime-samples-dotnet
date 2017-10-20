@@ -46,7 +46,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindAddress
         private MapView _myMapView = new MapView();
 
         // Create UI elements
-        private UIRoutingAndLocationBar _addressRoutingAndLocationBar = new UIRoutingAndLocationBar();
+        private UISearchBar _addressSearchBar = new UISearchBar();
 
         private UIButton _suggestButton = new UIButton();
 
@@ -68,7 +68,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindAddress
         {
             // Set up the visual frame for the MapView and search bar
             _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
-            _addressRoutingAndLocationBar.Frame = new CoreGraphics.CGRect(0, TopLayoutGuide.Length, View.Bounds.Width, 44);
+            _addressSearchBar.Frame = new CoreGraphics.CGRect(0, TopLayoutGuide.Length, View.Bounds.Width, 44);
 
             base.ViewDidLayoutSubviews();
         }
@@ -80,17 +80,17 @@ namespace ArcGISRuntimeXamarin.Samples.FindAddress
         {
             // Add MapView  & search bar to the view
             View.AddSubviews(_myMapView);
-            View.AddSubview(_addressRoutingAndLocationBar);
+            View.AddSubview(_addressSearchBar);
 
             // Configure the search bar to support search
-            _addressRoutingAndLocationBar.RoutingAndLocationButtonClicked += _addressRoutingAndLocationBar_Clicked;
+            _addressSearchBar.SearchButtonClicked += _addressSearchBar_Clicked;
 
             // Configure the search bar to support popover address suggestion
-            _addressRoutingAndLocationBar.ShowsRoutingAndLocationResultsButton = true;
-            _addressRoutingAndLocationBar.ListButtonClicked += _addressRoutingAndLocation_ListButtonClicked;
+            _addressSearchBar.ShowsSearchResultsButton = true;
+            _addressSearchBar.ListButtonClicked += _addressSearch_ListButtonClicked;
 
             // Disable user interaction until the geocoder is ready
-            _addressRoutingAndLocationBar.UserInteractionEnabled = false;
+            _addressSearchBar.UserInteractionEnabled = false;
 
             // Enable tap-for-info pattern on results
             _myMapView.GeoViewTapped += _myMapView_GeoViewTapped;
@@ -111,20 +111,20 @@ namespace ArcGISRuntimeXamarin.Samples.FindAddress
             _geocoder = await LocatorTask.CreateAsync(_serviceUri);
 
             // Enable controls now that the geocoder is ready
-            _addressRoutingAndLocationBar.UserInteractionEnabled = true;
+            _addressSearchBar.UserInteractionEnabled = true;
         }
 
-        private void _addressRoutingAndLocationBar_Clicked(object sender, EventArgs e)
+        private void _addressSearchBar_Clicked(object sender, EventArgs e)
         {
-            UpdateRoutingAndLocation();
+            UpdateSearch();
             // Dismiss the keyboard
-            _addressRoutingAndLocationBar.ResignFirstResponder();
+            _addressSearchBar.ResignFirstResponder();
         }
 
-        private async void UpdateRoutingAndLocation()
+        private async void UpdateSearch()
         {
             // Get the text in the search bar
-            String enteredText = _addressRoutingAndLocationBar.Text;
+            String enteredText = _addressSearchBar.Text;
 
             // Clear existing marker
             _myMapView.GraphicsOverlays.Clear();
@@ -182,7 +182,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindAddress
             return new Graphic(point, pinSymbol);
         }
 
-        private void _addressRoutingAndLocation_ListButtonClicked(object sender, EventArgs e)
+        private void _addressSearch_ListButtonClicked(object sender, EventArgs e)
         {
             // Create the alert view
             UIAlertController alert = UIAlertController.Create("Suggestions", "Location searches to try", UIAlertControllerStyle.Alert);
@@ -192,8 +192,8 @@ namespace ArcGISRuntimeXamarin.Samples.FindAddress
             {
                 alert.AddAction(UIAlertAction.Create(address, UIAlertActionStyle.Default, (obj) =>
                 {
-                    _addressRoutingAndLocationBar.Text = address;
-                    UpdateRoutingAndLocation();
+                    _addressSearchBar.Text = address;
+                    UpdateSearch();
                 }));
             }
 
@@ -206,7 +206,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindAddress
         /// </summary>
         private async void _myMapView_GeoViewTapped(object sender, GeoViewInputEventArgs e)
         {
-            // RoutingAndLocation for the graphics underneath the user's tap
+            // Search for the graphics underneath the user's tap
             IReadOnlyList<IdentifyGraphicsOverlayResult> results = await _myMapView.IdentifyGraphicsOverlaysAsync(e.Position, 12, false);
 
             // Return gracefully if there was no result

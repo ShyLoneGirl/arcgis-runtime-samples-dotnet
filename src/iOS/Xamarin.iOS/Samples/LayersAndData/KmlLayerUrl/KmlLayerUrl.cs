@@ -53,7 +53,7 @@ namespace ArcGISRuntimeXamarin.Samples.KmlLayerUrl
             KmlLayer displayLayer = new KmlLayer(fileDataSource);
 
             // Add the layer to the map
-            _myMapView.Map.OperationalLayersAndData.Add(displayLayer);
+            _myMapView.Map.OperationalLayers.Add(displayLayer);
         }
 
         public override void ViewDidLayoutSubviews()

@@ -21,8 +21,8 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayDrawingStatus
     public class DisplayDrawingStatus : UIViewController
     {
 
-        // Create and hold reference to the used MapsAndVisualization
-        private MapsAndVisualization _myMapsAndVisualization;
+        // Create and hold reference to the used MapView
+        private MapView _myMapView;
 
         private UIToolbar _toolbar;
 
@@ -45,8 +45,8 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayDrawingStatus
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualization
-            _myMapsAndVisualization.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
             // Setup the visual frame for the tool bar
             _toolbar.Frame = new CoreGraphics.CGRect(0, View.Bounds.Height - 30, View.Bounds.Width, 30);
@@ -75,17 +75,17 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayDrawingStatus
             // Add the feature layer to the Map
             myMap.OperationalLayers.Add(myFeatureLayer);
 
-            // Provide used Map to the MapsAndVisualization
-            _myMapsAndVisualization.Map = myMap;
+            // Provide used Map to the MapView
+            _myMapView.Map = myMap;
 
             // Hook up the DrawStatusChanged event
-            _myMapsAndVisualization.DrawStatusChanged += OnMapsAndVisualizationDrawStatusChanged;
+            _myMapView.DrawStatusChanged += OnMapViewDrawStatusChanged;
 
             // Animate the activity spinner
             _activityIndicator.StartAnimating();
         }
 
-        private void OnMapsAndVisualizationDrawStatusChanged(object sender, DrawStatusChangedEventArgs e)
+        private void OnMapViewDrawStatusChanged(object sender, DrawStatusChangedEventArgs e)
         {
             // Make sure that the UI changes are done in the UI thread
             BeginInvokeOnMainThread(() =>
@@ -100,8 +100,8 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayDrawingStatus
 
         private void CreateLayout()
         {
-            // Create a new MapsAndVisualization control and provide its location coordinates on the frame
-            _myMapsAndVisualization = new MapsAndVisualization();
+            // Create a new MapView control and provide its location coordinates on the frame
+            _myMapView = new MapView();
             
             // Create a toolbar on the bottom of the display 
             _toolbar = new UIToolbar();
@@ -119,8 +119,8 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayDrawingStatus
             // Add the UIBarButtonItems to the toolbar
             _toolbar.SetItems(barButtonItems, true);
 
-            // Add the MapsAndVisualization to the Subview
-            View.AddSubviews(_myMapsAndVisualization, _toolbar);
+            // Add the MapView to the Subview
+            View.AddSubviews(_myMapView, _toolbar);
         }
     }
 }

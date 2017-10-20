@@ -17,11 +17,11 @@ namespace ArcGISRuntimeXamarin.Samples.ShowMagnifier
     [Register("ShowMagnifier")]
     public class ShowMagnifier : UIViewController
     {
-        // Constant holding offset where the MapsAndVisualization control should start
+        // Constant holding offset where the MapView control should start
         private const int yPageOffset = 60;
 
-        // Create and hold reference to the used MapsAndVisualization
-        private MapsAndVisualization _myMapsAndVisualization = new MapsAndVisualization();
+        // Create and hold reference to the used MapView
+        private MapView _myMapView = new MapView();
 
         public ShowMagnifier()
         {
@@ -39,8 +39,8 @@ namespace ArcGISRuntimeXamarin.Samples.ShowMagnifier
 
         public override void ViewDidLayoutSubviews()
         {
-            // Setup the visual frame for the MapsAndVisualization
-            _myMapsAndVisualization.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+            // Setup the visual frame for the MapView
+            _myMapView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
 
             base.ViewDidLayoutSubviews();
         }
@@ -51,16 +51,16 @@ namespace ArcGISRuntimeXamarin.Samples.ShowMagnifier
             Map myMap = new Map(BasemapType.Topographic, 34.056295, -117.195800, 10);
 
             // Enable magnifier
-            _myMapsAndVisualization.InteractionOptions.IsMagnifierEnabled = true;
+            _myMapView.InteractionOptions.IsMagnifierEnabled = true;
 
-            // Assign the map to the MapsAndVisualization
-            _myMapsAndVisualization.Map = myMap;
+            // Assign the map to the MapView
+            _myMapView.Map = myMap;
         }
 
         private void CreateLayout()
         {
-            // Add MapsAndVisualization to the page
-            View.AddSubviews(_myMapsAndVisualization);
+            // Add MapView to the page
+            View.AddSubviews(_myMapView);
         }
     }
 }

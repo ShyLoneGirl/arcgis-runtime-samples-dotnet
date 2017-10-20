@@ -205,7 +205,7 @@ namespace ArcGISRuntimeXamarin.Samples.WmsServiceCatalog
         private void UpdateMapDisplay(List<LayerDisplayVM> displayList)
         {
             // Remove all existing layers
-            _myMapView.Map.OperationalLayersAndData.Clear();
+            _myMapView.Map.OperationalLayers.Clear();
 
             // Get a list of selected LayerInfos
             IEnumerable<WmsLayerInfo> selectedLayersAndData = displayList.Where(vm => vm.IsEnabled).Select(vm => vm.Info);
@@ -214,7 +214,7 @@ namespace ArcGISRuntimeXamarin.Samples.WmsServiceCatalog
             WmsLayer myLayer = new WmsLayer(selectedLayersAndData);
 
             // Add the layer to the map
-            _myMapView.Map.OperationalLayersAndData.Add(myLayer);
+            _myMapView.Map.OperationalLayers.Add(myLayer);
         }
 
         /// <summary>

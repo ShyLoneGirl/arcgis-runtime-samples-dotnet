@@ -29,7 +29,7 @@ namespace ArcGISRuntimeXamarin.Samples.IdentifyGraphics
         private MapView _myMapView = new MapView();
 
         // Graphics overlay to host graphics
-        private MapsAndVisualization _polygonOverlay;
+        private GraphicsOverlay _polygonOverlay;
 
         public IdentifyGraphics()
         { 
@@ -88,11 +88,11 @@ namespace ArcGISRuntimeXamarin.Samples.IdentifyGraphics
             Graphic polygonGraphic = new Graphic(polygonGeometry, polygonSymbol);
 
             // Create overlay to where graphics are shown
-            _polygonOverlay = new MapsAndVisualization();
+            _polygonOverlay = new GraphicsOverlay();
             _polygonOverlay.Graphics.Add(polygonGraphic);
 
             // Add created overlay to the MapView
-            _myMapView.MapsAndVisualizations.Add(_polygonOverlay);
+            _myMapView.GraphicsOverlays.Add(_polygonOverlay);
         }
 
         private async void OnMapViewTapped(object sender, GeoViewInputEventArgs e)
@@ -102,7 +102,7 @@ namespace ArcGISRuntimeXamarin.Samples.IdentifyGraphics
             var onlyReturnPopups = false; // Don't only return popups
 
             // Use the following method to identify graphics in a specific graphics overlay
-            IdentifyMapsAndVisualizationResult identifyResults = await _myMapView.IdentifyMapsAndVisualizationAsync(
+            IdentifyGraphicsOverlayResult identifyResults = await _myMapView.IdentifyGraphicsOverlayAsync(
                  _polygonOverlay,
                  e.Position,
                  tolerance, 
