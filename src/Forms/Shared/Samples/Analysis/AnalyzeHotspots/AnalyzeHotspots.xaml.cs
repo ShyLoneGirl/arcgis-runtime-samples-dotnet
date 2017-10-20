@@ -9,7 +9,7 @@
 
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Tasks;
-using Esri.ArcGISRuntime.Tasks.Analysis;
+using Esri.ArcGISRuntime.Tasks.Geoprocessing;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -23,11 +23,11 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeHotspots
         private const string _hotspotUrl =
             "https://sampleserver6.arcgisonline.com/arcgis/rest/services/911CallsHotspot/GPServer/911%20Calls%20Hotspot";
 
-        // The geoprocessing task for hot spot analysis 
-        private AnalysisTask _hotspotTask;
+        // The geoprocessing task for hot spot Geoprocessing 
+        private GeoprocessingTask _hotspotTask;
 
         // The job that handles the communication between the application and the geoprocessing task
-        private AnalysisJob _hotspotJob;
+        private GeoprocessingJob _hotspotJob;
 
         public AnalyzeHotspots()
         {
@@ -45,19 +45,19 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeHotspots
             Map myMap = new Map(Basemap.CreateTopographic());
 
             // Create a new geoprocessing task
-            _hotspotTask = await AnalysisTask.CreateAsync(new Uri(_hotspotUrl));
+            _hotspotTask = await GeoprocessingTask.CreateAsync(new Uri(_hotspotUrl));
 
             // Assign the map to the MapView
             MyMapView.Map = myMap;
         }
 
-        private async void OnRunAnalysisClicked(object sender, EventArgs e)
+        private async void OnRunGeoprocessingClicked(object sender, EventArgs e)
         {
             // Show busy activity indication
             MyActivityInidicator.IsVisible = true;
             MyActivityInidicator.IsRunning = true;
 
-            // Get the 'from' and 'to' dates from the date pickers for the geoprocessing analysis
+            // Get the 'from' and 'to' dates from the date pickers for the geoprocessing Geoprocessing
             DateTime myFromDate;
             DateTime myToDate;
             try
@@ -88,32 +88,32 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeHotspots
             }
 
             // Create the parameters that are passed to the used geoprocessing task
-            AnalysisParameters myHotspotParameters = new AnalysisParameters(AnalysisExecutionType.AsynchronousSubmit);
+            GeoprocessingParameters myHotspotParameters = new GeoprocessingParameters(GeoprocessingExecutionType.AsynchronousSubmit);
 
             // Construct the date query
             var myQueryString = string.Format("(\"DATE\" > date '{0} 00:00:00' AND \"DATE\" < date '{1} 00:00:00')",
                 myFromDate.ToString("yyyy-MM-dd"),
                 myToDate.ToString("yyyy-MM-dd"));
 
-            // Add the query that contains the date range used in the analysis
-            myHotspotParameters.Inputs.Add("Query", new AnalysisString(myQueryString));
+            // Add the query that contains the date range used in the Geoprocessing
+            myHotspotParameters.Inputs.Add("Query", new GeoprocessingString(myQueryString));
 
             // Create job that handles the communication between the application and the geoprocessing task
             _hotspotJob = _hotspotTask.CreateJob(myHotspotParameters);
             try
             {
-                // Execute the geoprocessing analysis and wait for the results
-                AnalysisResult myAnalysisResult = await _hotspotJob.GetResultAsync();
+                // Execute the geoprocessing Geoprocessing and wait for the results
+                GeoprocessingResult myGeoprocessingResult = await _hotspotJob.GetResultAsync();
 
                 // Add results to a map using map server from a geoprocessing task
                 // Load to get access to full extent
-                await myAnalysisResult.MapImageLayer.LoadAsync();
+                await myGeoprocessingResult.MapImageLayer.LoadAsync();
 
-                // Add the analysis layer to the map view
-                MyMapView.Map.OperationalLayers.Add(myAnalysisResult.MapImageLayer);
+                // Add the Geoprocessing layer to the map view
+                MyMapView.Map.OperationalLayers.Add(myGeoprocessingResult.MapImageLayer);
 
                 // Zoom to the results
-                await MyMapView.SetViewpointAsync(new Viewpoint(myAnalysisResult.MapImageLayer.FullExtent));
+                await MyMapView.SetViewpointAsync(new Viewpoint(myGeoprocessingResult.MapImageLayer.FullExtent));
             }
             catch (TaskCanceledException)
             {
@@ -124,7 +124,7 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeHotspots
                 // Display error messages if the geoprocessing task fails
                 if (_hotspotJob.Status == JobStatus.Failed && _hotspotJob.Error != null)
                 {
-                    await DisplayAlert("Analysis error", "Executing geoprocessing failed. " + _hotspotJob.Error.Message, "OK");
+                    await DisplayAlert("Geoprocessing error", "Executing geoprocessing failed. " + _hotspotJob.Error.Message, "OK");
                 }
                 else
                 {

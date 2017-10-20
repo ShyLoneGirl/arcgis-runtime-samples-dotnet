@@ -7,7 +7,7 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
 // language governing permissions and limitations under the License.
 
-using Esri.ArcGISRuntime.LayersAndData;
+using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Symbology;
@@ -237,10 +237,10 @@ namespace ArcGISRuntimeXamarin.Samples.GenerateGeodatabase
             string filename = "SanFrancisco.tpk";
 
             // The data manager provides a method to get the folder
-            string folder = LayersAndDataManager.GetLayersAndDataFolder();
+            string folder = DataManager.GetDataFolder();
 
             // Return the full path; Item ID is 3f1bbf0ec70b409a975f5c91f363fe7d
-            return Path.Combine(folder, "SampleLayersAndData", "GenerateGeodatabase", filename);
+            return Path.Combine(folder, "SampleData", "GenerateGeodatabase", filename);
             #endregion offlinedata
         }
 
@@ -250,7 +250,7 @@ namespace ArcGISRuntimeXamarin.Samples.GenerateGeodatabase
             String folder = "";
 
 #if NETFX_CORE //UWP
-            folder = Windows.Storage.ApplicationLayersAndData.Current.LocalFolder.Path.ToString();
+            folder = Windows.Storage.ApplicationData.Current.LocalFolder.Path.ToString();
 #elif __IOS__
             folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 #elif __ANDROID__

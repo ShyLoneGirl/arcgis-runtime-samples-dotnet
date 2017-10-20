@@ -9,7 +9,7 @@
 
 using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Tasks;
-using Esri.ArcGISRuntime.Tasks.LayersAndData;
+using Esri.ArcGISRuntime.Tasks.Geoprocessing;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -85,21 +85,21 @@ namespace ArcGISRuntimeXamarin.Samples.ListGeodatabaseVersions
             IFeatureSet results = null;
 
             // Create new geoprocessing task 
-            var listVersionsTask = await LayersAndDataTask.CreateAsync(new Uri(ListVersionsUrl));
+            var listVersionsTask = await GeoprocessingTask.CreateAsync(new Uri(ListVersionsUrl));
 
             // Create parameters that are passed to the used geoprocessing task
-            LayersAndDataParameters listVersionsParameters =
-                 new LayersAndDataParameters(LayersAndDataExecutionType.SynchronousExecute);
+            GeoprocessingParameters listVersionsParameters =
+                 new GeoprocessingParameters(GeoprocessingExecutionType.SynchronousExecute);
 
             // Create job that handles the communication between the application and the geoprocessing task
             var listVersionsJob = listVersionsTask.CreateJob(listVersionsParameters);
             try
             {
                 // Execute analysis and wait for the results
-                LayersAndDataResult analysisResult = await listVersionsJob.GetResultAsync();
+                GeoprocessingResult analysisResult = await listVersionsJob.GetResultAsync();
 
                 // Get results from the outputs
-                LayersAndDataFeatures listVersionsResults = analysisResult.Outputs["Versions"] as LayersAndDataFeatures;
+                GeoprocessingFeatures listVersionsResults = analysisResult.Outputs["Versions"] as GeoprocessingFeatures;
 
                 // Set results
                 results = listVersionsResults.Features;
@@ -109,7 +109,7 @@ namespace ArcGISRuntimeXamarin.Samples.ListGeodatabaseVersions
                 // Error handling if something goes wrong
                 if (listVersionsJob.Status == JobStatus.Failed && listVersionsJob.Error != null)
                 {
-                    await DisplayAlert("LayersAndData error", "Executing geoprocessing failed. " + listVersionsJob.Error.Message, "OK");
+                    await DisplayAlert("Geoprocessing error", "Executing geoprocessing failed. " + listVersionsJob.Error.Message, "OK");
                 }
                 else
                 {

@@ -6,10 +6,10 @@
              xmlns:mapping="clr-namespace:Esri.ArcGISRuntime.Mapping;assembly=Esri.ArcGISRuntime"
              x:Class="ArcGISRuntimeXamarin.Samples.ShowMagnifier.ShowMagnifier">
   <Grid>
-      <esriUI:MapsAndVisualization x:Name="MyMapsAndVisualization">
-          <esriUI:MapsAndVisualization.InteractionOptions>
-              <sharedUI:MapsAndVisualizationInteractionOptions/>                  
-          </esriUI:MapsAndVisualization.InteractionOptions>
-      </esriUI:MapsAndVisualization>
+      <esriUI:MapView x:Name="MyMapView">
+          <esriUI:MapView.InteractionOptions>
+              <sharedUI:MapViewInteractionOptions/>                  
+          </esriUI:MapView.InteractionOptions>
+      </esriUI:MapView>
   </Grid>
 </ContentPage>

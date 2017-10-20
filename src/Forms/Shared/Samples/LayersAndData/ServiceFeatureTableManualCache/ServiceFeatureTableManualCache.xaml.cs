@@ -7,7 +7,7 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific 
 // language governing permissions and limitations under the License.
 
-using Esri.ArcGISRuntime.LayersAndData;
+using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using System;
@@ -49,7 +49,7 @@ namespace ArcGISRuntimeXamarin.Samples.ServiceFeatureTableManualCache
             _incidentsFeatureTable.FeatureRequestMode = FeatureRequestMode.ManualCache;
 
             // When feature table is loaded, populate data
-            _incidentsFeatureTable.LoadStatusChanged += OnLoadedPopulateLayersAndData;
+            _incidentsFeatureTable.LoadStatusChanged += OnLoadedPopulateData;
 
             // Create FeatureLayer that uses the created table
             FeatureLayer incidentsFeatureLayer = new FeatureLayer(_incidentsFeatureTable);
@@ -61,7 +61,7 @@ namespace ArcGISRuntimeXamarin.Samples.ServiceFeatureTableManualCache
             MyMapView.Map = myMap;
         }
 
-        private async void OnLoadedPopulateLayersAndData(object sender, Esri.ArcGISRuntime.LoadStatusEventArgs e)
+        private async void OnLoadedPopulateData(object sender, Esri.ArcGISRuntime.LoadStatusEventArgs e)
         {
             // If layer isn't loaded, do nothing
             if (e.Status != Esri.ArcGISRuntime.LoadStatus.Loaded)

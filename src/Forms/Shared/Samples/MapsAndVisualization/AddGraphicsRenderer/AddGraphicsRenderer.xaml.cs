@@ -73,7 +73,7 @@ namespace ArcGISRuntimeXamarin.Samples.AddGraphicsRenderer
                 };
 
             // Create overlay to where graphics are shown
-            MapsAndVisualization overlay = new MapsAndVisualization();
+            GraphicsOverlay overlay = new GraphicsOverlay();
 
             // Add points to the graphics overlay
             foreach (var point in points)
@@ -100,7 +100,7 @@ namespace ArcGISRuntimeXamarin.Samples.AddGraphicsRenderer
             Device.BeginInvokeOnMainThread(() =>
             {
                 // Add created overlay to the MapView
-                MyMapView.MapsAndVisualizations.Add(overlay);
+                MyMapView.GraphicsOverlays.Add(overlay);
             });
         }
     }

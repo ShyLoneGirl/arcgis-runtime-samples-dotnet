@@ -33,14 +33,14 @@ namespace ArcGISRuntimeXamarin.Samples.ShowCallout
             // Create a new map based on the streets basemap
             Map myMap = new Map(myBasemap);
 
-            // Assign the map to the MapsAndVisualization
-            MyMapsAndVisualization.Map = myMap;
+            // Assign the map to the MapView
+            MyMapView.Map = myMap;
 
-            // Wire up the MapsAndVisualization GeoVewTapped event
-            MyMapsAndVisualization.GeoViewTapped += MyMapsAndVisualization_GeoViewTapped;
+            // Wire up the MapView GeoVewTapped event
+            MyMapView.GeoViewTapped += MyMapView_GeoViewTapped;
         }
 
-        private void MyMapsAndVisualization_GeoViewTapped(object sender, GeoViewInputEventArgs e)
+        private void MyMapView_GeoViewTapped(object sender, GeoViewInputEventArgs e)
         {
             // Get the user-tapped location
             MapPoint mapLocation = e.Location;
@@ -58,7 +58,7 @@ namespace ArcGISRuntimeXamarin.Samples.ShowCallout
             CalloutDefinition myCalloutDefinition = new CalloutDefinition("Location:", mapLocationDescription);
 
             // Display the callout
-            MyMapsAndVisualization.ShowCalloutAt(mapLocation, myCalloutDefinition);
+            MyMapView.ShowCalloutAt(mapLocation, myCalloutDefinition);
         }
     }
 }

@@ -57,7 +57,7 @@ namespace ArcGISRuntimeXamarin.Samples.FeatureLayerDefinitionExpression
             _featureLayer = new FeatureLayer(featureTable);
 
             //Add the feature layer to the map
-            myMap.OperationalLayersAndData.Add(_featureLayer);
+            myMap.OperationalLayers.Add(_featureLayer);
 
             // TODO: https://github.com/Esri/arcgis-runtime-samples-xamarin/issues/96
             if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Other)

@@ -74,7 +74,7 @@ namespace ArcGISRuntimeXamarin.Samples.FeatureLayerDictionaryRenderer
                 myLayer.Renderer = dictRenderer;
 
                 // Add the layer to the map
-                myMap.OperationalLayersAndData.Add(myLayer);
+                myMap.OperationalLayers.Add(myLayer);
             }
         }
 

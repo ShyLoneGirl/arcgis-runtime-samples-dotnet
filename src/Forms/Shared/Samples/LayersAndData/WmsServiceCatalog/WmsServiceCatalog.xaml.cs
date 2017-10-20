@@ -50,11 +50,11 @@ namespace ArcGISRuntimeXamarin.Samples.WmsServiceCatalog
             WmsServiceInfo info = service.ServiceInfo;
 
             // Get the list of layer infos
-            IReadOnlyList<WmsLayerInfo> topLevelLayersAndData = info.LayerInfos;
+            IReadOnlyList<WmsLayerInfo> topLevelLayers = info.LayerInfos;
 
             // Recursively build up a list of all the layers in the service and get their IDs as a flat list
             List<WmsLayerInfo> expandedList = new List<WmsLayerInfo>();
-            BuildLayerInfoList(topLevelLayersAndData, expandedList);
+            BuildLayerInfoList(topLevelLayers, expandedList);
 
             // Build the ViewModel from the expanded list of layer infos
             foreach (WmsLayerInfo layerInfo in expandedList)
@@ -97,16 +97,16 @@ namespace ArcGISRuntimeXamarin.Samples.WmsServiceCatalog
         private void UpdateMapDisplay(ObservableCollection<LayerDisplayVM> displayList)
         {
             // Remove all existing layers
-            MyMapView.Map.OperationalLayersAndData.Clear();
+            MyMapView.Map.OperationalLayers.Clear();
 
             // Get a list of selected LayerInfos
-            IEnumerable<WmsLayerInfo> selectedLayersAndData = displayList.Where(vm => vm.IsEnabled).Select(vm => vm.Info);
+            IEnumerable<WmsLayerInfo> selectedLayers = displayList.Where(vm => vm.IsEnabled).Select(vm => vm.Info);
 
             // Create a new WmsLayer from the selected layers
-            WmsLayer myLayer = new WmsLayer(selectedLayersAndData);
+            WmsLayer myLayer = new WmsLayer(selectedLayers);
 
             // Add the layer to the map
-            MyMapView.Map.OperationalLayersAndData.Add(myLayer);
+            MyMapView.Map.OperationalLayers.Add(myLayer);
         }
 
         /// <summary>

@@ -8,15 +8,15 @@
 // language governing permissions and limitations under the License.
 
 using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using System;
 using Xamarin.Forms;
 
-namespace ArcGISRuntimeXamarin.Samples.SetMapsAndVisualizationSpatialReference
+namespace ArcGISRuntimeXamarin.Samples.SetMapSpatialReference
 {
-    public partial class SetMapsAndVisualizationSpatialReference : ContentPage
+    public partial class SetMapSpatialReference : ContentPage
     {
-        public SetMapsAndVisualizationSpatialReference()
+        public SetMapSpatialReference()
         {
             InitializeComponent ();
 
@@ -28,20 +28,20 @@ namespace ArcGISRuntimeXamarin.Samples.SetMapsAndVisualizationSpatialReference
 
         private void Initialize()
         {
-            // Create new MapsAndVisualization using spatial reference as world bonne (54024)
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(SpatialReference.Create(54024));
+            // Create new Map using spatial reference as world bonne (54024)
+            Map myMap = new Map(SpatialReference.Create(54024));
 
             // Adding a map image layer which can reproject itself to the map's spatial reference
             // Note: Some layer such as tiled layer cannot reproject and will fail to draw if their spatial 
             // reference is not the same as the map's spatial reference
-            ArcGISMapsAndVisualizationImageLayer operationalLayer = new ArcGISMapsAndVisualizationImageLayer(new Uri(
-                "https://sampleserver6.arcgisonline.com/arcgis/rest/services/SampleWorldCities/MapsAndVisualizationServer"));
+            ArcGISMapImageLayer operationalLayer = new ArcGISMapImageLayer(new Uri(
+                "https://sampleserver6.arcgisonline.com/arcgis/rest/services/SampleWorldCities/MapServer"));
            
-            // Add operational layer to the MapsAndVisualization
-            myMapsAndVisualization.OperationalLayers.Add(operationalLayer);
+            // Add operational layer to the Map
+            myMap.OperationalLayers.Add(operationalLayer);
 
-            // Assign the map to the MapsAndVisualizationView
-            MyMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Assign the map to the MapView
+            MyMapView.Map = myMap;
         }
     }
 }

@@ -44,23 +44,9 @@
   <ItemGroup>
     <!-- JSON Metadata -->
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)groups.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\EditAndSyncFeatures\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerGeoPackage\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerQuery\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerShapefile\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\GenerateGeodatabase\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableCache\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableManualCache\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableNoCache\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\StatisticalQuery\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\StatsQueryGroupAndSort\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\Geoprocessing\AnalyzeHotspots\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\Analysis\AnalyzeHotspots\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\Analysis\AnalyzeViewshed\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\Geoprocessing\ListGeodatabaseVersions\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AddGraphicsRenderer\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\IdentifyGraphics\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SketchOnMap\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SurfacePlacements\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\CloudAndPortal\FeatureCollectionLayerFromPortal\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ArcGISMapImageLayerUrl\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ArcGISTiledLayerUrl\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ArcGISVectorTiledLayerUrl\metadata.json" />
@@ -68,75 +54,73 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ChangeSublayerVisibility\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\CreateFeatureCollectionLayer\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\DisplayScene\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\EditAndSyncFeatures\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ExportTiles\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\CloudAndPortal\FeatureCollectionLayerFromPortal\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureCollectionLayerFromQuery\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerDefinitionExpression\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerDictionaryRenderer\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerGeoPackage\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerQuery\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerSelection\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerShapefile\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerUrl\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\GenerateGeodatabase\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\KmlLayerFile\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\KmlLayerUrl\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ListGeodatabaseVersions\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\RasterLayerFile\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\RasterLayerImageServiceRaster\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\RasterLayerRasterFunction\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\RasterRenderingRule\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\SceneLayerUrl\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableCache\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableManualCache\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableNoCache\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\StatisticalQuery\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\StatsQueryGroupAndSort\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\TimeBasedQuery\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\WmsLayerUrl\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\WmsServiceCatalog\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\WMTSLayer\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\DisplayDeviceRoutingAndLocation\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AccessLoadStatus\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMapsAndVisualization\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AddGraphicsRenderer\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorEditSaveMap\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMap\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ChangeBasemap\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayMapsAndVisualization\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ManageBookmarks\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\Map\OpenMapURL\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMobileMapsAndVisualization\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SearchPortalMapsAndVisualizations\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapsAndVisualizationArea\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapsAndVisualizationLocation\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMapsAndVisualizationSpatialReference\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMinMaxScale\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ChangeViewpoint\metadata.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ChangeViewpoint\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayDrawingStatus\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayLayerViewState\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapView\MapRotation\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ShowCallout\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ShowMagnifier\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\TakeScreenshot\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\RoutingAndLocation\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindAddress\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindPlace\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayMap\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\IdentifyGraphics\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ManageBookmarks\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\MapRotation\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMapUrl\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMobileMap\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\RenderPictureMarkers\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\RenderSimpleMarkers\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\RenderUniqueValues\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SearchPortalMaps\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapArea\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapLocation\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMapSpatialReference\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMinMaxScale\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ShowCallout\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ShowMagnifier\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SimpleRenderers\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SketchOnMap\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SurfacePlacements\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\TakeScreenshot\metadata.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\UseDistanceCompositeSym\metadata.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorEditSaveMap\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\DisplayDeviceLocation\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindAddress\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindPlace\metadata.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindRoute\metadata.json" />
   </ItemGroup>
   <ItemGroup>
     <!-- Screenshots -->
-    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\EditAndSyncFeatures\EditAndSyncFeatures.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerGeoPackage\FeatureLayerGeoPackage.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerQuery\FeatureLayerQuery.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerShapefile\FeatureLayerShapefile.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\GenerateGeodatabase\GenerateGeodatabase.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableCache\ServiceFeatureTableCache.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableManualCache\ServiceFeatureTableManualCache.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableNoCache\ServiceFeatureTableNoCache.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\StatisticalQuery\StatisticalQuery.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\StatsQueryGroupAndSort\StatsQueryGroupAndSort.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\Geoprocessing\AnalyzeHotspots\AnalyzeHotspots.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\Analysis\AnalyzeHotspots\AnalyzeHotspots.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\Analysis\AnalyzeViewshed\AnalyzeViewshed.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\Geoprocessing\ListGeodatabaseVersions\ListGeodatabaseVersions.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AddGraphicsRenderer\AddGraphicsRenderer.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\IdentifyGraphics\IdentifyGraphics.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SketchOnMap\SketchOnMap.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SurfacePlacements\SurfacePlacements.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\CloudAndPortal\FeatureCollectionLayerFromPortal\FeatureCollectionLayerFromPortal.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ArcGISMapImageLayerUrl\ArcGISMapImageLayerUrl.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ArcGISTiledLayerUrl\ArcGISTiledLayerUrl.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ArcGISVectorTiledLayerUrl\ArcGISVectorTiledLayerUrl.jpg" />
@@ -144,55 +128,82 @@
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ChangeSublayerVisibility\ChangeSublayerVisibility.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\CreateFeatureCollectionLayer\CreateFeatureCollectionLayer.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\DisplayScene\DisplayScene.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\EditAndSyncFeatures\EditAndSyncFeatures.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ExportTiles\ExportTiles.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\CloudAndPortal\FeatureCollectionLayerFromPortal\FeatureCollectionLayerFromPortal.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureCollectionLayerFromQuery\FeatureCollectionLayerFromQuery.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerDefinitionExpression\FeatureLayerDefinitionExpression.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerDictionaryRenderer\FeatureLayerDictionaryRenderer.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerGeoPackage\FeatureLayerGeoPackage.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerQuery\FeatureLayerQuery.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerSelection\FeatureLayerSelection.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerShapefile\FeatureLayerShapefile.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\FeatureLayerUrl\FeatureLayerUrl.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\GenerateGeodatabase\GenerateGeodatabase.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\KmlLayerFile\KmlLayerFile.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\KmlLayerUrl\KmlLayerUrl.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ListGeodatabaseVersions\ListGeodatabaseVersions.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\RasterLayerFile\RasterLayerFile.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\RasterLayerImageServiceRaster\RasterLayerImageServiceRaster.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\RasterLayerRasterFunction\RasterLayerRasterFunction.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\RasterRenderingRule\RasterRenderingRule.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\SceneLayerUrl\SceneLayerUrl.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableCache\ServiceFeatureTableCache.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableManualCache\ServiceFeatureTableManualCache.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ServiceFeatureTableNoCache\ServiceFeatureTableNoCache.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\StatisticalQuery\StatisticalQuery.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\StatsQueryGroupAndSort\StatsQueryGroupAndSort.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\TimeBasedQuery\TimeBasedQuery.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\WmsLayerUrl\WmsLayerUrl.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\WmsServiceCatalog\WmsServiceCatalog.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\WMTSLayer\WMTSLayer.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\DisplayDeviceRoutingAndLocation\DisplayDeviceRoutingAndLocation.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AccessLoadStatus\AccessLoadStatus.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMapsAndVisualization\AuthorMapsAndVisualization.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AddGraphicsRenderer\AddGraphicsRenderer.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorEditSaveMap\AuthorEditSaveMap.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMap\AuthorMap.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ChangeBasemap\ChangeBasemap.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayMapsAndVisualization\DisplayMapsAndVisualization.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ManageBookmarks\ManageBookmarks.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\Map\OpenMapURL\OpenMapURL.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMobileMapsAndVisualization\OpenMobileMapsAndVisualization.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SearchPortalMapsAndVisualizations\SearchPortalMapsAndVisualizations.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapsAndVisualizationArea\SetInitialMapsAndVisualizationArea.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapsAndVisualizationLocation\SetInitialMapsAndVisualizationLocation.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMapsAndVisualizationSpatialReference\SetMapsAndVisualizationSpatialReference.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMinMaxScale\SetMinMaxScale.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ChangeViewpoint\ChangeViewpoint.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayDrawingStatus\DisplayDrawingStatus.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayLayerViewState\DisplayLayerViewState.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapView\MapRotation\MapRotation.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ShowCallout\ShowCallout.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ShowMagnifier\ShowMagnifier.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\TakeScreenshot\TakeScreenshot.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\RoutingAndLocation\RoutingAndLocation.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindAddress\FindAddress.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindPlace\FindPlace.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayMap\DisplayMap.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\IdentifyGraphics\IdentifyGraphics.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ManageBookmarks\ManageBookmarks.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\MapRotation\MapRotation.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMapUrl\OpenMapURL.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMobileMap\OpenMobileMap.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\RenderPictureMarkers\RenderPictureMarkers.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\RenderSimpleMarkers\RenderSimpleMarkers.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\RenderUniqueValues\RenderUniqueValues.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SearchPortalMaps\SearchPortalMaps.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapArea\SetInitialMapArea.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapLocation\SetInitialMapLocation.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMapSpatialReference\SetMapSpatialReference.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMinMaxScale\SetMinMaxScale.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ShowCallout\ShowCallout.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ShowMagnifier\ShowMagnifier.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SimpleRenderers\SimpleRenderers.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SketchOnMap\SketchOnMap.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SurfacePlacements\SurfacePlacements.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\TakeScreenshot\TakeScreenshot.jpg" />
     <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\UseDistanceCompositeSym\UseDistanceCompositeSym.jpg" />
-    <None Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorEditSaveMap\AuthorEditSaveMap.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\DisplayDeviceLocation\DisplayDeviceLocation.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindAddress\FindAddress.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindPlace\FindPlace.jpg" />
+    <None Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindRoute\FindRoute.jpg" />
   </ItemGroup>
   <ItemGroup>
     <!-- Sample Code -->
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\Analysis\AnalyzeHotspots\AnalyzeHotspots.xaml.cs">
+      <DependentUpon>AnalyzeHotspots.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ListGeodatabaseVersions\ListGeodatabaseVersions.xaml.cs">
+      <DependentUpon>ListGeodatabaseVersions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\DisplayDeviceLocation\DisplayDeviceLocation.xaml.cs">
+      <DependentUpon>DisplayDeviceLocation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindRoute\FindRoute.xaml.cs">
+      <DependentUpon>FindRoute.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\EditAndSyncFeatures\EditAndSyncFeatures.xaml.cs">
       <DependentUpon>EditAndSyncFeatures.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -233,16 +244,8 @@
       <DependentUpon>StatsQueryGroupAndSort.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\Geoprocessing\AnalyzeHotspots\AnalyzeHotspots.xaml.cs">
-      <DependentUpon>AnalyzeHotspots.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Samples\Analysis\AnalyzeViewshed\AnalyzeViewshed.xaml.cs">
       <DependentUpon>AnalyzeViewshed.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\Geoprocessing\ListGeodatabaseVersions\ListGeodatabaseVersions.xaml.cs">
-      <DependentUpon>ListGeodatabaseVersions.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AddGraphicsRenderer\AddGraphicsRenderer.xaml.cs">
@@ -361,19 +364,15 @@
       <DependentUpon>WMTSLayer.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\DisplayDeviceRoutingAndLocation\DisplayDeviceRoutingAndLocation.xaml.cs">
-      <DependentUpon>DisplayDeviceRoutingAndLocation.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AccessLoadStatus\AccessLoadStatus.xaml.cs">
       <DependentUpon>AccessLoadStatus.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMapsAndVisualization\AuthorMapsAndVisualization.xaml.cs">
-      <DependentUpon>AuthorMapsAndVisualization.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMap\AuthorMap.xaml.cs">
+      <DependentUpon>AuthorMap.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMapsAndVisualization\SaveMapsAndVisualizationPage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMap\SaveMapPage.xaml.cs">
       <DependentUpon>SaveMapPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -381,36 +380,36 @@
       <DependentUpon>ChangeBasemap.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayMapsAndVisualization\DisplayMapsAndVisualization.xaml.cs">
-      <DependentUpon>DisplayMapsAndVisualization.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayMap\DisplayMap.xaml.cs">
+      <DependentUpon>DisplayMap.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ManageBookmarks\ManageBookmarks.xaml.cs">
       <DependentUpon>ManageBookmarks.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\Map\OpenMapURL\OpenMapURL.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMapUrl\OpenMapURL.xaml.cs">
       <DependentUpon>OpenMapURL.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMobileMapsAndVisualization\OpenMobileMapsAndVisualization.xaml.cs">
-      <DependentUpon>OpenMobileMapsAndVisualization.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMobileMap\OpenMobileMap.xaml.cs">
+      <DependentUpon>OpenMobileMap.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SearchPortalMapsAndVisualizations\SearchPortalMapsAndVisualizations.xaml.cs">
-      <DependentUpon>SearchPortalMapsAndVisualizations.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SearchPortalMaps\SearchPortalMaps.xaml.cs">
+      <DependentUpon>SearchPortalMaps.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapsAndVisualizationArea\SetInitialMapsAndVisualizationArea.xaml.cs">
-      <DependentUpon>SetInitialMapsAndVisualizationArea.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapArea\SetInitialMapArea.xaml.cs">
+      <DependentUpon>SetInitialMapArea.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapsAndVisualizationLocation\SetInitialMapsAndVisualizationLocation.xaml.cs">
-      <DependentUpon>SetInitialMapsAndVisualizationLocation.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapLocation\SetInitialMapLocation.xaml.cs">
+      <DependentUpon>SetInitialMapLocation.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMapsAndVisualizationSpatialReference\SetMapsAndVisualizationSpatialReference.xaml.cs">
-      <DependentUpon>SetMapsAndVisualizationSpatialReference.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMapSpatialReference\SetMapSpatialReference.xaml.cs">
+      <DependentUpon>SetMapSpatialReference.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMinMaxScale\SetMinMaxScale.xaml.cs">
@@ -429,7 +428,7 @@
       <DependentUpon>DisplayLayerViewState.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapView\MapRotation\MapRotation.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\MapRotation\MapRotation.xaml.cs">
       <DependentUpon>MapRotation.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -443,10 +442,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\TakeScreenshot\TakeScreenshot.xaml.cs">
       <DependentUpon>TakeScreenshot.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\RoutingAndLocation\RoutingAndLocation.xaml.cs">
-      <DependentUpon>RoutingAndLocation.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindAddress\FindAddress.xaml.cs">
@@ -518,13 +513,7 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\StatsQueryGroupAndSort\StatsQueryGroupAndSort.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\Geoprocessing\AnalyzeHotspots\AnalyzeHotspots.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\Analysis\AnalyzeViewshed\AnalyzeViewshed.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\Geoprocessing\ListGeodatabaseVersions\ListGeodatabaseVersions.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AddGraphicsRenderer\AddGraphicsRenderer.xaml">
@@ -614,43 +603,40 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\WMTSLayer\WMTSLayer.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\DisplayDeviceRoutingAndLocation\DisplayDeviceRoutingAndLocation.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AccessLoadStatus\AccessLoadStatus.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMapsAndVisualization\AuthorMapsAndVisualization.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMap\AuthorMap.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMapsAndVisualization\SaveMapsAndVisualizationPage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorMap\SaveMapPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ChangeBasemap\ChangeBasemap.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayMapsAndVisualization\DisplayMapsAndVisualization.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayMap\DisplayMap.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ManageBookmarks\ManageBookmarks.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\Map\OpenMapURL\OpenMapURL.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMapUrl\OpenMapURL.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMobileMapsAndVisualization\OpenMobileMapsAndVisualization.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\OpenMobileMap\OpenMobileMap.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SearchPortalMapsAndVisualizations\SearchPortalMapsAndVisualizations.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SearchPortalMaps\SearchPortalMaps.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapsAndVisualizationArea\SetInitialMapsAndVisualizationArea.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapArea\SetInitialMapArea.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapsAndVisualizationLocation\SetInitialMapsAndVisualizationLocation.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetInitialMapLocation\SetInitialMapLocation.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMapsAndVisualizationSpatialReference\SetMapsAndVisualizationSpatialReference.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMapSpatialReference\SetMapSpatialReference.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\SetMinMaxScale\SetMinMaxScale.xaml">
@@ -665,7 +651,7 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\DisplayLayerViewState\DisplayLayerViewState.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapView\MapRotation\MapRotation.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\MapRotation\MapRotation.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\ShowCallout\ShowCallout.xaml">
@@ -675,9 +661,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\TakeScreenshot\TakeScreenshot.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\RoutingAndLocation\RoutingAndLocation.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindAddress\FindAddress.xaml">
@@ -707,5 +690,23 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Samples\MapsAndVisualization\AuthorEditSaveMap\SaveMapPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Samples\Analysis\AnalyzeHotspots\AnalyzeHotspots.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Samples\LayersAndData\ListGeodatabaseVersions\ListGeodatabaseVersions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\DisplayDeviceLocation\DisplayDeviceLocation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Samples\RoutingAndLocation\FindRoute\FindRoute.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

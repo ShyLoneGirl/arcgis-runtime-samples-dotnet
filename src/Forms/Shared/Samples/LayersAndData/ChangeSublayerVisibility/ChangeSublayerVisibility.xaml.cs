@@ -44,7 +44,7 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeSublayerVisibility
             };
 
             // Add created layer to the basemaps collection
-            myMap.Basemap.BaseLayersAndData.Add(_imageLayer);
+            myMap.Basemap.BaseLayers.Add(_imageLayer);
 
             // Assign the map to the MapView
             MyMapView.Map = myMap;

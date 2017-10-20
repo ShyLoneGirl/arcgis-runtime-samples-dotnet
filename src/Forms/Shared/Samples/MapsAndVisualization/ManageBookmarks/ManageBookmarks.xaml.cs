@@ -7,7 +7,7 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific 
 // language governing permissions and limitations under the License.
 
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using System;
 using System.Linq;
 using Xamarin.Forms;
@@ -30,10 +30,10 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
         {
 
             // Create new map with a base map
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateImageryWithLabels());
+            Map myMap = new Map(Basemap.CreateImageryWithLabels());
 
             // Set the map view, map property to the base map
-            MyMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            MyMapView.Map = myMap;
 
             // Create a set of predefined bookmarks; each one follows the pattern of:
             // ~ Initialize a viewpoint pointing to a latitude longitude
@@ -48,7 +48,7 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
             Bookmark myBookmark1 = new Bookmark();
             myBookmark1.Name = "Mysterious Desert Pattern";
             myBookmark1.Viewpoint = myViewpoint1;
-            MyMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Add(myBookmark1);
+            MyMapView.Map.Bookmarks.Add(myBookmark1);
             bookmarkPicker.Items.Add(myBookmark1.Name);
 
             // Bookmark-2
@@ -56,7 +56,7 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
             Bookmark myBookmark2 = new Bookmark();
             myBookmark2.Name = "Strange Symbol";
             myBookmark2.Viewpoint = myViewpoint2;
-            MyMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Add(myBookmark2);
+            MyMapView.Map.Bookmarks.Add(myBookmark2);
             bookmarkPicker.Items.Add(myBookmark2.Name);
 
             // Bookmark-3
@@ -64,7 +64,7 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
             Bookmark myBookmark3 = new Bookmark();
             myBookmark3.Name = "Guitar-Shaped Forest";
             myBookmark3.Viewpoint = myViewpoint3;
-            MyMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Add(myBookmark3);
+            MyMapView.Map.Bookmarks.Add(myBookmark3);
             bookmarkPicker.Items.Add(myBookmark3.Name);
 
             // Bookmark-4
@@ -72,14 +72,14 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
             Bookmark myBookmark4 = new Bookmark();
             myBookmark4.Name = "Grand Prismatic Spring";
             myBookmark4.Viewpoint = myViewpoint4;
-            MyMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Add(myBookmark4);
+            MyMapView.Map.Bookmarks.Add(myBookmark4);
             bookmarkPicker.Items.Add(myBookmark4.Name);
 
             // Set the initial combo box selection to the last bookmark added
             bookmarkPicker.SelectedIndex = 3;
 
             // Zoom to the last bookmark
-            myMapsAndVisualization.InitialViewpoint = myMapsAndVisualization.Bookmarks.Last().Viewpoint;
+            myMap.InitialViewpoint = myMap.Bookmarks.Last().Viewpoint;
         }
 
         private void BookmarkPicker_SelectedIndexChanged(object sender, EventArgs e)
@@ -88,7 +88,7 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
             var selectedBookmarkName = bookmarkPicker.Items[bookmarkPicker.SelectedIndex];
 
             // Get the collection of bookmarks in the map
-            BookmarkCollection myBookmarkCollection = MyMapsAndVisualizationView.MapsAndVisualization.Bookmarks;
+            BookmarkCollection myBookmarkCollection = MyMapView.Map.Bookmarks;
 
             // Loop through each bookmark
             foreach (var myBookmark in myBookmarkCollection)
@@ -100,7 +100,7 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
                 // set that to be the maps viewpoint
                 if (theBookmarkName == selectedBookmarkName.ToString())
                 {
-                    MyMapsAndVisualizationView.SetViewpoint(myBookmark.Viewpoint);
+                    MyMapView.SetViewpoint(myBookmark.Viewpoint);
                 }
             }
         }
@@ -151,7 +151,7 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
                 return;
 
             // Check to see if there is a bookmark with same name
-            bool doesNameExist = MyMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Any(b => b.Name == name);
+            bool doesNameExist = MyMapView.Map.Bookmarks.Any(b => b.Name == name);
             if (doesNameExist)
                 return;
 
@@ -160,10 +160,10 @@ namespace ArcGISRuntimeXamarin.Samples.ManageBookmarks
             myBookmark.Name = name;
 
             // Get the current viewpoint from map and assign it to bookmark 
-            myBookmark.Viewpoint = MyMapsAndVisualizationView.GetCurrentViewpoint(ViewpointType.BoundingGeometry);
+            myBookmark.Viewpoint = MyMapView.GetCurrentViewpoint(ViewpointType.BoundingGeometry);
 
             // Add the bookmark to bookmark collection of the map
-            MyMapsAndVisualizationView.MapsAndVisualization.Bookmarks.Add(myBookmark);
+            MyMapView.Map.Bookmarks.Add(myBookmark);
 
             // Add the bookmark name to the list of choices in the picker
             bookmarkPicker.Items.Add(name);

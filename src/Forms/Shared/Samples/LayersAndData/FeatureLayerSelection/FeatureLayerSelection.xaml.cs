@@ -77,7 +77,7 @@ namespace ArcGISRuntimeXamarin.Samples.FeatureLayerSelection
             if (_featureLayer.LoadStatus == LoadStatus.Loaded)
             {
                 // Add the feature layer to the map
-                myMap.OperationalLayersAndData.Add(_featureLayer);
+                myMap.OperationalLayers.Add(_featureLayer);
 
                 // Add tap event handler for mapview
                 MyMapView.GeoViewTapped += OnMapViewTapped;

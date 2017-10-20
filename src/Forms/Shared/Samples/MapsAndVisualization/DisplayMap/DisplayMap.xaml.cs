@@ -7,14 +7,14 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific 
 // language governing permissions and limitations under the License.
 
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Xamarin.Forms;
 
-namespace ArcGISRuntimeXamarin.Samples.DisplayMapsAndVisualization
+namespace ArcGISRuntimeXamarin.Samples.DisplayMap
 {
-    public partial class DisplayMapsAndVisualization : ContentPage
+    public partial class DisplayMap : ContentPage
     {
-        public DisplayMapsAndVisualization()
+        public DisplayMap()
         {
             InitializeComponent();
 
@@ -26,11 +26,11 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayMapsAndVisualization
 
         private void Initialize()
         {
-            // Create new MapsAndVisualization with basemap
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateImagery());
+            // Create new Map with basemap
+            Map myMap = new Map(Basemap.CreateImagery());
 
-            // Assign the map to the MapsAndVisualizationView
-            MyMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Assign the map to the MapView
+            MyMapView.Map = myMap;
         }
     }
 }

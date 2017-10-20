@@ -93,10 +93,10 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayLayerViewState
             layerStatusListView.ItemsSource = _layerStatusModels;
 
             // Event for layer view state changed
-            MyMapsAndVisualization.LayerViewStateChanged += OnLayerViewStateChanged;
+            MyMapView.LayerViewStateChanged += OnLayerViewStateChanged;
 
-            // Provide used Map to the MapsAndVisualization
-            MyMapsAndVisualization.Map = myMap;
+            // Provide used Map to the MapView
+            MyMapView.Map = myMap;
         }
 
         private void OnLayerViewStateChanged(object sender, LayerViewStateChangedEventArgs e)

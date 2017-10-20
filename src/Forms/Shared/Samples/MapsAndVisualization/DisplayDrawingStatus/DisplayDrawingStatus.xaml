@@ -9,7 +9,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <esriUI:MapsAndVisualization x:Name="myMapsAndVisualization" />
+        <esriUI:MapView x:Name="myMapView" />
         <ActivityIndicator x:Name="activityIndicator" Color="Black" />
     </Grid>
 </ContentPage>

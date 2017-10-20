@@ -67,8 +67,8 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeViewpoint
             // Create new Map with basemap and initial location
             Map myMap = new Map(Basemap.CreateTopographic());
 
-            // Assign the map to the MapsAndVisualization
-            MyMapsAndVisualization.Map = myMap;
+            // Assign the map to the MapView
+            MyMapView.Map = myMap;
         }
 
         private async void OnViewpointsClicked(object sender, EventArgs e)
@@ -85,29 +85,29 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeViewpoint
                 case "Geometry":
    
                     // Set Viewpoint using Redlands envelope defined above and a padding of 20
-                    await MyMapsAndVisualization.SetViewpointGeometryAsync(RedlandsEnvelope, 20);
+                    await MyMapView.SetViewpointGeometryAsync(RedlandsEnvelope, 20);
                     break;
 
                 case "Center & Scale":
                     
                     // Set Viewpoint so that it is centered on the London coordinates defined above
-                    await MyMapsAndVisualization.SetViewpointCenterAsync(LondonCoords);
+                    await MyMapView.SetViewpointCenterAsync(LondonCoords);
                     
                     // Set the Viewpoint scale to match the specified scale 
-                    await MyMapsAndVisualization.SetViewpointScaleAsync(LondonScale);
+                    await MyMapView.SetViewpointScaleAsync(LondonScale);
                     break;
 
                 case "Animate":
                     
                     // Navigate to full extent of the first baselayer before animating to specified geometry
-                    await MyMapsAndVisualization.SetViewpointAsync(
-                        new Viewpoint(MyMapsAndVisualization.Map.Basemap.BaseLayers.First().FullExtent));
+                    await MyMapView.SetViewpointAsync(
+                        new Viewpoint(MyMapView.Map.Basemap.BaseLayers.First().FullExtent));
                     
                     // Create a new Viewpoint using the specified geometry
                     var viewpoint = new Viewpoint(EdinburghEnvelope);
                     
-                    // Set Viewpoint of MapsAndVisualization to the Viewpoint created above and animate to it using a timespan of 5 seconds
-                    await MyMapsAndVisualization.SetViewpointAsync(viewpoint, TimeSpan.FromSeconds(5));
+                    // Set Viewpoint of MapView to the Viewpoint created above and animate to it using a timespan of 5 seconds
+                    await MyMapView.SetViewpointAsync(viewpoint, TimeSpan.FromSeconds(5));
                     break;
 
                 default:

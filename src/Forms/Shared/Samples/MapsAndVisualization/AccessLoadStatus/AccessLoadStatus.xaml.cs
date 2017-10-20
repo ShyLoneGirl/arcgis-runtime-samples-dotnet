@@ -8,7 +8,7 @@
 // language governing permissions and limitations under the License.
 
 using Esri.ArcGISRuntime;
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Xamarin.Forms;
 
 namespace ArcGISRuntimeXamarin.Samples.AccessLoadStatus
@@ -27,24 +27,24 @@ namespace ArcGISRuntimeXamarin.Samples.AccessLoadStatus
 
         private void Initialize()
         {
-            // Create new MapsAndVisualization with basemap
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateImagery());
+            // Create new Map with basemap
+            Map myMap = new Map(Basemap.CreateImagery());
 
             // Register to handle loading status changes
-            myMapsAndVisualization.LoadStatusChanged += OnMapsAndVisualizationsLoadStatusChanged;
+            myMap.LoadStatusChanged += OnMapsLoadStatusChanged;
 
-            // Provide used MapsAndVisualization to the MapsAndVisualizationView
-            myMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Provide used Map to the MapView
+            myMapView.Map = myMap;
         }
 
-        private void OnMapsAndVisualizationsLoadStatusChanged(object sender, LoadStatusEventArgs e)
+        private void OnMapsLoadStatusChanged(object sender, LoadStatusEventArgs e)
         {
             // Make sure that the UI changes are done in the UI thread
             Device.BeginInvokeOnMainThread(() =>
             {
                 // Update the load status information
                 loadStatusLabel.Text = string.Format(
-                        "MapsAndVisualizations' load status : {0}",
+                        "Maps' load status : {0}",
                         e.Status.ToString());
             });
         }

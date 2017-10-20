@@ -30,8 +30,8 @@ namespace ArcGISRuntimeXamarin.Samples.TakeScreenshot
             Basemap myBasemap = Basemap.CreateStreets();
             Map myMap = new Map(myBasemap);
 
-            // Assign the map to the MapsAndVisualization
-            MyMapsAndVisualization.Map = myMap;
+            // Assign the map to the map view
+            MyMapView.Map = myMap;
         }
 
         private async void OnTakeScreenshotClicked(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace ArcGISRuntimeXamarin.Samples.TakeScreenshot
             CreatingImageIndicator.IsVisible = true;
 
             // Export the image from mapview and assign it to the imageview
-            var exportedImage = await MyMapsAndVisualization.ExportImageAsync();
+            var exportedImage = await MyMapView.ExportImageAsync();
 
             // Create layout for sublayers page
             // Create root layout

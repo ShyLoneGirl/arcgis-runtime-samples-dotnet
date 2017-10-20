@@ -30,7 +30,7 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayDrawingStatus
         private void Initialize()
         {
             // Hook up the DrawStatusChanged event
-            myMapsAndVisualization.DrawStatusChanged += OnDrawStatusChanged;
+            myMapView.DrawStatusChanged += OnDrawStatusChanged;
 
             // Create new Map with basemap
             Map myMap = new Map(BasemapType.Topographic, 34.056, -117.196, 4);
@@ -46,8 +46,8 @@ namespace ArcGISRuntimeXamarin.Samples.DisplayDrawingStatus
             // Add the feature layer to the Map
             myMap.OperationalLayers.Add(myFeatureLayer);
 
-            // Provide used Map to the MapsAndVisualization
-            myMapsAndVisualization.Map = myMap;
+            // Provide used Map to the MapView
+            myMapView.Map = myMap;
         }
 
         private void OnDrawStatusChanged(object sender, DrawStatusChangedEventArgs e)

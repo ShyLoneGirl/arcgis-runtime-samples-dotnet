@@ -120,7 +120,7 @@ namespace ArcGISRuntimeXamarin.Samples.CreateFeatureCollectionLayer
             });
 
             // Add the layer to the Map's Operational LayersAndData collection
-            MyMapView.Map.OperationalLayersAndData.Add(collectionLayer);
+            MyMapView.Map.OperationalLayers.Add(collectionLayer);
         }
 
         private Renderer CreateRenderer(GeometryType rendererType)

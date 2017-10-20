@@ -8,7 +8,7 @@
 // language governing permissions and limitations under the License.
 
 using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Xamarin.Forms;
 
 namespace ArcGISRuntimeXamarin.Samples.SetMinMaxScale
@@ -27,27 +27,27 @@ namespace ArcGISRuntimeXamarin.Samples.SetMinMaxScale
 
         private void Initialize()
         {
-            // Create new MapsAndVisualization with Streets basemap 
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateStreets());
+            // Create new Map with Streets basemap 
+            Map myMap = new Map(Basemap.CreateStreets());
 
             // Set the scale at which this layer can be viewed
             // MinScale defines how far 'out' you can zoom where
             // MaxScale defines how far 'in' you can zoom.
-            myMapsAndVisualization.MinScale = 8000;
-            myMapsAndVisualization.MaxScale = 2000;
+            myMap.MinScale = 8000;
+            myMap.MaxScale = 2000;
 
             // Create central point where map is centered
-            MapsAndVisualizationPoint centralPoint = new MapsAndVisualizationPoint(-355453, 7548720, SpatialReferences.WebMercator);
+            MapPoint centralPoint = new MapPoint(-355453, 7548720, SpatialReferences.WebMercator);
 
             // Create starting viewpoint
             Viewpoint startingViewpoint = new Viewpoint(
                 centralPoint,
                 3000);
             // Set starting viewpoint
-            myMapsAndVisualization.InitialViewpoint = startingViewpoint;
+            myMap.InitialViewpoint = startingViewpoint;
 
             // Set map to mapview
-            MyMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            MyMapView.Map = myMap;
         }
     }
 }

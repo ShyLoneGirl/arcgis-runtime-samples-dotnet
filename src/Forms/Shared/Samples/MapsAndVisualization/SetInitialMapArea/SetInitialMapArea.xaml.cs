@@ -8,14 +8,14 @@
 // language governing permissions and limitations under the License.
 
 using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Xamarin.Forms;
 
-namespace ArcGISRuntimeXamarin.Samples.SetInitialMapsAndVisualizationArea
+namespace ArcGISRuntimeXamarin.Samples.SetInitialMapArea
 {
-    public partial class SetInitialMapsAndVisualizationArea : ContentPage
+    public partial class SetInitialMapArea : ContentPage
     {
-        public SetInitialMapsAndVisualizationArea()
+        public SetInitialMapArea()
         {
             InitializeComponent ();
 
@@ -27,17 +27,17 @@ namespace ArcGISRuntimeXamarin.Samples.SetInitialMapsAndVisualizationArea
 
         private void Initialize()
         {
-            // Create new MapsAndVisualization with basemap
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateImagery());
+            // Create new Map with basemap
+            Map myMap = new Map(Basemap.CreateImagery());
 
             // Create and set initial map area
             Envelope initialLocation = new Envelope(
                 -12211308.778729, 4645116.003309, -12208257.879667, 4650542.535773,
                 SpatialReferences.WebMercator);
-            myMapsAndVisualization.InitialViewpoint = new Viewpoint(initialLocation);
+            myMap.InitialViewpoint = new Viewpoint(initialLocation);
 
-            // Assign the map to the MapsAndVisualizationView
-            MyMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Assign the map to the MapView
+            MyMapView.Map = myMap;
         }
     }
 }

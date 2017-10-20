@@ -56,10 +56,10 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
             MyMapView.LocationDisplay.IsEnabled = true;
 
             // Enable all controls now that the locator task is ready
-            MyRoutingAndLocationBox.IsEnabled = true;
+            MySearchBox.IsEnabled = true;
             MyLocationBox.IsEnabled = true;
-            MyRoutingAndLocationButton.IsEnabled = true;
-            MyRoutingAndLocationRestrictedButton.IsEnabled = true;
+            MySearchButton.IsEnabled = true;
+            MySearchRestrictedButton.IsEnabled = true;
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
         /// </summary>
         /// <param name="locationText"></param>
         /// <returns></returns>
-        private async Task<MapPoint> GetRoutingAndLocationMapPoint(string locationText)
+        private async Task<MapPoint> GetSearchMapPoint(string locationText)
         {
             // Get the map point for the search text
             if (locationText != "Current Location")
@@ -98,7 +98,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
         /// <param name="enteredText">Results to search for</param>
         /// <param name="locationText">Location around which to find results</param>
         /// <param name="restrictToExtent">If true, limits results to only those that are within the current extent</param>
-        private async void UpdateRoutingAndLocation(string enteredText, string locationText, bool restrictToExtent = false)
+        private async void UpdateSearch(string enteredText, string locationText, bool restrictToExtent = false)
         {
             // Clear any existing markers
             MyMapView.GraphicsOverlays.Clear();
@@ -110,12 +110,12 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
             GeocodeParameters parameters = new GeocodeParameters();
 
             // Get the MapPoint for the current search location
-            MapPoint searchLocation = await GetRoutingAndLocationMapPoint(locationText);
+            MapPoint searchLocation = await GetSearchMapPoint(locationText);
 
             // Update the geocode parameters if the map point is not null
             if (searchLocation != null)
             {
-                parameters.PreferredRoutingAndLocationLocation = searchLocation;
+                parameters.PreferredSearchLocation = searchLocation;
             }
 
             // Update the search area if desired
@@ -125,7 +125,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
                 Geometry extent = MyMapView.VisibleArea;
 
                 // Update the search parameters
-                parameters.RoutingAndLocationArea = extent;
+                parameters.SearchArea = extent;
             }
 
             // Show the progress bar
@@ -214,7 +214,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
         /// </summary>
         private async void MyMapView_GeoViewTapped(object sender, Esri.ArcGISRuntime.Xamarin.Forms.GeoViewInputEventArgs e)
         {
-            // RoutingAndLocation for the graphics underneath the user's tap
+            // Search for the graphics underneath the user's tap
             IReadOnlyList<IdentifyGraphicsOverlayResult> results = await MyMapView.IdentifyGraphicsOverlaysAsync(e.Position, 12, false);
 
             // Clear callouts and return if there was no result
@@ -223,10 +223,10 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
             // Get the first graphic from the first result
             Graphic matchingGraphic = results.First().Graphics.First();
 
-            // Get the title; manually added to the point's attributes in UpdateRoutingAndLocation
+            // Get the title; manually added to the point's attributes in UpdateSearch
             String title = matchingGraphic.Attributes["Match_Title"] as String;
 
-            // Get the address; manually added to the point's attributes in UpdateRoutingAndLocation
+            // Get the address; manually added to the point's attributes in UpdateSearch
             String address = matchingGraphic.Attributes["Match_Address"] as String;
 
             // Define the callout
@@ -262,12 +262,12 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
             if (!String.IsNullOrWhiteSpace(location))
             {
                 // Get the MapPoint for the current search location
-                MapPoint searchLocation = await GetRoutingAndLocationMapPoint(location);
+                MapPoint searchLocation = await GetSearchMapPoint(location);
 
                 // Update the geocode parameters if the map point is not null
                 if (searchLocation != null)
                 {
-                    parameters.PreferredRoutingAndLocationLocation = searchLocation;
+                    parameters.PreferredSearchLocation = searchLocation;
                 }
             }
 
@@ -318,10 +318,10 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
         /// <summary>
         /// Method used to keep the suggestions up-to-date for the search box
         /// </summary>
-        private async void MyRoutingAndLocationBox_TextChanged(object sender, TextChangedEventArgs e)
+        private async void MySearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Get the current text
-            string searchText = MyRoutingAndLocationBox.Text;
+            string searchText = MySearchBox.Text;
 
             // Get the current search location
             string locationText = MyLocationBox.Text;
@@ -339,31 +339,31 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
         /// <summary>
         /// Method called to start a search that is restricted to results within the current extent
         /// </summary>
-        private void MyRoutingAndLocationRestrictedButton_Clicked(object sender, EventArgs e)
+        private void MySearchRestrictedButton_Clicked(object sender, EventArgs e)
         {
             // Get the search text
-            string searchText = MyRoutingAndLocationBox.Text;
+            string searchText = MySearchBox.Text;
 
             // Get the location text
             string locationText = MyLocationBox.Text;
 
             // Run the search
-            UpdateRoutingAndLocation(searchText, locationText, true);
+            UpdateSearch(searchText, locationText, true);
         }
 
         /// <summary>
         /// Method called to start an unrestricted search
         /// </summary>
-        private void MyRoutingAndLocationButton_Clicked(object sender, EventArgs e)
+        private void MySearchButton_Clicked(object sender, EventArgs e)
         {
             // Get the search text
-            string searchText = MyRoutingAndLocationBox.Text;
+            string searchText = MySearchBox.Text;
 
             // Get the location text
             string locationText = MyLocationBox.Text;
 
             // Run the search
-            UpdateRoutingAndLocation(searchText, locationText, false);
+            UpdateSearch(searchText, locationText, false);
         }
 
         /// <summary>
@@ -381,7 +381,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
         /// <summary>
         /// Hide the map view and show suggestions
         /// </summary>
-        private void MyRoutingAndLocationBox_Focused(object sender, FocusEventArgs e)
+        private void MySearchBox_Focused(object sender, FocusEventArgs e)
         {
             // Show the suggestion list
             lstViewSuggestions.IsVisible = true;
@@ -406,7 +406,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindPlace
             else
             {
                 // Otherwise, update the search box
-                MyRoutingAndLocationBox.Text = suggestion;
+                MySearchBox.Text = suggestion;
             }
         }
     }

@@ -48,7 +48,7 @@ namespace ArcGISRuntimeXamarin.Samples.RasterLayerImageServiceRaster
             RasterLayer myRasterLayer = new RasterLayer(myImageServiceRaster);
 
             // Add the raster layer to the maps layer collection
-            myMap.Basemap.BaseLayersAndData.Add(myRasterLayer);
+            myMap.Basemap.BaseLayers.Add(myRasterLayer);
 
             // Assign the map to the map view
             MyMapView.Map = myMap;

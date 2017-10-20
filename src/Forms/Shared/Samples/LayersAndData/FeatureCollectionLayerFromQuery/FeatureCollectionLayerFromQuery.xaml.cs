@@ -67,7 +67,7 @@ namespace ArcGISRuntimeXamarin.Samples.FeatureCollectionLayerFromQuery
 
             // Create a layer to display the feature collection, add it to the map's operational layers
             FeatureCollectionLayer featCollectionTable = new FeatureCollectionLayer(featCollection);
-            MyMapView.Map.OperationalLayersAndData.Add(featCollectionTable);
+            MyMapView.Map.OperationalLayers.Add(featCollectionTable);
         }
     }
 }

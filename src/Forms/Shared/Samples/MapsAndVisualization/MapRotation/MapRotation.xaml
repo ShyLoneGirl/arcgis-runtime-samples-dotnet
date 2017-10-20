@@ -13,6 +13,6 @@
         <Slider x:Name="MySlider" Minimum="0" Maximum="180" Value="0" ValueChanged="MySlider_ValueChanged" WidthRequest="300"/>
         <Label x:Name="MyLabel" Text=" " />
     </StackLayout>
-    <esriUI:MapsAndVisualization x:Name="MyMapsAndVisualization" Grid.Row="1"/>
+    <esriUI:MapView x:Name="MyMapView" Grid.Row="1"/>
   </Grid>
 </ContentPage>

@@ -10,7 +10,7 @@
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Symbology;
-using Esri.ArcGISRuntime.Tasks.RoutingAndLocation;
+using Esri.ArcGISRuntime.Tasks.NetworkAnalysis;
 using Esri.ArcGISRuntime.UI;
 using System;
 using System.Collections.Generic;
@@ -22,9 +22,9 @@ using Colors = System.Drawing.Color;
 #endif
 using Xamarin.Forms;
 
-namespace ArcGISRuntimeXamarin.Samples.NetworkAnalysis
+namespace ArcGISRuntimeXamarin.Samples.FindRoute
 {
-    public partial class NetworkAnalysis : ContentPage
+    public partial class FindRoute : ContentPage
     {
         // List of stops on the route ('from' and 'to')
         private List<Stop> _routeStops;
@@ -33,13 +33,13 @@ namespace ArcGISRuntimeXamarin.Samples.NetworkAnalysis
         private GraphicsOverlay _routeGraphicsOverlay;
 
         // URI for the San Diego route service
-        private Uri _sanDiegoRouteServiceUri = new Uri("https://sampleserver6.arcgisonline.com/arcgis/rest/services/RoutingAndLocation/SanDiego/NAServer/Route");
+        private Uri _sanDiegoRouteServiceUri = new Uri("https://sampleserver6.arcgisonline.com/arcgis/rest/services/NetworkAnalysis/SanDiego/NAServer/Route");
 
         // URIs for picture marker images
         private Uri _checkedFlagIconUri = new Uri("https://static.arcgis.com/images/Symbols/Transportation/CheckeredFlag.png");
         private Uri _carIconUri = new Uri("https://static.arcgis.com/images/Symbols/Transportation/CarRedFront.png");
 
-        public NetworkAnalysis()
+        public FindRoute()
         {
             InitializeComponent();
 

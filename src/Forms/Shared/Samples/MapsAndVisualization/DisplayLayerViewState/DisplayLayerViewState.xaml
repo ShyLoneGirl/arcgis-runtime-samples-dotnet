@@ -9,7 +9,7 @@
       <RowDefinition Height="*" />
       <RowDefinition Height="150" />
     </Grid.RowDefinitions>
-    <esriUI:MapsAndVisualization x:Name="MyMapsAndVisualization" Grid.Row="0"/>
+    <esriUI:MapView x:Name="MyMapView" Grid.Row="0"/>
     <ListView x:Name="layerStatusListView" Grid.Row="1">
       <ListView.ItemTemplate>
         <DataTemplate>

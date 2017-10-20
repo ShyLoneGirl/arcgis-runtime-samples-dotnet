@@ -7,7 +7,7 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific 
 // language governing permissions and limitations under the License.
 
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using System;
 using Xamarin.Forms;
 
@@ -48,25 +48,25 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeBasemap
                 case "Topo":
 
                     // Set the basemap to Topographic
-                    MyMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateTopographic();
+                    MyMapView.Map.Basemap = Basemap.CreateTopographic();
                     break;
 
                 case "Streets":
 
                     // Set the basemap to Streets
-                    MyMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateStreets();
+                    MyMapView.Map.Basemap = Basemap.CreateStreets();
                     break;
 
                 case "Imagery":
 
                     // Set the basemap to Imagery
-                    MyMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateImagery();
+                    MyMapView.Map.Basemap = Basemap.CreateImagery();
                     break;
 
                 case "Ocean":
 
                     // Set the basemap to Imagery
-                    MyMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateOceans();
+                    MyMapView.Map.Basemap = Basemap.CreateOceans();
                     break;
 
                 default:
@@ -76,11 +76,11 @@ namespace ArcGISRuntimeXamarin.Samples.ChangeBasemap
 
         private void Initialize()
         {
-            // Create new MapsAndVisualization with basemap
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateTopographic());
+            // Create new Map with basemap
+            Map myMap = new Map(Basemap.CreateTopographic());
 
-            // Assign the map to the MapsAndVisualizationView
-            MyMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Assign the map to the MapView
+            MyMapView.Map = myMap;
         }
     }
 }

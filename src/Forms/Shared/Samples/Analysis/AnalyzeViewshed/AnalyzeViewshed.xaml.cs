@@ -12,7 +12,7 @@ using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.Tasks;
-using Esri.ArcGISRuntime.Tasks.Analysis;
+using Esri.ArcGISRuntime.Tasks.Geoprocessing;
 using Esri.ArcGISRuntime.UI;
 using System;
 using System.Collections.Generic;
@@ -31,14 +31,14 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeViewshed
         // The graphics overlay to show where the user clicked in the map
         private GraphicsOverlay _inputOverlay;
 
-        // The graphics overlay to display the result of the viewshed analysis
+        // The graphics overlay to display the result of the viewshed Geoprocessing
         private GraphicsOverlay _resultOverlay;
 
         public AnalyzeViewshed()
         {
             InitializeComponent();
 
-            Title = "Viewshed (Analysis)";
+            Title = "Viewshed (Geoprocessing)";
 
             // Create the UI, setup the control references and execute initialization
             Initialize();
@@ -52,7 +52,7 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeViewshed
             // Hook into the MapView tapped event
             MyMapView.GeoViewTapped += MyMapView_GeoViewTapped;
 
-            // Create empty overlays for the user clicked location and the results of the viewshed analysis
+            // Create empty overlays for the user clicked location and the results of the viewshed Geoprocessing
             CreateOverlays();
 
             // Assign the map to the MapView
@@ -78,12 +78,12 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeViewshed
 
         private async Task CalculateViewshed(MapPoint location)
         {
-            // This function will define a new geoprocessing task that performs a custom viewshed analysis based upon a 
+            // This function will define a new geoprocessing task that performs a custom viewshed Geoprocessing based upon a 
             // user click on the map and then display the results back as a polygon fill graphics overlay. If there
             // is a problem with the execution of the geoprocessing task an error message will be displayed 
 
             // Create new geoprocessing task using the url defined in the member variables section
-            var myViewshedTask = await AnalysisTask.CreateAsync(new Uri(_viewshedUrl));
+            var myViewshedTask = await GeoprocessingTask.CreateAsync(new Uri(_viewshedUrl));
 
             // Create a new feature collection table based upon point geometries using the current map view spatial reference
             var myInputFeatures = new FeatureCollectionTable(new List<Field>(), GeometryType.Point, MyMapView.SpatialReference);
@@ -98,25 +98,25 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeViewshed
             await myInputFeatures.AddFeatureAsync(myInputFeature);
 
             // Create the parameters that are passed to the used geoprocessing task
-            AnalysisParameters myViewshedParameters =
-                new AnalysisParameters(AnalysisExecutionType.SynchronousExecute);
+            GeoprocessingParameters myViewshedParameters =
+                new GeoprocessingParameters(GeoprocessingExecutionType.SynchronousExecute);
 
             // Request the output features to use the same SpatialReference as the map view
             myViewshedParameters.OutputSpatialReference = MyMapView.SpatialReference;
 
             // Add an input location to the geoprocessing parameters
-            myViewshedParameters.Inputs.Add("Input_Observation_Point", new AnalysisFeatures(myInputFeatures));
+            myViewshedParameters.Inputs.Add("Input_Observation_Point", new GeoprocessingFeatures(myInputFeatures));
 
             // Create the job that handles the communication between the application and the geoprocessing task
             var myViewshedJob = myViewshedTask.CreateJob(myViewshedParameters);
 
             try
             {
-                // Execute analysis and wait for the results
-                AnalysisResult myAnalysisResult = await myViewshedJob.GetResultAsync();
+                // Execute Geoprocessing and wait for the results
+                GeoprocessingResult myGeoprocessingResult = await myViewshedJob.GetResultAsync();
 
                 // Get the results from the outputs
-                AnalysisFeatures myViewshedResultFeatures = myAnalysisResult.Outputs["Viewshed_Result"] as AnalysisFeatures;
+                GeoprocessingFeatures myViewshedResultFeatures = myGeoprocessingResult.Outputs["Viewshed_Result"] as GeoprocessingFeatures;
 
                 // Add all the results as a graphics to the map
                 IFeatureSet myViewshedAreas = myViewshedResultFeatures.Features;
@@ -130,7 +130,7 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeViewshed
                 // Display an error message if there is a problem
                 if (myViewshedJob.Status == JobStatus.Failed && myViewshedJob.Error != null)
                 {
-                    await DisplayAlert("Analysis error", "Executing geoprocessing failed. " + myViewshedJob.Error.Message, "OK");
+                    await DisplayAlert("Geoprocessing error", "Executing geoprocessing failed. " + myViewshedJob.Error.Message, "OK");
                 }
                 else
                 {
@@ -147,7 +147,7 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeViewshed
         private void CreateOverlays()
         {
             // This function will create the overlays that show the user clicked location and the results of the 
-            // viewshed analysis. Note: the overlays will not be populated with any graphics at this point
+            // viewshed Geoprocessing. Note: the overlays will not be populated with any graphics at this point
 
             // Create renderer for input graphic. Set the size and color properties for the simple renderer
             SimpleRenderer myInputRenderer = new SimpleRenderer()
@@ -171,7 +171,7 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeViewshed
                 Renderer = myInputRenderer
             };
 
-            // Create fill renderer for output of the viewshed analysis. Set the color property of the simple renderer 
+            // Create fill renderer for output of the viewshed Geoprocessing. Set the color property of the simple renderer 
             SimpleRenderer myResultRenderer = new SimpleRenderer()
             {
                 Symbol = new SimpleFillSymbol()
@@ -186,7 +186,7 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeViewshed
                 }
             };
 
-            // Create overlay to where viewshed analysis graphic is shown
+            // Create overlay to where viewshed Geoprocessing graphic is shown
             _resultOverlay = new GraphicsOverlay()
             {
                 Renderer = myResultRenderer
@@ -200,7 +200,7 @@ namespace ArcGISRuntimeXamarin.Samples.AnalyzeViewshed
         private void SetBusy(bool isBusy = true)
         {
             // This function toggles running of the 'progress' control feedback status to denote if 
-            // the viewshed analysis is executing as a result of the user click on the map
+            // the viewshed Geoprocessing is executing as a result of the user click on the map
 
             if (isBusy)
             {

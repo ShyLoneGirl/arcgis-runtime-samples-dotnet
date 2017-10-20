@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage x:Class="ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization.AuthorMapsAndVisualization"
+<ContentPage x:Class="ArcGISRuntimeXamarin.Samples.AuthorMap.AuthorMap"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:esriUI="clr-namespace:Esri.ArcGISRuntime.Xamarin.Forms;assembly=Esri.ArcGISRuntime.Xamarin.Forms"
-             xmlns:mapping="clr-namespace:Esri.ArcGISRuntime.MapsAndVisualizationping;assembly=Esri.ArcGISRuntime">
+             xmlns:mapping="clr-namespace:Esri.ArcGISRuntime.Mapping;assembly=Esri.ArcGISRuntime">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition/>
       <RowDefinition Height="70"/>
     </Grid.RowDefinitions>
-    <esriUI:MapsAndVisualizationView x:Name="MyMapsAndVisualizationView"
+    <esriUI:MapView x:Name="MyMapView"
                     Grid.Row="0"/>
-    <ProgressBar x:Name="SaveMapsAndVisualizationProgressBar"
+    <ProgressBar x:Name="SaveMapProgressBar"
                   IsVisible="False"/>
     <ListView x:Name="LayersList"
               Grid.Row="0"
@@ -76,10 +76,10 @@
               Clicked="ShowLayerList"/>
       <Button Grid.Column="2"
               Text="New"
-              Clicked="NewMapsAndVisualizationButtonClick"/>
+              Clicked="NewMapButtonClick"/>
       <Button Grid.Column="3"
               Text="Save ..."
-              Clicked="ShowSaveMapsAndVisualizationUI"/>
+              Clicked="ShowSaveMapUI"/>
     </Grid>
   </Grid>
 </ContentPage>

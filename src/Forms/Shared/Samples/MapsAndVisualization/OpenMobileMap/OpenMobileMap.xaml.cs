@@ -9,15 +9,15 @@
 
 using System.IO;
 using System.Linq;
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using ArcGISRuntimeXamarin.Managers;
 using Xamarin.Forms;
 
-namespace ArcGISRuntimeXamarin.Samples.OpenMobileMapsAndVisualization
+namespace ArcGISRuntimeXamarin.Samples.OpenMobileMap
 {
-    public partial class OpenMobileMapsAndVisualization : ContentPage
+    public partial class OpenMobileMap : ContentPage
     {
-        public OpenMobileMapsAndVisualization()
+        public OpenMobileMap()
         {
             InitializeComponent();
 
@@ -33,13 +33,13 @@ namespace ArcGISRuntimeXamarin.Samples.OpenMobileMapsAndVisualization
             string filepath = GetMmpkPath();
 
             // Open the map package
-            MobileMapsAndVisualizationPackage myMapsAndVisualizationPackage = await MobileMapsAndVisualizationPackage.OpenAsync(filepath);
+            MobileMapPackage myMapPackage = await MobileMapPackage.OpenAsync(filepath);
 
             // Check that there is at least one map
-            if (myMapsAndVisualizationPackage.MapsAndVisualizations.Count > 0)
+            if (myMapPackage.Maps.Count > 0)
             {
                 // Display the first map in the package
-                MyMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualizationPackage.MapsAndVisualizations.First();
+                MyMapView.Map = myMapPackage.Maps.First();
             }
         }
 
@@ -58,7 +58,7 @@ namespace ArcGISRuntimeXamarin.Samples.OpenMobileMapsAndVisualization
             string folder = DataManager.GetDataFolder();
 
             // Return the full path; Item ID is e1f3a7254cb845b09450f54937c16061
-            return Path.Combine(folder, "SampleData", "OpenMobileMapsAndVisualization", filename);
+            return Path.Combine(folder, "SampleData", "OpenMobileMap", filename);
             #endregion offlinedata
         }
     }

@@ -45,7 +45,7 @@ namespace ArcGISRuntimeXamarin.Samples.RasterLayerFile
 			await myRasterLayer.LoadAsync();
 
 			// Add the layer to the map
-			MyMapView.Map.OperationalLayersAndData.Add(myRasterLayer);
+			MyMapView.Map.OperationalLayers.Add(myRasterLayer);
 
 			// Get the raster's extent in a viewpoint
 			Viewpoint myFullRasterExtent = new Viewpoint(myRasterLayer.FullExtent);

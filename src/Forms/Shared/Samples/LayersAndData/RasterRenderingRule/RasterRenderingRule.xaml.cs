@@ -109,7 +109,7 @@ namespace ArcGISRuntimeXamarin.Samples.RasterRenderingRule
                     RasterLayer myRasterLayer = new RasterLayer(myImageServiceRaster);
 
                     // Add the raster layer to the operational layers of the  map view
-                    MyMapView.Map.OperationalLayersAndData.Add(myRasterLayer);
+                    MyMapView.Map.OperationalLayers.Add(myRasterLayer);
                 }
             }
         }

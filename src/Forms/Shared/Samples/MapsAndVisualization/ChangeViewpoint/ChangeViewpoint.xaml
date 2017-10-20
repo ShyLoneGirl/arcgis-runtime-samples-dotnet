@@ -10,6 +10,6 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
     <Button x:Name="ViewpointsButton" Text="Viewpoints" Clicked="OnViewpointsClicked"></Button>
-    <esriUI:MapsAndVisualization x:Name="MyMapsAndVisualization" Grid.Row="1"/>
+    <esriUI:MapView x:Name="MyMapView" Grid.Row="1"/>
   </Grid>
 </ContentPage>

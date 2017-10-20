@@ -4,5 +4,5 @@
              xmlns:esriUI="clr-namespace:Esri.ArcGISRuntime.Xamarin.Forms;assembly=Esri.ArcGISRuntime.Xamarin.Forms"
              xmlns:mapping="clr-namespace:Esri.ArcGISRuntime.Mapping;assembly=Esri.ArcGISRuntime" 
              x:Class="ArcGISRuntimeXamarin.Samples.ShowCallout.ShowCallout">
-    <esriUI:MapsAndVisualization x:Name="MyMapsAndVisualization" />
+    <esriUI:MapView x:Name="MyMapView" />
 </ContentPage>

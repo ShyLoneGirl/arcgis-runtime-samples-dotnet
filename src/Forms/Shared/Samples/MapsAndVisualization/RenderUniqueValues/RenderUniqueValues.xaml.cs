@@ -9,7 +9,7 @@
 
 using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Mapping;
-using Esri.ArcGISRuntime.MapsAndVisualization;
+using Esri.ArcGISRuntime.Symbology;
 using System;
 using Xamarin.Forms;
 

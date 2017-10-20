@@ -7,7 +7,7 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific 
 // language governing permissions and limitations under the License.
 
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Portal;
 using Esri.ArcGISRuntime.Security;
 using System;
@@ -32,18 +32,18 @@ using Xamarin.Auth;
 using System.IO;
 #endif
 
-namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
+namespace ArcGISRuntimeXamarin.Samples.AuthorMap
 {
-    public partial class AuthorMapsAndVisualization : ContentPage, IOAuthAuthorizeHandler
+    public partial class AuthorMap : ContentPage, IOAuthAuthorizeHandler
     {
         // OAuth-related values ...
         // URL of the server to authenticate with (ArcGIS Online)
         private const string ArcGISOnlineUrl = "https://www.arcgis.com/sharing/rest";
 
-        // Client ID for the app registered with the server (Portal MapsAndVisualizations)
+        // Client ID for the app registered with the server (Portal Maps)
         public string _appClientId = "2Gh53JRzkPtOENQq";
 
-        // Redirect URL after a successful authorization (configured for the Portal MapsAndVisualizations application)
+        // Redirect URL after a successful authorization (configured for the Portal Maps application)
         private string _oAuthRedirectUrl = "https://developers.arcgis.com";
 
         // String array to store basemap constructor types
@@ -58,12 +58,12 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
         // Dictionary of operational layer names and URLs
         private Dictionary<string, string> _operationalLayerUrls = new Dictionary<string, string>
         {
-            {"World Elevations", "http://sampleserver5.arcgisonline.com/arcgis/rest/services/Elevation/WorldElevations/MapsAndVisualizationServer"},
-            {"World Cities", "http://sampleserver6.arcgisonline.com/arcgis/rest/services/SampleWorldCities/MapsAndVisualizationServer/" },
-            {"US Census Data", "http://sampleserver5.arcgisonline.com/arcgis/rest/services/Census/MapsAndVisualizationServer"}
+            {"World Elevations", "http://sampleserver5.arcgisonline.com/arcgis/rest/services/Elevation/WorldElevations/MapServer"},
+            {"World Cities", "http://sampleserver6.arcgisonline.com/arcgis/rest/services/SampleWorldCities/MapServer/" },
+            {"US Census Data", "http://sampleserver5.arcgisonline.com/arcgis/rest/services/Census/MapServer"}
         };
 
-        public AuthorMapsAndVisualization()
+        public AuthorMap()
         {
             InitializeComponent();
 
@@ -76,7 +76,7 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
         private void Initialize()
         {
             // Call a function to create a new map with a light gray canvas basemap
-            CreateNewMapsAndVisualization();
+            CreateNewMap();
 
             // Show the default OAuth settings in the entry controls
             ClientIDEntry.Text = _appClientId;
@@ -160,79 +160,79 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
             LayersList.IsVisible = true;
         }
 
-        private async void ShowSaveMapsAndVisualizationUI(object sender, EventArgs e)
+        private async void ShowSaveMapUI(object sender, EventArgs e)
         {
-            // Create a SaveMapsAndVisualizationPage page for getting user input for the new web map item
-            var mapInputForm = new SaveMapsAndVisualizationPage();
+            // Create a SaveMapPage page for getting user input for the new web map item
+            var mapInputForm = new SaveMapPage();
 
             // If an existing map, show the UI for updating the item
-            var mapItem = MyMapsAndVisualizationView.MapsAndVisualization.Item;
+            var mapItem = MyMapView.Map.Item;
             if (mapItem != null)
             {
                 mapInputForm.ShowForUpdate(mapItem.Title,mapItem.Description, mapItem.Tags.ToArray());
             }
 
             // Handle the save button click event on the page
-            mapInputForm.OnSaveClicked += SaveMapsAndVisualizationAsync;
+            mapInputForm.OnSaveClicked += SaveMapAsync;
 
-            // Navigate to the SaveMapsAndVisualizationPage UI
-            // Note: in each platform's project, there is a custom PageRenderer class called SaveMapsAndVisualizationPage that provides
+            // Navigate to the SaveMapPage UI
+            // Note: in each platform's project, there is a custom PageRenderer class called SaveMapPage that provides
             //       platform-specific logic to challenge the user for OAuth credentials for ArcGIS Online when the page launches
             await Navigation.PushAsync(mapInputForm);
         }
 
         // Event handler to get information entered by the user and save the map
-        private async void SaveMapsAndVisualizationAsync(object sender, SaveMapsAndVisualizationEventArgs e)
+        private async void SaveMapAsync(object sender, SaveMapEventArgs e)
         {
             // Get the current map
-            var myMapsAndVisualization = MyMapsAndVisualizationView.MapsAndVisualization;
+            var myMap = MyMapView.Map;
 
             try
             {
                 // Show the progress bar so the user knows work is happening
-                SaveMapsAndVisualizationProgressBar.IsVisible = true;
+                SaveMapProgressBar.IsVisible = true;
 
                 // Make sure the user is logged in to ArcGIS Online
                 var cred = await EnsureLoggedInAsync();
                 AuthenticationManager.Current.AddCredential(cred);
 
                 // Get information entered by the user for the new portal item properties
-                var title = e.MapsAndVisualizationTitle;
-                var description = e.MapsAndVisualizationDescription;
+                var title = e.MapTitle;
+                var description = e.MapDescription;
                 var tags = e.Tags;
 
                 // Apply the current extent as the map's initial extent
-                myMapsAndVisualization.InitialViewpoint = MyMapsAndVisualizationView.GetCurrentViewpoint(ViewpointType.BoundingGeometry);
+                myMap.InitialViewpoint = MyMapView.GetCurrentViewpoint(ViewpointType.BoundingGeometry);
 
                 // Export the current map view for the item's thumbnail
-                RuntimeImage thumbnailImage = await MyMapsAndVisualizationView.ExportImageAsync();
+                RuntimeImage thumbnailImage = await MyMapView.ExportImageAsync();
 
                 // See if the map has already been saved (has an associated portal item)
-                if (myMapsAndVisualization.Item == null)
+                if (myMap.Item == null)
                 {
                     // Get the ArcGIS Online portal (will use credential from login above)
                     ArcGISPortal agsOnline = await ArcGISPortal.CreateAsync(new Uri(ArcGISOnlineUrl));
 
                     // Save the current state of the map as a portal item in the user's default folder
-                    await myMapsAndVisualization.SaveAsAsync(agsOnline, null, title, description, tags, thumbnailImage);
+                    await myMap.SaveAsAsync(agsOnline, null, title, description, tags, thumbnailImage);
 
                     // Report a successful save
-                    DisplayAlert("MapsAndVisualization Saved", "Saved '" + title + "' to ArcGIS Online!", "OK");
+                    DisplayAlert("Map Saved", "Saved '" + title + "' to ArcGIS Online!", "OK");
                 }
                 else
                 {
                     // This is not the initial save, call SaveAsync to save changes to the existing portal item
-                    await myMapsAndVisualization.SaveAsync();
+                    await myMap.SaveAsync();
 
                     // Get the file stream from the new thumbnail image
                     Stream imageStream = await thumbnailImage.GetEncodedBufferAsync();
 
                     // Update the item thumbnail
-                    (myMapsAndVisualization.Item as PortalItem).SetThumbnailWithImage(imageStream);
-                    await myMapsAndVisualization.SaveAsync();
+                    (myMap.Item as PortalItem).SetThumbnailWithImage(imageStream);
+                    await myMap.SaveAsync();
 
                     // Report update was successful
-                    DisplayAlert("Updates Saved", "Saved changes to '" + myMapsAndVisualization.Item.Title + "'", "OK");
+                    DisplayAlert("Updates Saved", "Saved changes to '" + myMap.Item.Title + "'", "OK");
                 }
             }
             catch (Exception ex)
@@ -243,7 +243,7 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
             finally
             {
                 // Hide the progress bar
-                SaveMapsAndVisualizationProgressBar.IsVisible = false;
+                SaveMapProgressBar.IsVisible = false;
             }
         }
 
@@ -268,19 +268,19 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
             return cred;
         }
 
-        private void NewMapsAndVisualizationButtonClick(object sender, EventArgs e)
+        private void NewMapButtonClick(object sender, EventArgs e)
         {
             // Call a function to create a new map
-            CreateNewMapsAndVisualization();
+            CreateNewMap();
         }
 
-        private void CreateNewMapsAndVisualization()
+        private void CreateNewMap()
         {
-            // Create new MapsAndVisualization with a light gray canvas basemap
-            var myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateLightGrayCanvas());
+            // Create new Map with a light gray canvas basemap
+            var myMap = new Map(Basemap.CreateLightGrayCanvas());
 
-            // Add the MapsAndVisualization to the MapsAndVisualizationView
-            MyMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Add the Map to the MapView
+            MyMapView.Map = myMap;
         }
 
         private void AddBasemap(string basemapName)
@@ -290,19 +290,19 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
             {
                 case "Topographic":
                     // Set the basemap to Topographic
-                    MyMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateTopographic();
+                    MyMapView.Map.Basemap = Basemap.CreateTopographic();
                     break;
                 case "Streets":
                     // Set the basemap to Streets
-                    MyMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateStreets();
+                    MyMapView.Map.Basemap = Basemap.CreateStreets();
                     break;
                 case "Imagery":
                     // Set the basemap to Imagery
-                    MyMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateImagery();
+                    MyMapView.Map.Basemap = Basemap.CreateImagery();
                     break;
                 case "Oceans":
                     // Set the basemap to Oceans
-                    MyMapsAndVisualizationView.MapsAndVisualization.Basemap = Basemap.CreateOceans();
+                    MyMapView.Map.Basemap = Basemap.CreateOceans();
                     break;
             }
         }
@@ -310,24 +310,24 @@ namespace ArcGISRuntimeXamarin.Samples.AuthorMapsAndVisualization
         private void AddLayer(string layerName, string url)
         {
             // See if the layer already exists
-            ArcGISMapsAndVisualizationImageLayer layer = MyMapsAndVisualizationView.MapsAndVisualization.OperationalLayers.FirstOrDefault(l => l.Name == layerName) as ArcGISMapsAndVisualizationImageLayer;
+            ArcGISMapImageLayer layer = MyMapView.Map.OperationalLayers.FirstOrDefault(l => l.Name == layerName) as ArcGISMapImageLayer;
 
             // If the layer is in the map, remove it
             if (layer != null)
             {
-                MyMapsAndVisualizationView.MapsAndVisualization.OperationalLayers.Remove(layer);
+                MyMapView.Map.OperationalLayers.Remove(layer);
             }
             else
             {
                 var layerUri = new Uri(url);
 
                 // Create a new map image layer
-                layer = new ArcGISMapsAndVisualizationImageLayer(layerUri);
+                layer = new ArcGISMapImageLayer(layerUri);
                 layer.Name = layerName;
 
                 // Set it 50% opaque, and add it to the map
                 layer.Opacity = 0.5;
-                MyMapsAndVisualizationView.MapsAndVisualization.OperationalLayers.Add(layer);
+                MyMapView.Map.OperationalLayers.Add(layer);
             }
         }
 

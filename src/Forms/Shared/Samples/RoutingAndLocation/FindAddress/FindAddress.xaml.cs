@@ -63,18 +63,18 @@ namespace ArcGISRuntimeXamarin.Samples.FindAddress
 
             // Enable the UI controls now that the LocatorTask is ready
             MySuggestButton.IsEnabled = true;
-            MyRoutingAndLocationBar.IsEnabled = true;
+            MySearchBar.IsEnabled = true;
         }
 
         private void Handle_TextChanged(object sender, System.EventArgs e)
         {
-            updateRoutingAndLocation();
+            updateSearch();
         }
 
-        private async void updateRoutingAndLocation()
+        private async void updateSearch()
         {
             // Get the text in the search bar
-            String enteredText = MyRoutingAndLocationBar.Text;
+            String enteredText = MySearchBar.Text;
 
             // Clear existing marker
             MyMapView.GraphicsOverlays.Clear();
@@ -142,8 +142,8 @@ namespace ArcGISRuntimeXamarin.Samples.FindAddress
             // Display the list of suggestions; returns the selected option
             String action = await DisplayActionSheet("Choose an address to geocode", "Cancel", null, _addresses);
             // Update the search
-            MyRoutingAndLocationBar.Text = action;
-            updateRoutingAndLocation();
+            MySearchBar.Text = action;
+            updateSearch();
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace ArcGISRuntimeXamarin.Samples.FindAddress
         /// </summary>
         private async void MyMapView_GeoViewTapped(object sender, Esri.ArcGISRuntime.Xamarin.Forms.GeoViewInputEventArgs e)
         {
-            // RoutingAndLocation for the graphics underneath the user's tap
+            // Search for the graphics underneath the user's tap
             IReadOnlyList<IdentifyGraphicsOverlayResult> results = await MyMapView.IdentifyGraphicsOverlaysAsync(e.Position, 12, false);
 
             // Return gracefully if there was no result

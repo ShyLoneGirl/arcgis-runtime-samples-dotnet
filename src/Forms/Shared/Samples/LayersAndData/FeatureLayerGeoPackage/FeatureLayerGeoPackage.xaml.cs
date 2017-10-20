@@ -8,7 +8,7 @@
 // language governing permissions and limitations under the License.
 
 using ArcGISRuntimeXamarin.Managers;
-using Esri.ArcGISRuntime.LayersAndData;
+using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Mapping;
 using System.IO;
 using System.Linq;
@@ -66,16 +66,16 @@ namespace ArcGISRuntimeXamarin.Samples.FeatureLayerGeoPackage
             string filename = "AuroraCO.gpkg";
 
             // The data manager provides a method to get the folder
-            string folder = LayersAndDataManager.GetLayersAndDataFolder();
+            string folder = DataManager.GetDataFolder();
 
             // Get the full path
-            string filepath = Path.Combine(folder, "SampleLayersAndData", "ReadGeoPackage", filename);
+            string filepath = Path.Combine(folder, "SampleData", "ReadGeoPackage", filename);
 
             // Check if the file exists
             if (!File.Exists(filepath))
             {
                 // If it's missing, download the GeoPackage
-                await LayersAndDataManager.GetLayersAndData("68ec42517cdd439e81b036210483e8e7", "ReadGeoPackage");
+                await DataManager.GetData("68ec42517cdd439e81b036210483e8e7", "ReadGeoPackage");
             }
 
             // Return the path

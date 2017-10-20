@@ -10,7 +10,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Button x:Name="TakeScreenshotButton" Text="Capture" Clicked="OnTakeScreenshotClicked"></Button>
-        <esriUI:MapsAndVisualization x:Name="MyMapsAndVisualization" Grid.Row="1"/>
+        <esriUI:MapView x:Name="MyMapView" Grid.Row="1"/>
         <ActivityIndicator x:Name="CreatingImageIndicator"
                            Grid.Row="1" Color="Fuchsia"
                            HorizontalOptions="Center" VerticalOptions="Center"

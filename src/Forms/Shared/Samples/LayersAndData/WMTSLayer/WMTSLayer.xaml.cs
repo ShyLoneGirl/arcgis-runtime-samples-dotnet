@@ -41,7 +41,7 @@ namespace ArcGISRuntimeXamarin.Samples.WMTSLayer
                 Basemap myBasemap = myMap.Basemap;
 
                 // Get the layer collection for the base layers
-                LayerCollection myLayerCollection = myBasemap.BaseLayersAndData;
+                LayerCollection myLayerCollection = myBasemap.BaseLayers;
 
                 // Add the WMTS layer to the layer collection of the map
                 myLayerCollection.Add(myWmtsLayer);
@@ -84,7 +84,7 @@ namespace ArcGISRuntimeXamarin.Samples.WMTSLayer
                 Basemap myBasemap = myMap.Basemap;
 
                 // Get the layer collection for the base layers
-                LayerCollection myLayerCollection = myBasemap.BaseLayersAndData;
+                LayerCollection myLayerCollection = myBasemap.BaseLayers;
 
                 // Add the WMTS layer to the layer collection of the map
                 myLayerCollection.Add(myWmtsLayer);

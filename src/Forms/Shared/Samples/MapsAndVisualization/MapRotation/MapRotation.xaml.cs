@@ -28,8 +28,8 @@ namespace ArcGISRuntimeXamarin.Samples.MapRotation
             Basemap myBasemap = Basemap.CreateStreets();
             Map myMap = new Map(myBasemap);
 
-            // Assign the map to the MapsAndVisualization
-            MyMapsAndVisualization.Map = myMap;
+            // Assign the map to the MapView
+            MyMapView.Map = myMap;
         }
 
         private void MySlider_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -37,8 +37,8 @@ namespace ArcGISRuntimeXamarin.Samples.MapRotation
             // Display the rotation value in the Label formatted nicely with degree symbol.
             MyLabel.Text = string.Format("{0:0}°", MySlider.Value);
 
-            // Set the MapsAndVisualization rotation to that of the Slider.
-            MyMapsAndVisualization.SetViewpointRotationAsync(e.NewValue);
+            // Set the MapView rotation to that of the Slider.
+            MyMapView.SetViewpointRotationAsync(e.NewValue);
         }
     }
 }

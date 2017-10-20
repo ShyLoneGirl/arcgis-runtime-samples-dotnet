@@ -7,7 +7,7 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific 
 // language governing permissions and limitations under the License.
 
-using Esri.ArcGISRuntime.MapsAndVisualizationping;
+using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Portal;
 using Esri.ArcGISRuntime.Security;
 using System;
@@ -28,26 +28,26 @@ using Android.App;
 using Xamarin.Auth;
 #endif
 
-namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
+namespace ArcGISRuntimeXamarin.Samples.SearchPortalMaps
 {
-    public partial class SearchPortalMapsAndVisualizations : ContentPage, IOAuthAuthorizeHandler
+    public partial class SearchPortalMaps : ContentPage, IOAuthAuthorizeHandler
     {
         // Constants for OAuth-related values ...
         // URL of the server to authenticate with (ArcGIS Online)
         private const string ArcGISOnlineUrl = "https://www.arcgis.com/sharing/rest";
 
-        // Client ID for the app registered with the server (Portal MapsAndVisualizations)
+        // Client ID for the app registered with the server (Portal Maps)
         public string _appClientId = "2Gh53JRzkPtOENQq";
 
-        // Redirect URL after a successful authorization (configured for the Portal MapsAndVisualizations application)
+        // Redirect URL after a successful authorization (configured for the Portal Maps application)
         private string _oAuthRedirectUrl = "https://developers.arcgis.com";
 
-        public SearchPortalMapsAndVisualizations()
+        public SearchPortalMaps()
         {
             InitializeComponent();
 
             // Display a default map
-            DisplayDefaultMapsAndVisualization();
+            DisplayDefaultMap();
 
             // Show the default OAuth settings in the entry controls
             ClientIDEntry.Text = _appClientId;
@@ -58,29 +58,29 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
                 Android: () =>
                 {
                     // Black background on Android (transparent by default)
-                    MapsAndVisualizationsListView.BackgroundColor = Color.Black;
-                    SearchMapsAndVisualizationsUI.BackgroundColor = Color.Black;
+                    MapsListView.BackgroundColor = Color.Black;
+                    SearchMapsUI.BackgroundColor = Color.Black;
                     OAuthSettingsGrid.BackgroundColor = Color.Black;
                 },
                 WinPhone: () =>
                 {
                     // Semi-transparent background on Windows with a small margin around the control
-                    MapsAndVisualizationsListView.BackgroundColor = Color.FromRgba(255, 255, 255, 0.3);
-                    MapsAndVisualizationsListView.Margin = new Thickness(50);
-                    SearchMapsAndVisualizationsUI.BackgroundColor = Color.FromRgba(255, 255, 255, 0.3);
-                    SearchMapsAndVisualizationsUI.Margin = new Thickness(50);
+                    MapsListView.BackgroundColor = Color.FromRgba(255, 255, 255, 0.3);
+                    MapsListView.Margin = new Thickness(50);
+                    SearchMapsUI.BackgroundColor = Color.FromRgba(255, 255, 255, 0.3);
+                    SearchMapsUI.Margin = new Thickness(50);
                     OAuthSettingsGrid.BackgroundColor = Color.FromRgba(255, 255, 255, 0.3);
                     OAuthSettingsGrid.Margin = new Thickness(50);
                 });
         }
 
-        private void DisplayDefaultMapsAndVisualization()
+        private void DisplayDefaultMap()
         {
-            // Create a new MapsAndVisualization instance
-            MapsAndVisualization myMapsAndVisualization = new MapsAndVisualization(Basemap.CreateStreets());
+            // Create a new Map instance
+            Map myMap = new Map(Basemap.CreateStreets());
 
-            // Provide MapsAndVisualization to the MapsAndVisualizationView
-            MyMapsAndVisualizationView.MapsAndVisualization = myMapsAndVisualization;
+            // Provide Map to the MapView
+            MyMapView.Map = myMap;
         }
 
         private void OAuthSettingsCancel(object sender, EventArgs e)
@@ -99,7 +99,7 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             UpdateAuthenticationManager();
         }
 
-        private async void SearchPublicMapsAndVisualizations(string searchText)
+        private async void SearchPublicMaps(string searchText)
         {
             // Get web map portal items from a keyword search
             IEnumerable<PortalItem> mapItems = null;
@@ -121,20 +121,20 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             mapItems = findResult.Results;
 
             // Hide the search controls
-            SearchMapsAndVisualizationsUI.IsVisible = false;
+            SearchMapsUI.IsVisible = false;
 
             // Show the list of web maps
-            MapsAndVisualizationsListView.ItemsSource = mapItems;
-            MapsAndVisualizationsListView.IsVisible = true;
+            MapsListView.ItemsSource = mapItems;
+            MapsListView.IsVisible = true;
         }
 
         private void ShowSearchUI(object sender, EventArgs e)
         {
             // Show the map search controls
-            SearchMapsAndVisualizationsUI.IsVisible = true;
+            SearchMapsUI.IsVisible = true;
         }
 
-        private async void GetMyMapsAndVisualizations(object sender, EventArgs e)
+        private async void GetMyMaps(object sender, EventArgs e)
         {
             // Get web map portal items in the current user's folder or from a keyword search
             IEnumerable<PortalItem> mapItems = null;
@@ -151,40 +151,40 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             PortalUserContent myContent = await portal.User.GetContentAsync();
 
             // Get the web map items in the root folder
-            mapItems = from item in myContent.Items where item.Type == PortalItemType.WebMapsAndVisualization select item;
+            mapItems = from item in myContent.Items where item.Type == PortalItemType.WebMap select item;
 
             // Loop through all sub-folders and get web map items, add them to the mapItems collection
             foreach (PortalFolder folder in myContent.Folders)
             {
                 IEnumerable<PortalItem> folderItems = await portal.User.GetContentAsync(folder.FolderId);
-                mapItems.Concat(from item in folderItems where item.Type == PortalItemType.WebMapsAndVisualization select item);
+                mapItems.Concat(from item in folderItems where item.Type == PortalItemType.WebMap select item);
             }
 
             // Show the list of web maps
-            MapsAndVisualizationsListView.ItemsSource = mapItems;
-            MapsAndVisualizationsListView.IsVisible = true;
+            MapsListView.ItemsSource = mapItems;
+            MapsListView.IsVisible = true;
         }
         
-        private void MapsAndVisualizationItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void MapItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             // Get the selected web map item in the list box
-            PortalItem selectedMapsAndVisualization = e.SelectedItem as PortalItem;
-            if (selectedMapsAndVisualization == null) { return; }
+            PortalItem selectedMap = e.SelectedItem as PortalItem;
+            if (selectedMap == null) { return; }
 
             // Create a new map, pass the web map portal item to the constructor
-            MapsAndVisualization webMapsAndVisualization = new MapsAndVisualization(selectedMapsAndVisualization);
+            Map webMap = new Map(selectedMap);
 
             // Handle change in the load status (to report load errors)
-            webMapsAndVisualization.LoadStatusChanged += WebMapsAndVisualizationLoadStatusChanged;
+            webMap.LoadStatusChanged += WebMapLoadStatusChanged;
 
             // Show the web map in the map view
-            MyMapsAndVisualizationView.MapsAndVisualization = webMapsAndVisualization;
+            MyMapView.Map = webMap;
 
             // Hide the list of maps
-            MapsAndVisualizationsListView.IsVisible = false;
+            MapsListView.IsVisible = false;
         }
 
-        private void WebMapsAndVisualizationLoadStatusChanged(object sender, Esri.ArcGISRuntime.LoadStatusEventArgs e)
+        private void WebMapLoadStatusChanged(object sender, Esri.ArcGISRuntime.LoadStatusEventArgs e)
         {
             // Get the current status
             var status = e.Status;
@@ -192,11 +192,11 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
             // Report errors if map failed to load
             if (status == Esri.ArcGISRuntime.LoadStatus.FailedToLoad)
             {
-                var map = sender as MapsAndVisualization;
+                var map = sender as Map;
                 var err = map.LoadError;
                 if (err != null)
                 {
-                    DisplayAlert(err.Message, "MapsAndVisualization Load Error", "OK");
+                    DisplayAlert(err.Message, "Map Load Error", "OK");
                 }
             }
         }
@@ -240,13 +240,13 @@ namespace ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations
         private void CancelSearchClicked(object sender, EventArgs e)
         {
             // Hide the search controls if the cancel button is clicked
-            SearchMapsAndVisualizationsUI.IsVisible = false;
+            SearchMapsUI.IsVisible = false;
         }
 
-        private void SearchMapsAndVisualizationsClicked(object sender, EventArgs e)
+        private void SearchMapsClicked(object sender, EventArgs e)
         {
             // Search ArcGIS Online maps with the text entered
-            SearchPublicMapsAndVisualizations(SearchTextEntry.Text);
+            SearchPublicMaps(SearchTextEntry.Text);
         }
 
         #region OAuth

@@ -2,21 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
              xmlns:esriUI="clr-namespace:Esri.ArcGISRuntime.Xamarin.Forms;assembly=Esri.ArcGISRuntime.Xamarin.Forms"
-             x:Class="ArcGISRuntimeXamarin.Samples.SearchPortalMapsAndVisualizations.SearchPortalMapsAndVisualizations">
+             x:Class="ArcGISRuntimeXamarin.Samples.SearchPortalMaps.SearchPortalMaps">
   <Grid x:Name="LayoutRoot">
     <Grid.RowDefinitions>
       <RowDefinition/>
       <RowDefinition Height="70"/>
     </Grid.RowDefinitions>
 
-        <esriUI:MapsAndVisualizationView x:Name="MyMapsAndVisualizationView"
+        <esriUI:MapView x:Name="MyMapView"
                         Grid.Row="0"/>
-        <TableView x:Name="SearchMapsAndVisualizationsUI"
+        <TableView x:Name="SearchMapsUI"
                    Grid.Row="0"
                    IsVisible="False"
                    Intent="Form">
             <TableRoot>
-                <TableSection Title="Search Public MapsAndVisualizations">
+                <TableSection Title="Search Public Maps">
                     <EntryCell x:Name="SearchTextEntry"
                                Label="Search Text:"
                                Text=""/>
@@ -27,15 +27,15 @@
                                     Clicked="CancelSearchClicked"
                                     Margin="20,0"/>
                             <Button Text="Search"
-                                    Clicked="SearchMapsAndVisualizationsClicked"/>
+                                    Clicked="SearchMapsClicked"/>
                         </StackLayout>
                     </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>
-        <ListView x:Name="MapsAndVisualizationsListView" 
+        <ListView x:Name="MapsListView" 
                   IsVisible="False"
-                  ItemSelected="MapsAndVisualizationItemSelected">
+                  ItemSelected="MapItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -93,10 +93,10 @@
         <StackLayout Grid.Row="1"
                      Orientation="Horizontal"
                      HorizontalOptions="Center">
-            <Button Text="Search MapsAndVisualizations"
+            <Button Text="Search Maps"
               Clicked="ShowSearchUI"/>
-            <Button Text="My MapsAndVisualizations"
-              Clicked="GetMyMapsAndVisualizations"/>
+            <Button Text="My Maps"
+              Clicked="GetMyMaps"/>
         </StackLayout>
   </Grid>
 </ContentPage>
