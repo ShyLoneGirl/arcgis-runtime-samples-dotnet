@@ -13,6 +13,7 @@ using System;
 using Esri.ArcGISRuntime.Geometry;
 using System.Collections.Generic;
 using Esri.ArcGISRuntime.Portal;
+using System.Windows;
 
 namespace ArcGISRuntime.WPF.Samples.KmlNetworkLinks
 {
@@ -31,55 +32,66 @@ namespace ArcGISRuntime.WPF.Samples.KmlNetworkLinks
 
         private async void Initialize()
         {
-            // Set up the map with a basemap
-            MyMap.Basemap = Basemap.CreateDarkGrayCanvasVector();
+            try
+            {
+                // Set up the map with a basemap
+                MyMap.Basemap = Basemap.CreateDarkGrayCanvasVector();
 
-            // First clear the operational layers
-            MyMap.OperationalLayers.Clear();
+                // First clear the operational layers
+                MyMap.OperationalLayers.Clear();
 
-            // Create the ArcGIS Portal
-            ArcGISPortal myPortal = await ArcGISPortal.CreateAsync();
+                // Create the ArcGIS Portal
+                ArcGISPortal myPortal = await ArcGISPortal.CreateAsync();
 
-            // Create the portal item with the known ID
-            PortalItem item = await PortalItem.CreateAsync(myPortal, "5d56deb77c0d424799a522d8a13f079e");
+                // Create the portal item with the known ID
+                PortalItem item = await PortalItem.CreateAsync(myPortal, "5d56deb77c0d424799a522d8a13f079e");
 
-            // Get the service Url
-            Uri serviceUri = item.ServiceUrl;
+                // Get the service Url
+                Uri serviceUri = item.ServiceUrl;
 
-            // Create a KML Dataset with the Url
-            _myKmlDataset = new KmlDataset(serviceUri);
+                // Create a KML Dataset with the Url
+                _myKmlDataset = new KmlDataset(serviceUri);
 
-            // Create a KML layer from the KmlDataset
-            KmlLayer myKmlLayer = new KmlLayer(_myKmlDataset);
+                // Create a KML layer from the KmlDataset
+                KmlLayer myKmlLayer = new KmlLayer(_myKmlDataset);
 
-            // Add the layer to the operational layers
-            MyMap.OperationalLayers.Add(myKmlLayer);
+                // Subscribe to status changes
+                myKmlLayer.LoadStatusChanged += KmlLayer_LoadStatusChanged;
 
-            // Define and extent to zoom to (in the case: Frankfurt Germany area)
-            Envelope myExtent = new Envelope(647571.091263907, 6310478.90141415, 1350638.62905514, 6604034.01050928, SpatialReferences.WebMercator);
+                // Ensure the KML layer is loaded
+                await myKmlLayer.LoadAsync();
 
-            // Zoom to the extent
-            await MyMapView.SetViewpointGeometryAsync(myExtent);
+                // Add the KML layer to the operational layers
+                MyMap.OperationalLayers.Add(myKmlLayer);
 
-            // Ensure the kmlLayer is loaded
-            await myKmlLayer.LoadAsync();
+                // Define and extent to zoom to (in the case: Frankfurt Germany area)
+                Envelope myExtent = new Envelope(647571.091263907, 6310478.90141415, 1350638.62905514, 6604034.01050928, SpatialReferences.WebMercator);
 
-            // Traverse the file and display the refresh intervals for network links
-            TraverseNodesUpdateStatus(_myKmlDataset.RootNodes);
+                // Zoom to the extent
+                await MyMapView.SetViewpointGeometryAsync(myExtent);
 
-            // Subscribe to status changes
-            myKmlLayer.LoadStatusChanged += KmlLayer_LoadStatusChanged;
+                // Traverse the file and display the refresh intervals for network links
+                TraverseNodesUpdateStatus(_myKmlDataset.RootNodes);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Sample error", "An error occurred" + ex.ToString());
+            }
         }
 
         private void KmlLayer_LoadStatusChanged(object sender, Esri.ArcGISRuntime.LoadStatusEventArgs e)
         {
             if (e.Status == Esri.ArcGISRuntime.LoadStatus.Loaded)
             {
-                // Clear the existing label
-                MyNetworkLinkLabel.Content = "";
+                // This makes sure that we switch to the UI thread before interacting with any UI components
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    // Clear the existing label
+                    MyNetworkLinkLabel.Content = "";
 
-                // Traverse the file and display the refresh intervals for network links
-                TraverseNodesUpdateStatus(_myKmlDataset.RootNodes);
+                    // Traverse the file and display the refresh intervals for network links
+                    TraverseNodesUpdateStatus(_myKmlDataset.RootNodes);
+                });
             }
         }
 
@@ -98,8 +110,8 @@ namespace ArcGISRuntime.WPF.Samples.KmlNetworkLinks
                     string existingLabel = MyNetworkLinkLabel.Content as string;
 
                     // Update the text with information about the layer
-                    existingLabel += String.Format("\n{0} - {1}", netLink.Name, netLink.RefreshInterval);
-                    //existingLabel += String.Format("\n{0} - {1}s", netLink.Name, netLink.RefreshInterval);
+                    existingLabel += String.Format("Network Link Name: {0} - Network Link Refresh Interval: {1}" + 
+                        Environment.NewLine, netLink.Name, netLink.RefreshInterval);
 
                     // Update the label with the new text
                     MyNetworkLinkLabel.Content = existingLabel;

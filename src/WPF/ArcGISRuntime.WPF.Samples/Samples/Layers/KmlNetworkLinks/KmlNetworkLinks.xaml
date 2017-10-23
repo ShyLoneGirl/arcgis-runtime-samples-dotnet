@@ -13,7 +13,7 @@
         </esri:MapView>
         <Border Margin="30" Padding="10" 
                 BorderThickness="1" Background="White"
-                Width="375"
+                Width="500"
                 MinHeight="10" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Label x:Name="MyNetworkLinkLabel" />
         </Border>
