@@ -12,8 +12,8 @@
     <AssemblyName>ArcGISRuntime.UWP.Samples</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -99,6 +99,7 @@
     <None Include="project.json" />
     <Content Include="Properties\ArcGISRuntime.Windows.Samples.rd.xml" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Samples\Layers\KmlNodeVisibility\metadata.json" />
   </ItemGroup>
   <ItemGroup>
     <!-- JSON Metadata -->
@@ -137,6 +138,7 @@
     <Content Include="Samples\Layers\FeatureLayerUrl\metadata.json" />
     <Content Include="Samples\Layers\KmlLayerFile\metadata.json" />
     <Content Include="Samples\Layers\KmlLayerUrl\metadata.json" />
+    <Content Include="Samples\Layers\KmlNodeVisibility\KmlNodeVisibility.jpg" />
     <Content Include="Samples\Layers\RasterLayerFile\metadata.json" />
     <Content Include="Samples\Layers\RasterLayerImageServiceRaster\metadata.json" />
     <Content Include="Samples\Layers\RasterLayerRasterFunction\metadata.json" />
@@ -354,6 +356,9 @@
     </Compile>
     <Compile Include="Samples\Layers\KmlLayerUrl\KmlLayerUrl.xaml.cs">
       <DependentUpon>KmlLayerUrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Layers\KmlNodeVisibility\KmlNodeVisibility.xaml.cs">
+      <DependentUpon>KmlNodeVisibility.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\Layers\RasterLayerFile\RasterLayerFile.xaml.cs">
       <DependentUpon>RasterLayerFile.xaml</DependentUpon>
@@ -606,6 +611,10 @@
     </Page>
     <Page Include="Samples\Layers\KmlLayerUrl\KmlLayerUrl.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Layers\KmlNodeVisibility\KmlNodeVisibility.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Samples\Layers\RasterLayerFile\RasterLayerFile.xaml">
       <Generator>MSBuild:Compile</Generator>
