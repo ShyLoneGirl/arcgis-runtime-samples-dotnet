@@ -1,4 +1,4 @@
-﻿// Copyright 2017 Esri.
+// Copyright 2017 Esri.
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
@@ -7,32 +7,45 @@
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
 // language governing permissions and limitations under the License.
 
+using Android.App;
+using Android.OS;
+using Android.Widget;
 using ArcGISRuntimeXamarin.Managers;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Ogc;
+using Esri.ArcGISRuntime.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
 {
-	public partial class KmlNodeVisibility : ContentPage
-	{
+    [Activity]
+    public class KmlNodeVisibility : Activity
+    {
+        // Create and hold reference to the used SceneView
+        private SceneView _mySceneView = new SceneView();
 
-		public KmlNodeVisibility()
-		{
-			InitializeComponent();
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
 
-			Title = "KmlNode visibility";
+            Title = "KmlNode visibility";
 
-			Initialize();
-		}
+            // Create the UI, setup the control references
+            CreateLayout();
 
-		private async void Initialize()
-		{
+            // Initialize the sample
+            Initialize();
+        }
+
+        private async void Initialize()
+        {
+            // Create dialog to display alert information
+            var alert = new AlertDialog.Builder(this);
+
             try
             {
                 // Create a new scene
@@ -57,7 +70,7 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
                 myScene.OperationalLayers.Add(myKmlLayer);
 
                 // Assign the scene to the SceneView
-                MySceneView.Scene = myScene;
+                _mySceneView.Scene = myScene;
 
                 // Define a map point to zoom to (in the case: North East North America)
                 MapPoint myMapPoint = new MapPoint(-78.78, 40.30, 397774, SpatialReferences.Wgs84);
@@ -66,12 +79,14 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
                 Camera myCamera = new Camera(myMapPoint, 356.98, 51.48, 0);
 
                 // Zoom to the extent
-                await MySceneView.SetViewpointCameraAsync(myCamera);
+                await _mySceneView.SetViewpointCameraAsync(myCamera);
             }
             catch (Exception ex)
             {
                 // Something went wrong, display a message
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                alert.SetTitle("Error");
+                alert.SetMessage(ex.ToString());
+                alert.Show();
             }
         }
 
@@ -153,7 +168,7 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
         private void ScreenOverlaysOnOff_Clicked(object sender, EventArgs e)
         {
             // Get the layer collection from the scene view
-            LayerCollection myOperationLayersCollectionSV = MySceneView.Scene.OperationalLayers;
+            LayerCollection myOperationLayersCollectionSV = _mySceneView.Scene.OperationalLayers;
 
             // Make sure there is at least one operational layer present 
             if (myOperationLayersCollectionSV.Count > 0)
@@ -176,7 +191,7 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
         private void GroundOverlaysOnOff_Clicked(object sender, EventArgs e)
         {
             // Get the layer collection from the scene view
-            LayerCollection myOperationLayersCollectionSV = MySceneView.Scene.OperationalLayers;
+            LayerCollection myOperationLayersCollectionSV = _mySceneView.Scene.OperationalLayers;
 
             // Make sure there is at least one operational layer present 
             if (myOperationLayersCollectionSV.Count > 0)
@@ -199,7 +214,7 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
         private void PLacemarksOnOff_Clicked(object sender, EventArgs e)
         {
             // Get the layer collection from the scene view
-            LayerCollection myOperationLayersCollectionSV = MySceneView.Scene.OperationalLayers;
+            LayerCollection myOperationLayersCollectionSV = _mySceneView.Scene.OperationalLayers;
 
             // Make sure there is at least one operational layer present 
             if (myOperationLayersCollectionSV.Count > 0)
@@ -238,6 +253,41 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
 
             return filepath;
             #endregion offlinedata
+        }
+        private void CreateLayout()
+        {
+            // Create a new vertical layout for the app
+            var layout = new LinearLayout(this) { Orientation = Orientation.Vertical };
+
+            // Create Button
+            var button1 = new Button(this);
+            button1.Text = "Toggle ScreenOverlays On/Off";
+            button1.Click += ScreenOverlaysOnOff_Clicked;
+
+            // Add Button to the layout  
+            layout.AddView(button1);
+
+            // Create Button
+            var button2 = new Button(this);
+            button2.Text = "Toggle GroundOverlays On/Off";
+            button2.Click += GroundOverlaysOnOff_Clicked;
+
+            // Add Button to the layout  
+            layout.AddView(button2);
+
+            // Create Button
+            var button3 = new Button(this);
+            button3.Text = "Toggle Placemarks On/Off";
+            button3.Click += PLacemarksOnOff_Clicked;
+
+            // Add Button to the layout  
+            layout.AddView(button3);
+
+            // Add the scene view to the layout
+            layout.AddView(_mySceneView);
+
+            // Show the layout in the app
+            SetContentView(layout);
         }
 
     }

@@ -11,28 +11,52 @@ using ArcGISRuntimeXamarin.Managers;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Ogc;
+using Esri.ArcGISRuntime.UI.Controls;
+using Foundation;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Xamarin.Forms;
+using UIKit;
 
 namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
 {
-	public partial class KmlNodeVisibility : ContentPage
-	{
+    [Register("KmlNodeVisibility")]
+    public class KmlNodeVisibility : UIViewController
+    {
+        // Constant holding offset where the SceneView control should start
+        private const int yPageOffset = 60;
 
-		public KmlNodeVisibility()
-		{
-			InitializeComponent();
+        // Create and hold reference to the used SceneView
+        private SceneView _mySceneView = new SceneView();
 
-			Title = "KmlNode visibility";
+        // Create button
+        private UIButton _button1;
 
-			Initialize();
-		}
+        // Create button
+        private UIButton _button2;
 
-		private async void Initialize()
-		{
+        // Create button
+        private UIButton _button3;
+
+        public KmlNodeVisibility()
+        {
+            Title = "KmlNode visibility";
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            // Create the UI, setup the control references
+            CreateLayout();
+
+            // Initialize the sample
+            Initialize();
+        }
+
+        private async void Initialize()
+        {
             try
             {
                 // Create a new scene
@@ -57,7 +81,7 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
                 myScene.OperationalLayers.Add(myKmlLayer);
 
                 // Assign the scene to the SceneView
-                MySceneView.Scene = myScene;
+                _mySceneView.Scene = myScene;
 
                 // Define a map point to zoom to (in the case: North East North America)
                 MapPoint myMapPoint = new MapPoint(-78.78, 40.30, 397774, SpatialReferences.Wgs84);
@@ -66,12 +90,14 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
                 Camera myCamera = new Camera(myMapPoint, 356.98, 51.48, 0);
 
                 // Zoom to the extent
-                await MySceneView.SetViewpointCameraAsync(myCamera);
+                await _mySceneView.SetViewpointCameraAsync(myCamera);
             }
             catch (Exception ex)
             {
                 // Something went wrong, display a message
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                UIAlertController alert = UIAlertController.Create("Error", ex.ToString(), UIAlertControllerStyle.Alert);
+                alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                PresentViewController(alert, true, null);
             }
         }
 
@@ -153,7 +179,7 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
         private void ScreenOverlaysOnOff_Clicked(object sender, EventArgs e)
         {
             // Get the layer collection from the scene view
-            LayerCollection myOperationLayersCollectionSV = MySceneView.Scene.OperationalLayers;
+            LayerCollection myOperationLayersCollectionSV = _mySceneView.Scene.OperationalLayers;
 
             // Make sure there is at least one operational layer present 
             if (myOperationLayersCollectionSV.Count > 0)
@@ -176,7 +202,7 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
         private void GroundOverlaysOnOff_Clicked(object sender, EventArgs e)
         {
             // Get the layer collection from the scene view
-            LayerCollection myOperationLayersCollectionSV = MySceneView.Scene.OperationalLayers;
+            LayerCollection myOperationLayersCollectionSV = _mySceneView.Scene.OperationalLayers;
 
             // Make sure there is at least one operational layer present 
             if (myOperationLayersCollectionSV.Count > 0)
@@ -199,7 +225,7 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
         private void PLacemarksOnOff_Clicked(object sender, EventArgs e)
         {
             // Get the layer collection from the scene view
-            LayerCollection myOperationLayersCollectionSV = MySceneView.Scene.OperationalLayers;
+            LayerCollection myOperationLayersCollectionSV = _mySceneView.Scene.OperationalLayers;
 
             // Make sure there is at least one operational layer present 
             if (myOperationLayersCollectionSV.Count > 0)
@@ -240,5 +266,55 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
             #endregion offlinedata
         }
 
+        public override void ViewDidLayoutSubviews()
+        {
+            // Setup the visual frame for the SceneView
+            _mySceneView.Frame = new CoreGraphics.CGRect(0, 0, View.Bounds.Width, View.Bounds.Height);
+
+            // Setup the visual frame for button1
+            _button1.Frame = new CoreGraphics.CGRect(0, yPageOffset, View.Bounds.Width, 40);
+
+            // Setup the visual frame for button2
+            _button2.Frame = new CoreGraphics.CGRect(0, yPageOffset + 40, View.Bounds.Width, 40);
+
+            // Setup the visual frame for button3
+            _button3.Frame = new CoreGraphics.CGRect(0, yPageOffset + 80, View.Bounds.Width, 40);
+
+            base.ViewDidLayoutSubviews();
+        }
+
+        private void CreateLayout()
+        {
+            // Create button1
+            _button1 = new UIButton();
+            _button1.SetTitle("Toggle ScreenOverlays On/Off", UIControlState.Normal);
+            _button1.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+            _button1.BackgroundColor = UIColor.White;
+
+            // Hook to touch event to do button1
+            _button1.TouchUpInside += ScreenOverlaysOnOff_Clicked;
+
+            // Create button2
+            _button2 = new UIButton();
+            _button2.SetTitle("Toggle GroundOverlays On/Off", UIControlState.Normal);
+            _button2.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+            _button2.BackgroundColor = UIColor.White;
+
+            // Hook to touch event to do button2
+            _button2.TouchUpInside += GroundOverlaysOnOff_Clicked;
+
+            // Create button3
+            _button3 = new UIButton();
+            _button3.SetTitle("Toggle Placemarks On/Off", UIControlState.Normal);
+            _button3.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+            _button3.BackgroundColor = UIColor.White;
+
+            // Hook to touch event to do button1
+            _button3.TouchUpInside += PLacemarksOnOff_Clicked;
+
+            // Add SceneView to the page
+            View.AddSubviews(_mySceneView, _button1, _button2, _button3);
+
+        }
     }
 }
