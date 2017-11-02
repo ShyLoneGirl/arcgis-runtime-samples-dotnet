@@ -259,7 +259,7 @@ namespace ArcGISRuntimeXamarin.Samples.KmlNodeVisibility
             if (!File.Exists(filepath))
             {
                 // Download the file
-                await DataManager.GetData("da14cd4758ff4d8eb794f2dd9c19b91c", "KmlNodeVisibility");
+                await DataManager.GetData("b32481af00c94d638d51c58332d2c742", "KmlNodeVisibility");
             }
 
             return filepath;
